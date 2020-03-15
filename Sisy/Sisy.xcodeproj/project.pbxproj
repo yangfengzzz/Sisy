@@ -817,10 +817,87 @@
 		049649C8241DC0690006C91E /* OgreHollowEllipsoidEmitter.h in Headers */ = {isa = PBXBuildFile; fileRef = 04964995241DC0690006C91E /* OgreHollowEllipsoidEmitter.h */; };
 		049649C9241DC0690006C91E /* OgreCylinderEmitter.h in Headers */ = {isa = PBXBuildFile; fileRef = 04964996241DC0690006C91E /* OgreCylinderEmitter.h */; };
 		049649CC241DC0F50006C91E /* libgfx.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0496429A241D9F000006C91E /* libgfx.dylib */; };
+		04964A13241DC15E0006C91E /* OgreMetalDevice.mm in Sources */ = {isa = PBXBuildFile; fileRef = 049649DC241DC1580006C91E /* OgreMetalDevice.mm */; };
+		04964A14241DC15E0006C91E /* OgreMetalAsyncTextureTicket.mm in Sources */ = {isa = PBXBuildFile; fileRef = 049649DD241DC1580006C91E /* OgreMetalAsyncTextureTicket.mm */; };
+		04964A15241DC15E0006C91E /* OgreMetalHardwareBufferCommon.mm in Sources */ = {isa = PBXBuildFile; fileRef = 049649DE241DC1580006C91E /* OgreMetalHardwareBufferCommon.mm */; };
+		04964A16241DC15E0006C91E /* OgreMetalHardwareIndexBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 049649DF241DC1580006C91E /* OgreMetalHardwareIndexBuffer.mm */; };
+		04964A17241DC15E0006C91E /* OgreMetalProgram.mm in Sources */ = {isa = PBXBuildFile; fileRef = 049649E0241DC1580006C91E /* OgreMetalProgram.mm */; };
+		04964A18241DC15E0006C91E /* OgreMetalUavBufferPacked.h in Headers */ = {isa = PBXBuildFile; fileRef = 049649E1241DC1580006C91E /* OgreMetalUavBufferPacked.h */; };
+		04964A19241DC15E0006C91E /* OgreMetalEngineDll.mm in Sources */ = {isa = PBXBuildFile; fileRef = 049649E2241DC1580006C91E /* OgreMetalEngineDll.mm */; };
+		04964A1A241DC15E0006C91E /* OgreMetalTextureGpuManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 049649E3241DC1580006C91E /* OgreMetalTextureGpuManager.h */; };
+		04964A1B241DC15E0006C91E /* OgreMetalGpuProgramManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 049649E4241DC1580006C91E /* OgreMetalGpuProgramManager.h */; };
+		04964A1C241DC15E0006C91E /* OgreMetalProgram.h in Headers */ = {isa = PBXBuildFile; fileRef = 049649E5241DC1580006C91E /* OgreMetalProgram.h */; };
+		04964A1D241DC15E0006C91E /* OgreMetalDescriptorSetTexture.h in Headers */ = {isa = PBXBuildFile; fileRef = 049649E6241DC1580006C91E /* OgreMetalDescriptorSetTexture.h */; };
+		04964A1E241DC15E0006C91E /* OgreMetalHardwareBufferManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 049649E7241DC1590006C91E /* OgreMetalHardwareBufferManager.h */; };
+		04964A1F241DC15E0006C91E /* OgreMetalHardwareVertexBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 049649E8241DC1590006C91E /* OgreMetalHardwareVertexBuffer.mm */; };
+		04964A20241DC15E0006C91E /* OgreMetalMultiSourceVertexBufferPool.mm in Sources */ = {isa = PBXBuildFile; fileRef = 049649E9241DC1590006C91E /* OgreMetalMultiSourceVertexBufferPool.mm */; };
+		04964A21241DC15E0006C91E /* OgreMetalRenderSystem.mm in Sources */ = {isa = PBXBuildFile; fileRef = 049649EA241DC1590006C91E /* OgreMetalRenderSystem.mm */; };
+		04964A22241DC15E0006C91E /* OgreMetalTextureGpuWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = 049649EB241DC1590006C91E /* OgreMetalTextureGpuWindow.mm */; };
+		04964A23241DC15E0006C91E /* OgreMetalTexBufferPacked.mm in Sources */ = {isa = PBXBuildFile; fileRef = 049649EC241DC1590006C91E /* OgreMetalTexBufferPacked.mm */; };
+		04964A24241DC15E0006C91E /* OgreMetalHardwareVertexBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 049649ED241DC1590006C91E /* OgreMetalHardwareVertexBuffer.h */; };
+		04964A25241DC15E0006C91E /* OgreMetalPrerequisites.h in Headers */ = {isa = PBXBuildFile; fileRef = 049649EE241DC1590006C91E /* OgreMetalPrerequisites.h */; };
+		04964A26241DC15E0006C91E /* OgreMetalHardwareBufferCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 049649EF241DC1590006C91E /* OgreMetalHardwareBufferCommon.h */; };
+		04964A27241DC15E0006C91E /* OgreMetalPlugin.mm in Sources */ = {isa = PBXBuildFile; fileRef = 049649F0241DC1590006C91E /* OgreMetalPlugin.mm */; };
+		04964A28241DC15E0006C91E /* OgreMetalRenderPassDescriptor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 049649F1241DC15A0006C91E /* OgreMetalRenderPassDescriptor.mm */; };
+		04964A29241DC15E0006C91E /* OgreMetalPixelFormatToShaderType.mm in Sources */ = {isa = PBXBuildFile; fileRef = 049649F2241DC15A0006C91E /* OgreMetalPixelFormatToShaderType.mm */; };
+		04964A2A241DC15E0006C91E /* OgreMetalMappings.h in Headers */ = {isa = PBXBuildFile; fileRef = 049649F3241DC15A0006C91E /* OgreMetalMappings.h */; };
+		04964A2B241DC15E0006C91E /* OgreMetalRenderSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = 049649F4241DC15A0006C91E /* OgreMetalRenderSystem.h */; };
+		04964A2C241DC15E0006C91E /* OgreMetalWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 049649F5241DC15A0006C91E /* OgreMetalWindow.h */; };
+		04964A2D241DC15E0006C91E /* OgreMetalRenderPassDescriptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 049649F6241DC15A0006C91E /* OgreMetalRenderPassDescriptor.h */; };
+		04964A2E241DC15E0006C91E /* OgreMetalPixelFormatToShaderType.h in Headers */ = {isa = PBXBuildFile; fileRef = 049649F7241DC15A0006C91E /* OgreMetalPixelFormatToShaderType.h */; };
+		04964A2F241DC15E0006C91E /* OgreMetalProgramFactory.mm in Sources */ = {isa = PBXBuildFile; fileRef = 049649F8241DC15A0006C91E /* OgreMetalProgramFactory.mm */; };
+		04964A30241DC15E0006C91E /* OgreMetalStagingTexture.mm in Sources */ = {isa = PBXBuildFile; fileRef = 049649F9241DC15A0006C91E /* OgreMetalStagingTexture.mm */; };
+		04964A31241DC15E0006C91E /* OgreMetalDiscardBufferManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 049649FA241DC15A0006C91E /* OgreMetalDiscardBufferManager.mm */; };
+		04964A32241DC15E0006C91E /* OgreMetalRenderTargetCommon.mm in Sources */ = {isa = PBXBuildFile; fileRef = 049649FB241DC15B0006C91E /* OgreMetalRenderTargetCommon.mm */; };
+		04964A33241DC15E0006C91E /* OgreMetalMappings.mm in Sources */ = {isa = PBXBuildFile; fileRef = 049649FC241DC15B0006C91E /* OgreMetalMappings.mm */; };
+		04964A34241DC15E0006C91E /* OgreMetalDiscardBufferManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 049649FD241DC15B0006C91E /* OgreMetalDiscardBufferManager.h */; };
+		04964A35241DC15E0006C91E /* OgreMetalDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 049649FE241DC15B0006C91E /* OgreMetalDevice.h */; };
+		04964A36241DC15E0006C91E /* OgreMetalTextureGpu.h in Headers */ = {isa = PBXBuildFile; fileRef = 049649FF241DC15B0006C91E /* OgreMetalTextureGpu.h */; };
+		04964A37241DC15E0006C91E /* OgreMetalAsyncTextureTicket.h in Headers */ = {isa = PBXBuildFile; fileRef = 04964A00241DC15B0006C91E /* OgreMetalAsyncTextureTicket.h */; };
+		04964A38241DC15E0006C91E /* OgreMetalGpuProgramManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04964A01241DC15C0006C91E /* OgreMetalGpuProgramManager.mm */; };
+		04964A39241DC15E0006C91E /* OgreMetalHlmsPso.h in Headers */ = {isa = PBXBuildFile; fileRef = 04964A02241DC15C0006C91E /* OgreMetalHlmsPso.h */; };
+		04964A3A241DC15E0006C91E /* OgreMetalStagingTexture.h in Headers */ = {isa = PBXBuildFile; fileRef = 04964A03241DC15C0006C91E /* OgreMetalStagingTexture.h */; };
+		04964A3B241DC15E0006C91E /* OgreMetalConstBufferPacked.h in Headers */ = {isa = PBXBuildFile; fileRef = 04964A04241DC15C0006C91E /* OgreMetalConstBufferPacked.h */; };
+		04964A3C241DC15E0006C91E /* OgreMetalUavBufferPacked.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04964A05241DC15C0006C91E /* OgreMetalUavBufferPacked.mm */; };
+		04964A3D241DC15E0006C91E /* OgreMetalProgramFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 04964A06241DC15C0006C91E /* OgreMetalProgramFactory.h */; };
+		04964A3E241DC15E0006C91E /* OgreMetalTexBufferPacked.h in Headers */ = {isa = PBXBuildFile; fileRef = 04964A07241DC15C0006C91E /* OgreMetalTexBufferPacked.h */; };
+		04964A3F241DC15E0006C91E /* OgreMetalMultiSourceVertexBufferPool.h in Headers */ = {isa = PBXBuildFile; fileRef = 04964A08241DC15C0006C91E /* OgreMetalMultiSourceVertexBufferPool.h */; };
+		04964A40241DC15E0006C91E /* OgreMetalTextureGpu.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04964A09241DC15D0006C91E /* OgreMetalTextureGpu.mm */; };
+		04964A41241DC15E0006C91E /* OgreMetalPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 04964A0A241DC15D0006C91E /* OgreMetalPlugin.h */; };
+		04964A42241DC15E0006C91E /* OgreMetalHardwareIndexBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 04964A0B241DC15D0006C91E /* OgreMetalHardwareIndexBuffer.h */; };
+		04964A43241DC15E0006C91E /* OgreMetalHardwareBufferManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04964A0D241DC15D0006C91E /* OgreMetalHardwareBufferManager.mm */; };
+		04964A44241DC15E0006C91E /* OgreMetalTextureGpuWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 04964A0E241DC15D0006C91E /* OgreMetalTextureGpuWindow.h */; };
+		04964A45241DC15E0006C91E /* OgreMetalWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04964A0F241DC15E0006C91E /* OgreMetalWindow.mm */; };
+		04964A46241DC15E0006C91E /* OgreMetalConstBufferPacked.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04964A10241DC15E0006C91E /* OgreMetalConstBufferPacked.mm */; };
+		04964A47241DC15E0006C91E /* OgreMetalRenderTargetCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 04964A11241DC15E0006C91E /* OgreMetalRenderTargetCommon.h */; };
+		04964A48241DC15E0006C91E /* OgreMetalTextureGpuManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04964A12241DC15E0006C91E /* OgreMetalTextureGpuManager.mm */; };
+		04964A55241DC1B30006C91E /* OgreMetalStagingBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04964A4B241DC1B10006C91E /* OgreMetalStagingBuffer.mm */; };
+		04964A56241DC1B30006C91E /* OgreMetalStagingBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 04964A4C241DC1B10006C91E /* OgreMetalStagingBuffer.h */; };
+		04964A57241DC1B30006C91E /* OgreMetalVaoManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 04964A4D241DC1B20006C91E /* OgreMetalVaoManager.h */; };
+		04964A58241DC1B30006C91E /* OgreMetalBufferInterface.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04964A4E241DC1B20006C91E /* OgreMetalBufferInterface.mm */; };
+		04964A59241DC1B30006C91E /* OgreMetalVaoManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04964A4F241DC1B20006C91E /* OgreMetalVaoManager.mm */; };
+		04964A5A241DC1B30006C91E /* OgreMetalAsyncTicket.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04964A50241DC1B20006C91E /* OgreMetalAsyncTicket.mm */; };
+		04964A5B241DC1B30006C91E /* OgreMetalDynamicBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 04964A51241DC1B20006C91E /* OgreMetalDynamicBuffer.h */; };
+		04964A5C241DC1B30006C91E /* OgreMetalDynamicBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04964A52241DC1B20006C91E /* OgreMetalDynamicBuffer.mm */; };
+		04964A5D241DC1B30006C91E /* OgreMetalBufferInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = 04964A53241DC1B20006C91E /* OgreMetalBufferInterface.h */; };
+		04964A5E241DC1B30006C91E /* OgreMetalAsyncTicket.h in Headers */ = {isa = PBXBuildFile; fileRef = 04964A54241DC1B20006C91E /* OgreMetalAsyncTicket.h */; };
+		04964A61241DC28B0006C91E /* OgreMetalView.h in Headers */ = {isa = PBXBuildFile; fileRef = 04964A5F241DC28B0006C91E /* OgreMetalView.h */; };
+		04964A62241DC28B0006C91E /* OgreMetalView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04964A60241DC28B0006C91E /* OgreMetalView.mm */; };
+		04964A63241DC2A80006C91E /* libgfx.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0496429A241D9F000006C91E /* libgfx.dylib */; };
+		04964A65241DC2B00006C91E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04964A64241DC2B00006C91E /* QuartzCore.framework */; };
+		04964A66241DC2B60006C91E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04964883241DBCBE0006C91E /* Cocoa.framework */; };
+		04964A68241DC2BA0006C91E /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04964A67241DC2BA0006C91E /* Metal.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		049649CA241DC0F10006C91E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04964284241D9ED90006C91E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 04964299241D9F000006C91E;
+			remoteInfo = gfx;
+		};
+		04964A69241DC2BD0006C91E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 04964284241D9ED90006C91E /* Project object */;
 			proxyType = 1;
@@ -1660,6 +1737,76 @@
 		04964994241DC0690006C91E /* OgreCylinderEmitter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OgreCylinderEmitter.cpp; path = ParticleFX/OgreCylinderEmitter.cpp; sourceTree = "<group>"; };
 		04964995241DC0690006C91E /* OgreHollowEllipsoidEmitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OgreHollowEllipsoidEmitter.h; path = ParticleFX/OgreHollowEllipsoidEmitter.h; sourceTree = "<group>"; };
 		04964996241DC0690006C91E /* OgreCylinderEmitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OgreCylinderEmitter.h; path = ParticleFX/OgreCylinderEmitter.h; sourceTree = "<group>"; };
+		049649D1241DC13B0006C91E /* libgfx_Metal.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libgfx_Metal.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		049649DC241DC1580006C91E /* OgreMetalDevice.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OgreMetalDevice.mm; sourceTree = "<group>"; };
+		049649DD241DC1580006C91E /* OgreMetalAsyncTextureTicket.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OgreMetalAsyncTextureTicket.mm; sourceTree = "<group>"; };
+		049649DE241DC1580006C91E /* OgreMetalHardwareBufferCommon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OgreMetalHardwareBufferCommon.mm; sourceTree = "<group>"; };
+		049649DF241DC1580006C91E /* OgreMetalHardwareIndexBuffer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OgreMetalHardwareIndexBuffer.mm; sourceTree = "<group>"; };
+		049649E0241DC1580006C91E /* OgreMetalProgram.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OgreMetalProgram.mm; sourceTree = "<group>"; };
+		049649E1241DC1580006C91E /* OgreMetalUavBufferPacked.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OgreMetalUavBufferPacked.h; sourceTree = "<group>"; };
+		049649E2241DC1580006C91E /* OgreMetalEngineDll.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OgreMetalEngineDll.mm; sourceTree = "<group>"; };
+		049649E3241DC1580006C91E /* OgreMetalTextureGpuManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OgreMetalTextureGpuManager.h; sourceTree = "<group>"; };
+		049649E4241DC1580006C91E /* OgreMetalGpuProgramManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OgreMetalGpuProgramManager.h; sourceTree = "<group>"; };
+		049649E5241DC1580006C91E /* OgreMetalProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OgreMetalProgram.h; sourceTree = "<group>"; };
+		049649E6241DC1580006C91E /* OgreMetalDescriptorSetTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OgreMetalDescriptorSetTexture.h; sourceTree = "<group>"; };
+		049649E7241DC1590006C91E /* OgreMetalHardwareBufferManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OgreMetalHardwareBufferManager.h; sourceTree = "<group>"; };
+		049649E8241DC1590006C91E /* OgreMetalHardwareVertexBuffer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OgreMetalHardwareVertexBuffer.mm; sourceTree = "<group>"; };
+		049649E9241DC1590006C91E /* OgreMetalMultiSourceVertexBufferPool.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OgreMetalMultiSourceVertexBufferPool.mm; sourceTree = "<group>"; };
+		049649EA241DC1590006C91E /* OgreMetalRenderSystem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OgreMetalRenderSystem.mm; sourceTree = "<group>"; };
+		049649EB241DC1590006C91E /* OgreMetalTextureGpuWindow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OgreMetalTextureGpuWindow.mm; sourceTree = "<group>"; };
+		049649EC241DC1590006C91E /* OgreMetalTexBufferPacked.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OgreMetalTexBufferPacked.mm; sourceTree = "<group>"; };
+		049649ED241DC1590006C91E /* OgreMetalHardwareVertexBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OgreMetalHardwareVertexBuffer.h; sourceTree = "<group>"; };
+		049649EE241DC1590006C91E /* OgreMetalPrerequisites.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OgreMetalPrerequisites.h; sourceTree = "<group>"; };
+		049649EF241DC1590006C91E /* OgreMetalHardwareBufferCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OgreMetalHardwareBufferCommon.h; sourceTree = "<group>"; };
+		049649F0241DC1590006C91E /* OgreMetalPlugin.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OgreMetalPlugin.mm; sourceTree = "<group>"; };
+		049649F1241DC15A0006C91E /* OgreMetalRenderPassDescriptor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OgreMetalRenderPassDescriptor.mm; sourceTree = "<group>"; };
+		049649F2241DC15A0006C91E /* OgreMetalPixelFormatToShaderType.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OgreMetalPixelFormatToShaderType.mm; sourceTree = "<group>"; };
+		049649F3241DC15A0006C91E /* OgreMetalMappings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OgreMetalMappings.h; sourceTree = "<group>"; };
+		049649F4241DC15A0006C91E /* OgreMetalRenderSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OgreMetalRenderSystem.h; sourceTree = "<group>"; };
+		049649F5241DC15A0006C91E /* OgreMetalWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OgreMetalWindow.h; sourceTree = "<group>"; };
+		049649F6241DC15A0006C91E /* OgreMetalRenderPassDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OgreMetalRenderPassDescriptor.h; sourceTree = "<group>"; };
+		049649F7241DC15A0006C91E /* OgreMetalPixelFormatToShaderType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OgreMetalPixelFormatToShaderType.h; sourceTree = "<group>"; };
+		049649F8241DC15A0006C91E /* OgreMetalProgramFactory.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OgreMetalProgramFactory.mm; sourceTree = "<group>"; };
+		049649F9241DC15A0006C91E /* OgreMetalStagingTexture.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OgreMetalStagingTexture.mm; sourceTree = "<group>"; };
+		049649FA241DC15A0006C91E /* OgreMetalDiscardBufferManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OgreMetalDiscardBufferManager.mm; sourceTree = "<group>"; };
+		049649FB241DC15B0006C91E /* OgreMetalRenderTargetCommon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OgreMetalRenderTargetCommon.mm; sourceTree = "<group>"; };
+		049649FC241DC15B0006C91E /* OgreMetalMappings.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OgreMetalMappings.mm; sourceTree = "<group>"; };
+		049649FD241DC15B0006C91E /* OgreMetalDiscardBufferManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OgreMetalDiscardBufferManager.h; sourceTree = "<group>"; };
+		049649FE241DC15B0006C91E /* OgreMetalDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OgreMetalDevice.h; sourceTree = "<group>"; };
+		049649FF241DC15B0006C91E /* OgreMetalTextureGpu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OgreMetalTextureGpu.h; sourceTree = "<group>"; };
+		04964A00241DC15B0006C91E /* OgreMetalAsyncTextureTicket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OgreMetalAsyncTextureTicket.h; sourceTree = "<group>"; };
+		04964A01241DC15C0006C91E /* OgreMetalGpuProgramManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OgreMetalGpuProgramManager.mm; sourceTree = "<group>"; };
+		04964A02241DC15C0006C91E /* OgreMetalHlmsPso.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OgreMetalHlmsPso.h; sourceTree = "<group>"; };
+		04964A03241DC15C0006C91E /* OgreMetalStagingTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OgreMetalStagingTexture.h; sourceTree = "<group>"; };
+		04964A04241DC15C0006C91E /* OgreMetalConstBufferPacked.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OgreMetalConstBufferPacked.h; sourceTree = "<group>"; };
+		04964A05241DC15C0006C91E /* OgreMetalUavBufferPacked.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OgreMetalUavBufferPacked.mm; sourceTree = "<group>"; };
+		04964A06241DC15C0006C91E /* OgreMetalProgramFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OgreMetalProgramFactory.h; sourceTree = "<group>"; };
+		04964A07241DC15C0006C91E /* OgreMetalTexBufferPacked.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OgreMetalTexBufferPacked.h; sourceTree = "<group>"; };
+		04964A08241DC15C0006C91E /* OgreMetalMultiSourceVertexBufferPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OgreMetalMultiSourceVertexBufferPool.h; sourceTree = "<group>"; };
+		04964A09241DC15D0006C91E /* OgreMetalTextureGpu.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OgreMetalTextureGpu.mm; sourceTree = "<group>"; };
+		04964A0A241DC15D0006C91E /* OgreMetalPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OgreMetalPlugin.h; sourceTree = "<group>"; };
+		04964A0B241DC15D0006C91E /* OgreMetalHardwareIndexBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OgreMetalHardwareIndexBuffer.h; sourceTree = "<group>"; };
+		04964A0C241DC15D0006C91E /* OgreMetalPixelFormatToShaderType.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OgreMetalPixelFormatToShaderType.inl; sourceTree = "<group>"; };
+		04964A0D241DC15D0006C91E /* OgreMetalHardwareBufferManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OgreMetalHardwareBufferManager.mm; sourceTree = "<group>"; };
+		04964A0E241DC15D0006C91E /* OgreMetalTextureGpuWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OgreMetalTextureGpuWindow.h; sourceTree = "<group>"; };
+		04964A0F241DC15E0006C91E /* OgreMetalWindow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OgreMetalWindow.mm; sourceTree = "<group>"; };
+		04964A10241DC15E0006C91E /* OgreMetalConstBufferPacked.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OgreMetalConstBufferPacked.mm; sourceTree = "<group>"; };
+		04964A11241DC15E0006C91E /* OgreMetalRenderTargetCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OgreMetalRenderTargetCommon.h; sourceTree = "<group>"; };
+		04964A12241DC15E0006C91E /* OgreMetalTextureGpuManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OgreMetalTextureGpuManager.mm; sourceTree = "<group>"; };
+		04964A4B241DC1B10006C91E /* OgreMetalStagingBuffer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = OgreMetalStagingBuffer.mm; path = Vao/OgreMetalStagingBuffer.mm; sourceTree = "<group>"; };
+		04964A4C241DC1B10006C91E /* OgreMetalStagingBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OgreMetalStagingBuffer.h; path = Vao/OgreMetalStagingBuffer.h; sourceTree = "<group>"; };
+		04964A4D241DC1B20006C91E /* OgreMetalVaoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OgreMetalVaoManager.h; path = Vao/OgreMetalVaoManager.h; sourceTree = "<group>"; };
+		04964A4E241DC1B20006C91E /* OgreMetalBufferInterface.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = OgreMetalBufferInterface.mm; path = Vao/OgreMetalBufferInterface.mm; sourceTree = "<group>"; };
+		04964A4F241DC1B20006C91E /* OgreMetalVaoManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = OgreMetalVaoManager.mm; path = Vao/OgreMetalVaoManager.mm; sourceTree = "<group>"; };
+		04964A50241DC1B20006C91E /* OgreMetalAsyncTicket.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = OgreMetalAsyncTicket.mm; path = Vao/OgreMetalAsyncTicket.mm; sourceTree = "<group>"; };
+		04964A51241DC1B20006C91E /* OgreMetalDynamicBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OgreMetalDynamicBuffer.h; path = Vao/OgreMetalDynamicBuffer.h; sourceTree = "<group>"; };
+		04964A52241DC1B20006C91E /* OgreMetalDynamicBuffer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = OgreMetalDynamicBuffer.mm; path = Vao/OgreMetalDynamicBuffer.mm; sourceTree = "<group>"; };
+		04964A53241DC1B20006C91E /* OgreMetalBufferInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OgreMetalBufferInterface.h; path = Vao/OgreMetalBufferInterface.h; sourceTree = "<group>"; };
+		04964A54241DC1B20006C91E /* OgreMetalAsyncTicket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OgreMetalAsyncTicket.h; path = Vao/OgreMetalAsyncTicket.h; sourceTree = "<group>"; };
+		04964A5F241DC28B0006C91E /* OgreMetalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OgreMetalView.h; path = Windowing/OSX/OgreMetalView.h; sourceTree = "<group>"; };
+		04964A60241DC28B0006C91E /* OgreMetalView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = OgreMetalView.mm; path = Windowing/OSX/OgreMetalView.mm; sourceTree = "<group>"; };
+		04964A64241DC2B00006C91E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		04964A67241DC2BA0006C91E /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1686,6 +1833,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		049649CF241DC13B0006C91E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04964A68241DC2BA0006C91E /* Metal.framework in Frameworks */,
+				04964A66241DC2B60006C91E /* Cocoa.framework in Frameworks */,
+				04964A65241DC2B00006C91E /* QuartzCore.framework in Frameworks */,
+				04964A63241DC2A80006C91E /* libgfx.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -1694,6 +1852,7 @@
 			children = (
 				0496429B241D9F000006C91E /* gfx */,
 				0496488A241DBDEC0006C91E /* gfx_component */,
+				049649D2241DC13B0006C91E /* gfx_Metal */,
 				0496428E241D9EDA0006C91E /* Sisy */,
 				0496428D241D9EDA0006C91E /* Products */,
 				04964882241DBCBE0006C91E /* Frameworks */,
@@ -1706,6 +1865,7 @@
 				0496428C241D9EDA0006C91E /* Sisy */,
 				0496429A241D9F000006C91E /* libgfx.dylib */,
 				04964889241DBDEC0006C91E /* libgfx_component.dylib */,
+				049649D1241DC13B0006C91E /* libgfx_Metal.dylib */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2627,6 +2787,8 @@
 		04964882241DBCBE0006C91E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				04964A67241DC2BA0006C91E /* Metal.framework */,
+				04964A64241DC2B00006C91E /* QuartzCore.framework */,
 				04964883241DBCBE0006C91E /* Cocoa.framework */,
 			);
 			name = Frameworks;
@@ -2833,6 +2995,97 @@
 				0496491F241DBF8B0006C91E /* OgreParallaxCorrectedCubemapAuto.h */,
 			);
 			name = LocalCubemaps;
+			sourceTree = "<group>";
+		};
+		049649D2241DC13B0006C91E /* gfx_Metal */ = {
+			isa = PBXGroup;
+			children = (
+				049649EE241DC1590006C91E /* OgreMetalPrerequisites.h */,
+				049649EF241DC1590006C91E /* OgreMetalHardwareBufferCommon.h */,
+				049649DE241DC1580006C91E /* OgreMetalHardwareBufferCommon.mm */,
+				04964A49241DC1630006C91E /*  HardwareBuffer */,
+				049649E7241DC1590006C91E /* OgreMetalHardwareBufferManager.h */,
+				04964A0D241DC15D0006C91E /* OgreMetalHardwareBufferManager.mm */,
+				04964A53241DC1B20006C91E /* OgreMetalBufferInterface.h */,
+				04964A4E241DC1B20006C91E /* OgreMetalBufferInterface.mm */,
+				04964A51241DC1B20006C91E /* OgreMetalDynamicBuffer.h */,
+				04964A52241DC1B20006C91E /* OgreMetalDynamicBuffer.mm */,
+				04964A4C241DC1B10006C91E /* OgreMetalStagingBuffer.h */,
+				04964A4B241DC1B10006C91E /* OgreMetalStagingBuffer.mm */,
+				04964A4A241DC1A40006C91E /* BufferPacked */,
+				04964A4D241DC1B20006C91E /* OgreMetalVaoManager.h */,
+				04964A4F241DC1B20006C91E /* OgreMetalVaoManager.mm */,
+				04964A54241DC1B20006C91E /* OgreMetalAsyncTicket.h */,
+				04964A50241DC1B20006C91E /* OgreMetalAsyncTicket.mm */,
+				04964A00241DC15B0006C91E /* OgreMetalAsyncTextureTicket.h */,
+				049649DD241DC1580006C91E /* OgreMetalAsyncTextureTicket.mm */,
+				049649F4241DC15A0006C91E /* OgreMetalRenderSystem.h */,
+				049649EA241DC1590006C91E /* OgreMetalRenderSystem.mm */,
+				049649F7241DC15A0006C91E /* OgreMetalPixelFormatToShaderType.h */,
+				04964A0C241DC15D0006C91E /* OgreMetalPixelFormatToShaderType.inl */,
+				049649F2241DC15A0006C91E /* OgreMetalPixelFormatToShaderType.mm */,
+				049649E5241DC1580006C91E /* OgreMetalProgram.h */,
+				049649E0241DC1580006C91E /* OgreMetalProgram.mm */,
+				04964A06241DC15C0006C91E /* OgreMetalProgramFactory.h */,
+				049649F8241DC15A0006C91E /* OgreMetalProgramFactory.mm */,
+				049649E4241DC1580006C91E /* OgreMetalGpuProgramManager.h */,
+				04964A01241DC15C0006C91E /* OgreMetalGpuProgramManager.mm */,
+				049649FD241DC15B0006C91E /* OgreMetalDiscardBufferManager.h */,
+				049649FA241DC15A0006C91E /* OgreMetalDiscardBufferManager.mm */,
+				04964A02241DC15C0006C91E /* OgreMetalHlmsPso.h */,
+				049649F3241DC15A0006C91E /* OgreMetalMappings.h */,
+				049649FC241DC15B0006C91E /* OgreMetalMappings.mm */,
+				049649F6241DC15A0006C91E /* OgreMetalRenderPassDescriptor.h */,
+				049649F1241DC15A0006C91E /* OgreMetalRenderPassDescriptor.mm */,
+				04964A11241DC15E0006C91E /* OgreMetalRenderTargetCommon.h */,
+				049649FB241DC15B0006C91E /* OgreMetalRenderTargetCommon.mm */,
+				04964A03241DC15C0006C91E /* OgreMetalStagingTexture.h */,
+				049649F9241DC15A0006C91E /* OgreMetalStagingTexture.mm */,
+				049649FF241DC15B0006C91E /* OgreMetalTextureGpu.h */,
+				04964A09241DC15D0006C91E /* OgreMetalTextureGpu.mm */,
+				049649E3241DC1580006C91E /* OgreMetalTextureGpuManager.h */,
+				04964A12241DC15E0006C91E /* OgreMetalTextureGpuManager.mm */,
+				04964A0E241DC15D0006C91E /* OgreMetalTextureGpuWindow.h */,
+				049649EB241DC1590006C91E /* OgreMetalTextureGpuWindow.mm */,
+				049649E6241DC1580006C91E /* OgreMetalDescriptorSetTexture.h */,
+				049649FE241DC15B0006C91E /* OgreMetalDevice.h */,
+				049649DC241DC1580006C91E /* OgreMetalDevice.mm */,
+				049649F5241DC15A0006C91E /* OgreMetalWindow.h */,
+				04964A0F241DC15E0006C91E /* OgreMetalWindow.mm */,
+				04964A5F241DC28B0006C91E /* OgreMetalView.h */,
+				04964A60241DC28B0006C91E /* OgreMetalView.mm */,
+				049649E2241DC1580006C91E /* OgreMetalEngineDll.mm */,
+				04964A0A241DC15D0006C91E /* OgreMetalPlugin.h */,
+				049649F0241DC1590006C91E /* OgreMetalPlugin.mm */,
+			);
+			name = gfx_Metal;
+			path = ../src.gfx_rendersys/Metal;
+			sourceTree = "<group>";
+		};
+		04964A49241DC1630006C91E /*  HardwareBuffer */ = {
+			isa = PBXGroup;
+			children = (
+				04964A0B241DC15D0006C91E /* OgreMetalHardwareIndexBuffer.h */,
+				049649DF241DC1580006C91E /* OgreMetalHardwareIndexBuffer.mm */,
+				049649ED241DC1590006C91E /* OgreMetalHardwareVertexBuffer.h */,
+				049649E8241DC1590006C91E /* OgreMetalHardwareVertexBuffer.mm */,
+			);
+			name = " HardwareBuffer";
+			sourceTree = "<group>";
+		};
+		04964A4A241DC1A40006C91E /* BufferPacked */ = {
+			isa = PBXGroup;
+			children = (
+				04964A04241DC15C0006C91E /* OgreMetalConstBufferPacked.h */,
+				04964A10241DC15E0006C91E /* OgreMetalConstBufferPacked.mm */,
+				04964A08241DC15C0006C91E /* OgreMetalMultiSourceVertexBufferPool.h */,
+				049649E9241DC1590006C91E /* OgreMetalMultiSourceVertexBufferPool.mm */,
+				04964A07241DC15C0006C91E /* OgreMetalTexBufferPacked.h */,
+				049649EC241DC1590006C91E /* OgreMetalTexBufferPacked.mm */,
+				049649E1241DC1580006C91E /* OgreMetalUavBufferPacked.h */,
+				04964A05241DC15C0006C91E /* OgreMetalUavBufferPacked.mm */,
+			);
+			name = BufferPacked;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -3318,6 +3571,47 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		049649CD241DC13B0006C91E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04964A2A241DC15E0006C91E /* OgreMetalMappings.h in Headers */,
+				04964A39241DC15E0006C91E /* OgreMetalHlmsPso.h in Headers */,
+				04964A24241DC15E0006C91E /* OgreMetalHardwareVertexBuffer.h in Headers */,
+				04964A1E241DC15E0006C91E /* OgreMetalHardwareBufferManager.h in Headers */,
+				04964A3E241DC15E0006C91E /* OgreMetalTexBufferPacked.h in Headers */,
+				04964A44241DC15E0006C91E /* OgreMetalTextureGpuWindow.h in Headers */,
+				04964A56241DC1B30006C91E /* OgreMetalStagingBuffer.h in Headers */,
+				04964A34241DC15E0006C91E /* OgreMetalDiscardBufferManager.h in Headers */,
+				04964A57241DC1B30006C91E /* OgreMetalVaoManager.h in Headers */,
+				04964A5B241DC1B30006C91E /* OgreMetalDynamicBuffer.h in Headers */,
+				04964A36241DC15E0006C91E /* OgreMetalTextureGpu.h in Headers */,
+				04964A2C241DC15E0006C91E /* OgreMetalWindow.h in Headers */,
+				04964A1D241DC15E0006C91E /* OgreMetalDescriptorSetTexture.h in Headers */,
+				04964A2D241DC15E0006C91E /* OgreMetalRenderPassDescriptor.h in Headers */,
+				04964A42241DC15E0006C91E /* OgreMetalHardwareIndexBuffer.h in Headers */,
+				04964A3D241DC15E0006C91E /* OgreMetalProgramFactory.h in Headers */,
+				04964A3A241DC15E0006C91E /* OgreMetalStagingTexture.h in Headers */,
+				04964A35241DC15E0006C91E /* OgreMetalDevice.h in Headers */,
+				04964A41241DC15E0006C91E /* OgreMetalPlugin.h in Headers */,
+				04964A25241DC15E0006C91E /* OgreMetalPrerequisites.h in Headers */,
+				04964A37241DC15E0006C91E /* OgreMetalAsyncTextureTicket.h in Headers */,
+				04964A2B241DC15E0006C91E /* OgreMetalRenderSystem.h in Headers */,
+				04964A61241DC28B0006C91E /* OgreMetalView.h in Headers */,
+				04964A26241DC15E0006C91E /* OgreMetalHardwareBufferCommon.h in Headers */,
+				04964A1C241DC15E0006C91E /* OgreMetalProgram.h in Headers */,
+				04964A3F241DC15E0006C91E /* OgreMetalMultiSourceVertexBufferPool.h in Headers */,
+				04964A1B241DC15E0006C91E /* OgreMetalGpuProgramManager.h in Headers */,
+				04964A1A241DC15E0006C91E /* OgreMetalTextureGpuManager.h in Headers */,
+				04964A5E241DC1B30006C91E /* OgreMetalAsyncTicket.h in Headers */,
+				04964A5D241DC1B30006C91E /* OgreMetalBufferInterface.h in Headers */,
+				04964A18241DC15E0006C91E /* OgreMetalUavBufferPacked.h in Headers */,
+				04964A2E241DC15E0006C91E /* OgreMetalPixelFormatToShaderType.h in Headers */,
+				04964A3B241DC15E0006C91E /* OgreMetalConstBufferPacked.h in Headers */,
+				04964A47241DC15E0006C91E /* OgreMetalRenderTargetCommon.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -3373,6 +3667,24 @@
 			productReference = 04964889241DBDEC0006C91E /* libgfx_component.dylib */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
+		049649D0241DC13B0006C91E /* gfx_Metal */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 049649D9241DC13B0006C91E /* Build configuration list for PBXNativeTarget "gfx_Metal" */;
+			buildPhases = (
+				049649CD241DC13B0006C91E /* Headers */,
+				049649CE241DC13B0006C91E /* Sources */,
+				049649CF241DC13B0006C91E /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				04964A6A241DC2BD0006C91E /* PBXTargetDependency */,
+			);
+			name = gfx_Metal;
+			productName = gfx_Metal;
+			productReference = 049649D1241DC13B0006C91E /* libgfx_Metal.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -3389,6 +3701,9 @@
 						CreatedOnToolsVersion = 11.3.1;
 					};
 					04964888241DBDEC0006C91E = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+					049649D0241DC13B0006C91E = {
 						CreatedOnToolsVersion = 11.3.1;
 					};
 				};
@@ -3409,6 +3724,7 @@
 				0496428B241D9ED90006C91E /* Sisy */,
 				04964299241D9F000006C91E /* gfx */,
 				04964888241DBDEC0006C91E /* gfx_component */,
+				049649D0241DC13B0006C91E /* gfx_Metal */,
 			);
 		};
 /* End PBXProject section */
@@ -3777,6 +4093,45 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		049649CE241DC13B0006C91E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04964A38241DC15E0006C91E /* OgreMetalGpuProgramManager.mm in Sources */,
+				04964A30241DC15E0006C91E /* OgreMetalStagingTexture.mm in Sources */,
+				04964A45241DC15E0006C91E /* OgreMetalWindow.mm in Sources */,
+				04964A17241DC15E0006C91E /* OgreMetalProgram.mm in Sources */,
+				04964A15241DC15E0006C91E /* OgreMetalHardwareBufferCommon.mm in Sources */,
+				04964A5A241DC1B30006C91E /* OgreMetalAsyncTicket.mm in Sources */,
+				04964A13241DC15E0006C91E /* OgreMetalDevice.mm in Sources */,
+				04964A43241DC15E0006C91E /* OgreMetalHardwareBufferManager.mm in Sources */,
+				04964A32241DC15E0006C91E /* OgreMetalRenderTargetCommon.mm in Sources */,
+				04964A3C241DC15E0006C91E /* OgreMetalUavBufferPacked.mm in Sources */,
+				04964A59241DC1B30006C91E /* OgreMetalVaoManager.mm in Sources */,
+				04964A22241DC15E0006C91E /* OgreMetalTextureGpuWindow.mm in Sources */,
+				04964A21241DC15E0006C91E /* OgreMetalRenderSystem.mm in Sources */,
+				04964A33241DC15E0006C91E /* OgreMetalMappings.mm in Sources */,
+				04964A27241DC15E0006C91E /* OgreMetalPlugin.mm in Sources */,
+				04964A40241DC15E0006C91E /* OgreMetalTextureGpu.mm in Sources */,
+				04964A1F241DC15E0006C91E /* OgreMetalHardwareVertexBuffer.mm in Sources */,
+				04964A14241DC15E0006C91E /* OgreMetalAsyncTextureTicket.mm in Sources */,
+				04964A2F241DC15E0006C91E /* OgreMetalProgramFactory.mm in Sources */,
+				04964A62241DC28B0006C91E /* OgreMetalView.mm in Sources */,
+				04964A20241DC15E0006C91E /* OgreMetalMultiSourceVertexBufferPool.mm in Sources */,
+				04964A16241DC15E0006C91E /* OgreMetalHardwareIndexBuffer.mm in Sources */,
+				04964A46241DC15E0006C91E /* OgreMetalConstBufferPacked.mm in Sources */,
+				04964A29241DC15E0006C91E /* OgreMetalPixelFormatToShaderType.mm in Sources */,
+				04964A48241DC15E0006C91E /* OgreMetalTextureGpuManager.mm in Sources */,
+				04964A23241DC15E0006C91E /* OgreMetalTexBufferPacked.mm in Sources */,
+				04964A19241DC15E0006C91E /* OgreMetalEngineDll.mm in Sources */,
+				04964A31241DC15E0006C91E /* OgreMetalDiscardBufferManager.mm in Sources */,
+				04964A28241DC15E0006C91E /* OgreMetalRenderPassDescriptor.mm in Sources */,
+				04964A58241DC1B30006C91E /* OgreMetalBufferInterface.mm in Sources */,
+				04964A5C241DC1B30006C91E /* OgreMetalDynamicBuffer.mm in Sources */,
+				04964A55241DC1B30006C91E /* OgreMetalStagingBuffer.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -3784,6 +4139,11 @@
 			isa = PBXTargetDependency;
 			target = 04964299241D9F000006C91E /* gfx */;
 			targetProxy = 049649CA241DC0F10006C91E /* PBXContainerItemProxy */;
+		};
+		04964A6A241DC2BD0006C91E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 04964299241D9F000006C91E /* gfx */;
+			targetProxy = 04964A69241DC2BD0006C91E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -3999,6 +4359,36 @@
 			};
 			name = Release;
 		};
+		049649DA241DC13B0006C91E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				GCC_ENABLE_CPP_RTTI = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		049649DB241DC13B0006C91E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				GCC_ENABLE_CPP_RTTI = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -4034,6 +4424,15 @@
 			buildConfigurations = (
 				04964892241DBDEC0006C91E /* Debug */,
 				04964893241DBDEC0006C91E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		049649D9241DC13B0006C91E /* Build configuration list for PBXNativeTarget "gfx_Metal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				049649DA241DC13B0006C91E /* Debug */,
+				049649DB241DC13B0006C91E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
