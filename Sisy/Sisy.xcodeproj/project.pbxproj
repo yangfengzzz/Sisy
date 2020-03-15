@@ -314,7 +314,6 @@
 		049645DE241D9F810006C91E /* OgreRenderSystemCapabilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 049643DE241D9F750006C91E /* OgreRenderSystemCapabilities.h */; };
 		049645DF241D9F810006C91E /* OgreResource.h in Headers */ = {isa = PBXBuildFile; fileRef = 049643DF241D9F750006C91E /* OgreResource.h */; };
 		049645E0241D9F810006C91E /* OgreLodListener.h in Headers */ = {isa = PBXBuildFile; fileRef = 049643E0241D9F750006C91E /* OgreLodListener.h */; };
-		049645E1241D9F810006C91E /* OgreRotationalSpline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 049643E1241D9F750006C91E /* OgreRotationalSpline.cpp */; };
 		049645E2241D9F810006C91E /* OgreTextureGpuManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 049643E2241D9F750006C91E /* OgreTextureGpuManager.h */; };
 		049645E3241D9F810006C91E /* OgreMaterial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 049643E3241D9F750006C91E /* OgreMaterial.cpp */; };
 		049645E4241D9F810006C91E /* OgreGpuProgramParams.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 049643E5241D9F750006C91E /* OgreGpuProgramParams.cpp */; };
@@ -326,7 +325,7 @@
 		049645EA241D9F810006C91E /* OgreAlignedAllocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 049643EB241D9F760006C91E /* OgreAlignedAllocator.cpp */; };
 		049645EB241D9F810006C91E /* OgreHlmsManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 049643EC241D9F760006C91E /* OgreHlmsManager.cpp */; };
 		049645EC241D9F810006C91E /* OgreExternalTextureSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 049643ED241D9F760006C91E /* OgreExternalTextureSource.cpp */; };
-		049645ED241D9F810006C91E /* OgreRotationSpline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 049643EE241D9F760006C91E /* OgreRotationSpline.cpp */; };
+		049645ED241D9F810006C91E /* OgreRotationalSpline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 049643EE241D9F760006C91E /* OgreRotationalSpline.cpp */; };
 		049645EE241D9F810006C91E /* OgreHlmsSamplerblock.h in Headers */ = {isa = PBXBuildFile; fileRef = 049643EF241D9F760006C91E /* OgreHlmsSamplerblock.h */; };
 		049645EF241D9F810006C91E /* OgreHardwareVertexBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 049643F0241D9F760006C91E /* OgreHardwareVertexBuffer.h */; };
 		049645F0241D9F810006C91E /* OgreHlmsTexturePack.h in Headers */ = {isa = PBXBuildFile; fileRef = 049643F1241D9F760006C91E /* OgreHlmsTexturePack.h */; };
@@ -678,6 +677,7 @@
 		0496487F241DBC600006C91E /* OgreUavBufferPacked.h in Headers */ = {isa = PBXBuildFile; fileRef = 04964872241DBC600006C91E /* OgreUavBufferPacked.h */; };
 		04964880241DBC600006C91E /* OgreMultiSourceVertexBufferPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04964873241DBC600006C91E /* OgreMultiSourceVertexBufferPool.cpp */; };
 		04964881241DBC600006C91E /* OgreMultiSourceVertexBufferPool.h in Headers */ = {isa = PBXBuildFile; fileRef = 04964874241DBC600006C91E /* OgreMultiSourceVertexBufferPool.h */; };
+		04964884241DBCBE0006C91E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04964883241DBCBE0006C91E /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -1004,7 +1004,6 @@
 		049643DE241D9F750006C91E /* OgreRenderSystemCapabilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OgreRenderSystemCapabilities.h; sourceTree = "<group>"; };
 		049643DF241D9F750006C91E /* OgreResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OgreResource.h; sourceTree = "<group>"; };
 		049643E0241D9F750006C91E /* OgreLodListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OgreLodListener.h; sourceTree = "<group>"; };
-		049643E1241D9F750006C91E /* OgreRotationalSpline.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OgreRotationalSpline.cpp; sourceTree = "<group>"; };
 		049643E2241D9F750006C91E /* OgreTextureGpuManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OgreTextureGpuManager.h; sourceTree = "<group>"; };
 		049643E3241D9F750006C91E /* OgreMaterial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OgreMaterial.cpp; sourceTree = "<group>"; };
 		049643E4241D9F750006C91E /* OgreLight.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OgreLight.inl; sourceTree = "<group>"; };
@@ -1017,7 +1016,7 @@
 		049643EB241D9F760006C91E /* OgreAlignedAllocator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OgreAlignedAllocator.cpp; sourceTree = "<group>"; };
 		049643EC241D9F760006C91E /* OgreHlmsManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OgreHlmsManager.cpp; sourceTree = "<group>"; };
 		049643ED241D9F760006C91E /* OgreExternalTextureSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OgreExternalTextureSource.cpp; sourceTree = "<group>"; };
-		049643EE241D9F760006C91E /* OgreRotationSpline.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OgreRotationSpline.cpp; sourceTree = "<group>"; };
+		049643EE241D9F760006C91E /* OgreRotationalSpline.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OgreRotationalSpline.cpp; sourceTree = "<group>"; };
 		049643EF241D9F760006C91E /* OgreHlmsSamplerblock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OgreHlmsSamplerblock.h; sourceTree = "<group>"; };
 		049643F0241D9F760006C91E /* OgreHardwareVertexBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OgreHardwareVertexBuffer.h; sourceTree = "<group>"; };
 		049643F1241D9F760006C91E /* OgreHlmsTexturePack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OgreHlmsTexturePack.h; sourceTree = "<group>"; };
@@ -1371,6 +1370,7 @@
 		04964872241DBC600006C91E /* OgreUavBufferPacked.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OgreUavBufferPacked.h; path = Vao/OgreUavBufferPacked.h; sourceTree = "<group>"; };
 		04964873241DBC600006C91E /* OgreMultiSourceVertexBufferPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OgreMultiSourceVertexBufferPool.cpp; path = Vao/OgreMultiSourceVertexBufferPool.cpp; sourceTree = "<group>"; };
 		04964874241DBC600006C91E /* OgreMultiSourceVertexBufferPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OgreMultiSourceVertexBufferPool.h; path = Vao/OgreMultiSourceVertexBufferPool.h; sourceTree = "<group>"; };
+		04964883241DBCBE0006C91E /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1385,6 +1385,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04964884241DBCBE0006C91E /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1397,6 +1398,7 @@
 				0496429B241D9F000006C91E /* gfx */,
 				0496428E241D9EDA0006C91E /* Sisy */,
 				0496428D241D9EDA0006C91E /* Products */,
+				04964882241DBCBE0006C91E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1560,8 +1562,7 @@
 				04964441241D9F7B0006C91E /* OgreSimpleSpline.h */,
 				04964342241D9F6C0006C91E /* OgreSimpleSpline.cpp */,
 				049643CF241D9F740006C91E /* OgreRotationalSpline.h */,
-				049643E1241D9F750006C91E /* OgreRotationalSpline.cpp */,
-				049643EE241D9F760006C91E /* OgreRotationSpline.cpp */,
+				049643EE241D9F760006C91E /* OgreRotationalSpline.cpp */,
 				0496448E241D9F7F0006C91E /* OgreNumerics.cpp */,
 				049643B2241D9F720006C91E /* OgreNumerics.h */,
 				04964407241D9F770006C91E /* OgrePolygon.cpp */,
@@ -2324,6 +2325,14 @@
 			name = BillboardChains;
 			sourceTree = "<group>";
 		};
+		04964882241DBCBE0006C91E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				04964883241DBCBE0006C91E /* Cocoa.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -2831,7 +2840,6 @@
 				049644B2241D9F810006C91E /* OgreOldSkeletonInstance.cpp in Sources */,
 				04964508241D9F810006C91E /* OgreDeflate.cpp in Sources */,
 				0496477F241DAEEF0006C91E /* OgreAabb.cpp in Sources */,
-				049645E1241D9F810006C91E /* OgreRotationalSpline.cpp in Sources */,
 				049645E4241D9F810006C91E /* OgreGpuProgramParams.cpp in Sources */,
 				049645A5241D9F810006C91E /* OgrePixelCountLodStrategy.cpp in Sources */,
 				049644FC241D9F810006C91E /* OgreHardwareCounterBuffer.cpp in Sources */,
@@ -2999,7 +3007,7 @@
 				0496472B241DAD000006C91E /* OgreBufferInterface.cpp in Sources */,
 				049644E5241D9F810006C91E /* OgreTextureBox.cpp in Sources */,
 				049644FA241D9F810006C91E /* OgreMatrix3.cpp in Sources */,
-				049645ED241D9F810006C91E /* OgreRotationSpline.cpp in Sources */,
+				049645ED241D9F810006C91E /* OgreRotationalSpline.cpp in Sources */,
 				0496462F241D9F810006C91E /* OgreShadowCameraSetupPlaneOptimal.cpp in Sources */,
 				0496450E241D9F810006C91E /* OgreAtomicScalar.cpp in Sources */,
 				04964658241D9F810006C91E /* OgreHighLevelGpuProgramManager.cpp in Sources */,
@@ -3231,6 +3239,13 @@
 				GCC_ENABLE_CPP_EXCEPTIONS = YES;
 				GCC_ENABLE_CPP_RTTI = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				OTHER_LDFLAGS = (
+					"-lzzip",
+					"-lz",
+					"-lfreeimage",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -3246,6 +3261,13 @@
 				GCC_ENABLE_CPP_EXCEPTIONS = YES;
 				GCC_ENABLE_CPP_RTTI = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				OTHER_LDFLAGS = (
+					"-lzzip",
+					"-lz",
+					"-lfreeimage",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
