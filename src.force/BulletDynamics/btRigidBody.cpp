@@ -48,8 +48,8 @@ void btRigidBody::setupRigidBody(const btRigidBody::btRigidBodyConstructionInfo&
 	m_gravity.setValue(btScalar(0.0), btScalar(0.0), btScalar(0.0));
 	m_gravity_acceleration.setValue(btScalar(0.0), btScalar(0.0), btScalar(0.0));
 	m_totalForce.setValue(btScalar(0.0), btScalar(0.0), btScalar(0.0));
-	m_totalTorque.setValue(btScalar(0.0), btScalar(0.0), btScalar(0.0)),
-		setDamping(constructionInfo.m_linearDamping, constructionInfo.m_angularDamping);
+    m_totalTorque.setValue(btScalar(0.0), btScalar(0.0), btScalar(0.0));
+    setDamping(constructionInfo.m_linearDamping, constructionInfo.m_angularDamping);
 
 	m_linearSleepingThreshold = constructionInfo.m_linearSleepingThreshold;
 	m_angularSleepingThreshold = constructionInfo.m_angularSleepingThreshold;

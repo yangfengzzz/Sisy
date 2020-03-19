@@ -1190,10 +1190,10 @@ public:
 		}
 */
 	/**@brief Set the values 
-   * @param x Value of x
-   * @param y Value of y
-   * @param z Value of z
-   * @param w Value of w
+   * @param _x Value of x
+   * @param _y Value of y
+   * @param _z Value of z
+   * @param _w Value of w
    */
 	SIMD_FORCE_INLINE void setValue(const btScalar& _x, const btScalar& _y, const btScalar& _z, const btScalar& _w)
 	{

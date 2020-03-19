@@ -40,7 +40,7 @@ struct b3HashString
 
 		/* Fowler / Noll / Vo (FNV) Hash */
 		unsigned int hash = InitialFNV;
-		int len = m_string.length();
+		size_t len = m_string.length();
 		for (int i = 0; i < len; i++)
 		{
 			hash = hash ^ (m_string[i]); /* xor  the low 8 bits */
@@ -53,8 +53,10 @@ struct b3HashString
 	{
 		int ret = 0;
 
-		while (!(ret = *(unsigned char*)src - *(unsigned char*)dst) && *dst)
-			++src, ++dst;
+        while (!(ret = *(unsigned char*)src - *(unsigned char*)dst) && *dst){
+            ++src;
+            ++dst;
+        }
 
 		if (ret < 0)
 			ret = -1;
