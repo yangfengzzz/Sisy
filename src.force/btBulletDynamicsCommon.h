@@ -38,6 +38,6 @@ subject to the following restrictions:
 #include "BulletDynamics/btSequentialImpulseConstraintSolver.h"
 
 ///Vehicle simulation, with wheel contact simulated by raycasts
-#include "BulletDynamics/Vehicle/btRaycastVehicle.h"
+#include "BulletDynamics/btRaycastVehicle.h"
 
 #endif  //BULLET_DYNAMICS_COMMON_H
