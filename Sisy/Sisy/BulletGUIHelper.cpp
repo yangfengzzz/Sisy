@@ -329,15 +329,15 @@ void BulletGuiHelper::createCollisionShapeGraphicsObject(btCollisionShape* colli
     if (collisionShape->getUserIndex() >= 0)
         return;
 
-    if (m_data->m_checkedTexture < 0)
-    {
-        m_data->m_checkedTexture = createCheckeredTexture(173, 199, 255);
-    }
-
-    if (m_data->m_checkedTextureGrey < 0)
-    {
-        m_data->m_checkedTextureGrey = createCheckeredTexture(192, 192, 192);
-    }
+//    if (m_data->m_checkedTexture < 0)
+//    {
+//        m_data->m_checkedTexture = createCheckeredTexture(173, 199, 255);
+//    }
+//
+//    if (m_data->m_checkedTextureGrey < 0)
+//    {
+//        m_data->m_checkedTextureGrey = createCheckeredTexture(192, 192, 192);
+//    }
 
     btAlignedObjectArray<GLInstanceVertex> gfxVertices;
     btAlignedObjectArray<int> indices;
@@ -919,6 +919,38 @@ void BulletGuiHelper::createCollisionShapeGraphicsObject(btCollisionShape* colli
         int shapeId = registerGraphicsShape(&gfxVertices[0].xyzw[0], gfxVertices.size(),
                                             &indices[0], indices.size());
         collisionShape->setUserIndex(shapeId);
+    }
+}
+
+void BulletGuiHelper::computeSoftBodyVertices(btCollisionShape* collisionShape,
+                                              btAlignedObjectArray<GLInstanceVertex>& gfxVertices,
+                                              btAlignedObjectArray<int>& indices)
+{
+    if (collisionShape->getUserPointer() == 0)
+        return;
+    b3Assert(collisionShape->getUserPointer());
+    btSoftBody* psb = (btSoftBody*)collisionShape->getUserPointer();
+    gfxVertices.resize(psb->m_faces.size() * 3);
+
+    for (int i = 0; i < psb->m_faces.size(); i++)  // Foreach face
+    {
+        for (int k = 0; k < 3; k++)  // Foreach vertex on a face
+        {
+            int currentIndex = i * 3 + k;
+            for (int j = 0; j < 3; j++)
+            {
+                gfxVertices[currentIndex].xyzw[j] = psb->m_faces[i].m_n[k]->m_x[j];
+            }
+            for (int j = 0; j < 3; j++)
+            {
+                gfxVertices[currentIndex].normal[j] = psb->m_faces[i].m_n[k]->m_n[j];
+            }
+            for (int j = 0; j < 2; j++)
+            {
+                gfxVertices[currentIndex].uv[j] = 0.5;  //we don't have UV info...
+            }
+            indices.push_back(currentIndex);
+        }
     }
 }
 
@@ -1646,37 +1678,6 @@ void BulletGuiHelper::autogenerateGraphicsObjects(btDiscreteDynamicsWorld* rbWor
 //	}
 //}
 //
-//void OpenGLGuiHelper::computeSoftBodyVertices(btCollisionShape* collisionShape,
-//											  btAlignedObjectArray<GLInstanceVertex>& gfxVertices,
-//											  btAlignedObjectArray<int>& indices)
-//{
-//	if (collisionShape->getUserPointer() == 0)
-//		return;
-//	b3Assert(collisionShape->getUserPointer());
-//	btSoftBody* psb = (btSoftBody*)collisionShape->getUserPointer();
-//	gfxVertices.resize(psb->m_faces.size() * 3);
-//
-//	for (int i = 0; i < psb->m_faces.size(); i++)  // Foreach face
-//	{
-//		for (int k = 0; k < 3; k++)  // Foreach vertex on a face
-//		{
-//			int currentIndex = i * 3 + k;
-//			for (int j = 0; j < 3; j++)
-//			{
-//				gfxVertices[currentIndex].xyzw[j] = psb->m_faces[i].m_n[k]->m_x[j];
-//			}
-//			for (int j = 0; j < 3; j++)
-//			{
-//				gfxVertices[currentIndex].normal[j] = psb->m_faces[i].m_n[k]->m_n[j];
-//			}
-//			for (int j = 0; j < 2; j++)
-//			{
-//				gfxVertices[currentIndex].uv[j] = 0.5;  //we don't have UV info...
-//			}
-//			indices.push_back(currentIndex);
-//		}
-//	}
-//}
 //
 //void OpenGLGuiHelper::updateShape(int shapeIndex, float* vertices)
 //{
