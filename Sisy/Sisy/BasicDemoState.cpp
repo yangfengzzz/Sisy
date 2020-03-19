@@ -1,5 +1,5 @@
 
-#include "MyGameState.h"
+#include "BasicDemoState.h"
 #include "GraphicsSystem.h"
 #include "CameraController.h"
 #include "OgreSceneManager.h"

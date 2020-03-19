@@ -1,6 +1,6 @@
 
 #include "GraphicsSystem.h"
-#include "MyGameState.h"
+#include "BasicDemoState.h"
 
 #include "OgreSceneManager.h"
 #include "OgreCamera.h"
