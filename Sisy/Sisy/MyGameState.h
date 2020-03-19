@@ -9,6 +9,10 @@ namespace Demo
 {
     class MyGameState : public TutorialGameState
     {
+        Ogre::SceneNode* mSceneNode[125];
+        btRigidBody* bulletBody[125];
+        
+        Ogre::SceneNode     *mLightNodes[3];
     public:
         MyGameState( const Ogre::String &helpDescription );
         

@@ -17,7 +17,7 @@ namespace v1
 namespace Demo{
 class GraphicsSystem;
 class CameraController;
-class BulletGuiHelper;
+class BulletConverter;
 /// Base game state for the tutorials. All it does is show a little text on screen :)
 class TutorialGameState : public GameState
 {
@@ -51,7 +51,7 @@ protected:
     btVector3 m_oldPickingPos;
     btVector3 m_hitPos;
     btScalar m_oldPickingDist;
-    BulletGuiHelper     *mBulletHelper;
+    BulletConverter     *mBulletHelper;
     
 public:
     TutorialGameState( const Ogre::String &helpDescription );

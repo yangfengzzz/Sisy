@@ -15,6 +15,7 @@
 #include "OgreMesh2.h"
 #include "OgreSubMesh2.h"
 #include "OgreItem.h"
+#include <iostream>
 
 #define BT_LINE_BATCH_SIZE 512
 namespace Demo{
@@ -132,7 +133,7 @@ class MyTriangleCollector2 : public btTriangleCallback
 {
 public:
     btAlignedObjectArray<GLInstanceVertex>* m_pVerticesOut;
-    btAlignedObjectArray<int>* m_pIndicesOut;
+    btAlignedObjectArray<Ogre::uint16>* m_pIndicesOut;
     btVector3 m_aabbMin, m_aabbMax;
     btScalar m_textureScaling;
 
@@ -185,7 +186,7 @@ BulletGuiHelper::~BulletGuiHelper()
     delete m_data;
 }
 
-Ogre::IndexBufferPacked* BulletGuiHelper::createIndexBuffer(const int* indices, int numIndices)
+Ogre::IndexBufferPacked* BulletGuiHelper::createIndexBuffer(const Ogre::uint16* indices, int numIndices)
 {
     Ogre::IndexBufferPacked *indexBuffer = 0;
     
@@ -239,7 +240,7 @@ struct CubeVertices
 
 std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*>
 BulletGuiHelper::createDynamicMesh(const float* vertices, int numvertices,
-                                   const int* indices, int numIndices, int idx)
+                                   const Ogre::uint16* indices, int numIndices, int idx)
 {
     Ogre::Root *root = m_data->m_glApp->getRoot();
     Ogre::RenderSystem *renderSystem = root->getRenderSystem();
@@ -301,33 +302,35 @@ BulletGuiHelper::createDynamicMesh(const float* vertices, int numvertices,
     
     //Set the bounds to get frustum culling and LOD to work correctly.
     mesh->_setBounds( Ogre::Aabb(Ogre::Vector3::ZERO,
-                                 Ogre::Vector3::UNIT_SCALE ), false );
-    mesh->_setBoundingSphereRadius(10 );
+                                 50*Ogre::Vector3::UNIT_SCALE ), false );
+    mesh->_setBoundingSphereRadius(50 );
     
     return std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*>( mesh, vertexBuffer );
 }
 
 
 int BulletGuiHelper::registerGraphicsShape(const float* vertices, int numvertices,
-                                           const int* indices, int numIndices)
+                                           const Ogre::uint16* indices, int numIndices,
+                                           const btVector3& pos)
 {
     Ogre::SceneManager *sceneManager = m_data->m_glApp->getSceneManager();
     
-    auto mesh = createDynamicMesh(vertices, numvertices, indices, numvertices, idx++);
+    auto mesh = createDynamicMesh(vertices, numvertices, indices, numIndices, idx++);
     Ogre::Item *item = sceneManager->createItem( mesh.first, Ogre::SCENE_DYNAMIC );
     Ogre::SceneNode *sceneNode = sceneManager->getRootSceneNode( Ogre::SCENE_DYNAMIC )->
     createChildSceneNode( Ogre::SCENE_DYNAMIC );
     sceneNode->attachObject( item );
-    sceneNode->setPosition( 0, 0, 0 );
+    sceneNode->setPosition( pos.x(), pos.y(), pos.z() );
     
     return idx;
 }
 
-void BulletGuiHelper::createCollisionShapeGraphicsObject(btCollisionShape* collisionShape)
+void BulletGuiHelper::createCollisionShapeGraphicsObject(btCollisionObject* body)
 {
+    btCollisionShape* collisionShape = body->getCollisionShape();
     //already has a graphics object?
-    if (collisionShape->getUserIndex() >= 0)
-        return;
+//    if (collisionShape->getUserIndex() >= 0)
+//        return;
 
 //    if (m_data->m_checkedTexture < 0)
 //    {
@@ -340,7 +343,7 @@ void BulletGuiHelper::createCollisionShapeGraphicsObject(btCollisionShape* colli
 //    }
 
     btAlignedObjectArray<GLInstanceVertex> gfxVertices;
-    btAlignedObjectArray<int> indices;
+    btAlignedObjectArray<Ogre::uint16> indices;
     int strideInBytes = 9 * sizeof(float);
     if (collisionShape->getShapeType() == BOX_SHAPE_PROXYTYPE)
     {
@@ -358,38 +361,39 @@ void BulletGuiHelper::createCollisionShapeGraphicsObject(btCollisionShape* colli
         int graphicsShapeIndex = -1;
         int* graphicsShapeIndexPtr = m_data->m_hashShapes[shape];
 
-        if (graphicsShapeIndexPtr)
-        {
-            graphicsShapeIndex = *graphicsShapeIndexPtr;
-        }
-        else
-        {
+//        if (graphicsShapeIndexPtr)
+//        {
+//            graphicsShapeIndex = *graphicsShapeIndexPtr;
+//        }
+//        else
+//        {
             int numVertices = sizeof(cube_vertices_textured) / strideInBytes;
-            transformedVertices.resize(numVertices * 9);
+            transformedVertices.resize(numVertices * 6);
             for (int i = 0; i < numVertices; i++)
             {
                 btVector3 vert;
                 vert.setValue(cube_vertices_textured[i * 9 + 0],
-                    cube_vertices_textured[i * 9 + 1],
-                    cube_vertices_textured[i * 9 + 2]);
+                              cube_vertices_textured[i * 9 + 1],
+                              cube_vertices_textured[i * 9 + 2]);
 
                 btVector3 trVer = halfExtents * vert;
-                transformedVertices[i * 9 + 0] = trVer[0];
-                transformedVertices[i * 9 + 1] = trVer[1];
-                transformedVertices[i * 9 + 2] = trVer[2];
-                transformedVertices[i * 9 + 3] = cube_vertices_textured[i * 9 + 3];
-                transformedVertices[i * 9 + 4] = cube_vertices_textured[i * 9 + 4];
-                transformedVertices[i * 9 + 5] = cube_vertices_textured[i * 9 + 5];
-                transformedVertices[i * 9 + 6] = cube_vertices_textured[i * 9 + 6];
-                transformedVertices[i * 9 + 7] = cube_vertices_textured[i * 9 + 7];
-                transformedVertices[i * 9 + 8] = cube_vertices_textured[i * 9 + 8];
+                transformedVertices[i * 6 + 0] = trVer[0];
+                transformedVertices[i * 6 + 1] = trVer[1];
+                transformedVertices[i * 6 + 2] = trVer[2];
+//                transformedVertices[i * 9 + 3] = cube_vertices_textured[i * 9 + 3];
+                transformedVertices[i * 6 + 3] = cube_vertices_textured[i * 9 + 4];
+                transformedVertices[i * 6 + 4] = cube_vertices_textured[i * 9 + 5];
+                transformedVertices[i * 6 + 5] = cube_vertices_textured[i * 9 + 6];
+//                transformedVertices[i * 9 + 7] = cube_vertices_textured[i * 9 + 7];
+//                transformedVertices[i * 9 + 8] = cube_vertices_textured[i * 9 + 8];
             }
 
-            int numIndices = sizeof(cube_indices) / sizeof(int);
+            int numIndices = sizeof(cube_indices) / sizeof(Ogre::uint16);
             graphicsShapeIndex = registerGraphicsShape(&transformedVertices[0], numVertices,
-                                                       cube_indices, numIndices);
+                                                       cube_indices, numIndices,
+                                                       body->getWorldTransform().getOrigin());
             m_data->m_hashShapes.insert(shape, graphicsShapeIndex);
-        }
+//        }
 
         collisionShape->setUserIndex(graphicsShapeIndex);
         return;
@@ -426,7 +430,8 @@ void BulletGuiHelper::createCollisionShapeGraphicsObject(btCollisionShape* colli
                 userImage = m_data->m_checkedTexture;
             }
             int shapeId = registerGraphicsShape(&gfxVertices[0].xyzw[0], gfxVertices.size(),
-                                                &indices[0], indices.size());
+                                                &indices[0], indices.size(),
+                                                body->getWorldTransform().getOrigin());
             collisionShape->setUserIndex(shapeId);
         }
         return;
@@ -439,7 +444,8 @@ void BulletGuiHelper::createCollisionShapeGraphicsObject(btCollisionShape* colli
         if (gfxVertices.size() && indices.size())
         {
             int shapeId = registerGraphicsShape(&gfxVertices[0].xyzw[0], gfxVertices.size(),
-                                                &indices[0], indices.size());
+                                                &indices[0], indices.size(),
+                                                body->getWorldTransform().getOrigin());
 
             b3Assert(shapeId >= 0);
             collisionShape->setUserIndex(shapeId);
@@ -506,9 +512,10 @@ void BulletGuiHelper::createCollisionShapeGraphicsObject(btCollisionShape* colli
                     transformedVertices[i * 9 + 8] = textured_detailed_sphere_vertices[i * 9 + 8];
                 }
 
-                int numIndices = sizeof(textured_detailed_sphere_indices) / sizeof(int);
+                int numIndices = sizeof(textured_detailed_sphere_indices) / sizeof(Ogre::uint16);
                 graphicsShapeIndex = registerGraphicsShape(&transformedVertices[0], numVertices,
-                                                           textured_detailed_sphere_indices, numIndices);
+                                                           textured_detailed_sphere_indices, numIndices,
+                                                           body->getWorldTransform().getOrigin());
 
                 m_data->m_hashShapes.insert(shape, graphicsShapeIndex);
             }
@@ -560,9 +567,10 @@ void BulletGuiHelper::createCollisionShapeGraphicsObject(btCollisionShape* colli
                 transformedVertices[i * 9 + 8] = textured_detailed_sphere_vertices[i * 9 + 8];
             }
 
-            int numIndices = sizeof(textured_detailed_sphere_indices) / sizeof(int);
+            int numIndices = sizeof(textured_detailed_sphere_indices) / sizeof(Ogre::uint16);
             graphicsShapeIndex = registerGraphicsShape(&transformedVertices[0], numVertices,
-                                                       textured_detailed_sphere_indices, numIndices);
+                                                       textured_detailed_sphere_indices, numIndices,
+                                                       body->getWorldTransform().getOrigin());
             m_data->m_hashShapes.insert(shape, graphicsShapeIndex);
         }
 
@@ -617,9 +625,10 @@ void BulletGuiHelper::createCollisionShapeGraphicsObject(btCollisionShape* colli
                         transformedVertices[i * 9 + 8] = textured_detailed_sphere_vertices[i * 9 + 8];
                     }
 
-                    int numIndices = sizeof(textured_detailed_sphere_indices) / sizeof(int);
+                    int numIndices = sizeof(textured_detailed_sphere_indices) / sizeof(Ogre::uint16);
                     graphicsShapeIndex = registerGraphicsShape(&transformedVertices[0], numVertices,
-                                                               textured_detailed_sphere_indices, numIndices);
+                                                               textured_detailed_sphere_indices, numIndices,
+                                                               body->getWorldTransform().getOrigin());
                     m_data->m_hashShapes.insert(shape, graphicsShapeIndex);
                 }
 
@@ -681,9 +690,10 @@ void BulletGuiHelper::createCollisionShapeGraphicsObject(btCollisionShape* colli
                         transformedVertices[i * 9 + 8] = textured_detailed_sphere_vertices[i * 9 + 8];
                     }
 
-                    int numIndices = sizeof(textured_detailed_sphere_indices) / sizeof(int);
+                    int numIndices = sizeof(textured_detailed_sphere_indices) / sizeof(Ogre::uint16);
                     graphicsShapeIndex = registerGraphicsShape(&transformedVertices[0], numVertices,
-                                                               textured_detailed_sphere_indices, numIndices);
+                                                               textured_detailed_sphere_indices, numIndices,
+                                                               body->getWorldTransform().getOrigin());
                     m_data->m_hashShapes.insert(shape, graphicsShapeIndex);
                 }
 
@@ -754,9 +764,10 @@ void BulletGuiHelper::createCollisionShapeGraphicsObject(btCollisionShape* colli
                             transformedVertices[i * 9 + 8] = textured_detailed_sphere_vertices[i * 9 + 8];
                         }
 
-                        int numIndices = sizeof(textured_detailed_sphere_indices) / sizeof(int);
+                        int numIndices = sizeof(textured_detailed_sphere_indices) / sizeof(Ogre::uint16);
                         graphicsShapeIndex = registerGraphicsShape(&transformedVertices[0], numVertices,
-                                                                   textured_detailed_sphere_indices, numIndices);
+                                                                   textured_detailed_sphere_indices, numIndices,
+                                                                   body->getWorldTransform().getOrigin());
                         m_data->m_hashShapes.insert(shape, graphicsShapeIndex);
                     }
                     collisionShape->setUserIndex(graphicsShapeIndex);
@@ -816,9 +827,10 @@ void BulletGuiHelper::createCollisionShapeGraphicsObject(btCollisionShape* colli
                 transformedVertices[i * 9 + 8] = textured_detailed_sphere_vertices[i * 9 + 8];
             }
 
-            int numIndices = sizeof(textured_detailed_sphere_indices) / sizeof(int);
+            int numIndices = sizeof(textured_detailed_sphere_indices) / sizeof(Ogre::uint16);
             graphicsShapeIndex = registerGraphicsShape(&transformedVertices[0], numVertices,
-                                                       textured_detailed_sphere_indices, numIndices);
+                                                       textured_detailed_sphere_indices, numIndices,
+                                                       body->getWorldTransform().getOrigin());
             m_data->m_hashShapes.insert(shape, graphicsShapeIndex);
         }
         collisionShape->setUserIndex(graphicsShapeIndex);
@@ -883,7 +895,8 @@ void BulletGuiHelper::createCollisionShapeGraphicsObject(btCollisionShape* colli
         gfxVertices[3].uv[1] = -vecLen / 2;
 
         int shapeId = registerGraphicsShape(&gfxVertices[0].xyzw[0], gfxVertices.size(),
-                                            &indices[0], indices.size());
+                                            &indices[0], indices.size(),
+                                            body->getWorldTransform().getOrigin());
         collisionShape->setUserIndex(shapeId);
         return;
     }
@@ -917,14 +930,15 @@ void BulletGuiHelper::createCollisionShapeGraphicsObject(btCollisionShape* colli
     if (gfxVertices.size() && indices.size())
     {
         int shapeId = registerGraphicsShape(&gfxVertices[0].xyzw[0], gfxVertices.size(),
-                                            &indices[0], indices.size());
+                                            &indices[0], indices.size(),
+                                            body->getWorldTransform().getOrigin());
         collisionShape->setUserIndex(shapeId);
     }
 }
 
 void BulletGuiHelper::computeSoftBodyVertices(btCollisionShape* collisionShape,
                                               btAlignedObjectArray<GLInstanceVertex>& gfxVertices,
-                                              btAlignedObjectArray<int>& indices)
+                                              btAlignedObjectArray<Ogre::uint16>& indices)
 {
     if (collisionShape->getUserPointer() == 0)
         return;
@@ -991,7 +1005,7 @@ void BulletGuiHelper::autogenerateGraphicsObjects(btDiscreteDynamicsWorld* rbWor
         {
             colObj->getCollisionShape()->setUserPointer(sb);
         }
-        createCollisionShapeGraphicsObject(colObj->getCollisionShape());
+        createCollisionShapeGraphicsObject(colObj);
         int colorIndex = colObj->getBroadphaseHandle()->getUid() & 3;
 
         btVector4 color;

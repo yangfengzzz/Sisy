@@ -28,19 +28,20 @@ struct BulletGuiHelper
 public:
     std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*>
     createDynamicMesh(const float* vertices, int numvertices,
-                      const int* indices, int numIndices, int idx);
+                      const Ogre::uint16* indices, int numIndices, int idx);
     
     Ogre::IndexBufferPacked*
-    createIndexBuffer(const int* indices, int numIndices);
+    createIndexBuffer(const Ogre::uint16* indices, int numIndices);
     
     virtual int registerGraphicsShape(const float* vertices, int numvertices,
-                                      const int* indices, int numIndices);
+                                      const Ogre::uint16* indices, int numIndices,
+                                      const btVector3& pos);
     
-    virtual void createCollisionShapeGraphicsObject(btCollisionShape* collisionShape);
+    virtual void createCollisionShapeGraphicsObject(btCollisionObject* body);
     
     void computeSoftBodyVertices(btCollisionShape* collisionShape,
                                  btAlignedObjectArray<GLInstanceVertex>& gfxVertices,
-                                 btAlignedObjectArray<int>& indices);
+                                 btAlignedObjectArray<Ogre::uint16>& indices);
     
     virtual void autogenerateGraphicsObjects(btDiscreteDynamicsWorld* rbWorld);
 

@@ -1,6 +1,8 @@
 #ifndef SHAPE_DATA_H
 #define SHAPE_DATA_H
 
+#include "OgrePrerequisites.h"
+
 #ifdef USE_BARREL_VERTICES
 static float barrel_vertices[] = {
 	0.0f, -0.5f, 0.0f, 1.0f, 0.0f, -1.0f, 0.0f, 0.5f, 0.5f,
@@ -923,7 +925,7 @@ static const float cube_vertices2[] =
 		1,
 };
 
-static const int cube_indices[] =
+static const Ogre::uint16 cube_indices[] =
 	{
 		0, 1, 2, 0, 2, 3,  //ground face
 		6, 5, 4, 7, 6, 4,  //top face
@@ -53948,7 +53950,7 @@ const float textured_detailed_sphere_vertices[] =
 		0.620700,
 };
 
-const int textured_detailed_sphere_indices[] =
+const Ogre::uint16 textured_detailed_sphere_indices[] =
 	{
 		0,
 		1,

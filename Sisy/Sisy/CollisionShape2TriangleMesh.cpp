@@ -4,12 +4,13 @@
 #include "btBulletCollisionCommon.h"
 #include "btShapeHull.h"  //to create a tesselation of a generic btConvexShape
 #include "btConvexPolyhedron.h"
+#include "OgrePrerequisites.h"
 
 void CollisionShape2TriangleMesh(btCollisionShape* collisionShape,
                                  const btTransform& parentTransform,
                                  btAlignedObjectArray<btVector3>& vertexPositions,
                                  btAlignedObjectArray<btVector3>& vertexNormals,
-                                 btAlignedObjectArray<int>& indicesOut)
+                                 btAlignedObjectArray<Ogre::uint16>& indicesOut)
 
 {
 	//todo: support all collision shape types

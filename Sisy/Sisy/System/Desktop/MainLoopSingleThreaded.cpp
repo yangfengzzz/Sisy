@@ -39,7 +39,7 @@
 #include "OgreWindow.h"
 #include "OgreTimer.h"
 
-#include "../../../src.gfx/Threading/OgreThreads.h"
+#include "Threading/OgreThreads.h"
 
 using namespace Demo;
 
