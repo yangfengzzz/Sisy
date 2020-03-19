@@ -1,15 +1,21 @@
 #ifndef Bullet_GUI_HELPER_H
 #define Bullet_GUI_HELPER_H
-#include "CommonGUIHelperInterface.h"
+//#include "CommonGUIHelperInterface.h"
 #include "OgreString.h"
 class btCollisionShape;
 class btTransform;
+class btRigidBody;
+class btVector3;
+class btCollisionObject;
+class btDiscreteDynamicsWorld;
 #include "btAlignedObjectArray.h"
 #include "InstanceGraphicsShape.h"
 
 namespace Demo{
+typedef void (*VisualizerFlagCallback)(int flag, bool enable);
+
 class GraphicsSystem;
-struct BulletGuiHelper : public GUIHelperInterface
+struct BulletGuiHelper
 {
     struct BulletGuiHelperInternalData* m_data;
     

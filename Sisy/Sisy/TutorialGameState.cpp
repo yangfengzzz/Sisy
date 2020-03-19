@@ -17,6 +17,7 @@
 #include "OgreHlms.h"
 #include "OgreHlmsCompute.h"
 #include "OgreGpuProgramManager.h"
+#include "BulletGUIHelper.h"
 
 using namespace Demo;
 
@@ -40,6 +41,7 @@ TutorialGameState::~TutorialGameState()
 void TutorialGameState::_notifyGraphicsSystem( GraphicsSystem *graphicsSystem )
 {
     mGraphicsSystem = graphicsSystem;
+    mBulletHelper = new BulletGuiHelper(graphicsSystem);
 }
 //-----------------------------------------------------------------------------------
 void TutorialGameState::createScene01(void)

@@ -1000,7 +1000,7 @@ void BulletGuiHelper::autogenerateGraphicsObjects(btDiscreteDynamicsWorld* rbWor
         {
             color.setValue(1, 1, 1, 1);
         }
-        createCollisionObjectGraphicsObject(colObj, color);
+//        createCollisionObjectGraphicsObject(colObj, color);
 //        if (sb)
 //        {
 //            int graphicsInstanceId = colObj->getUserIndex();
