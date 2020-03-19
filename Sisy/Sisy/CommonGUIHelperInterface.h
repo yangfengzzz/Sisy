@@ -7,8 +7,6 @@ class btDiscreteDynamicsWorld;
 class btCollisionShape;
 struct Common2dCanvasInterface;
 struct CommonParameterInterface;
-struct CommonRenderInterface;
-struct CommonGraphicsApp;
 
 struct GUISyncPosition
 {
@@ -54,16 +52,7 @@ struct GUIHelperInterface
 
 	virtual Common2dCanvasInterface* get2dCanvasInterface() = 0;
 
-	virtual CommonParameterInterface* getParameterInterface() = 0;
-
-	virtual CommonRenderInterface* getRenderInterface() = 0;
-
-	virtual const CommonRenderInterface* getRenderInterface() const
-	{
-		return 0;
-	}
-
-	virtual CommonGraphicsApp* getAppInterface() = 0;
+    virtual CommonParameterInterface* getParameterInterface() = 0;
 
 	virtual void setUpAxis(int axis) = 0;
 
@@ -156,16 +145,6 @@ struct DummyGUIHelper : public GUIHelperInterface
 	}
 
 	virtual CommonParameterInterface* getParameterInterface()
-	{
-		return 0;
-	}
-
-	virtual CommonRenderInterface* getRenderInterface()
-	{
-		return 0;
-	}
-
-	virtual CommonGraphicsApp* getAppInterface()
 	{
 		return 0;
 	}

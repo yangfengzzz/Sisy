@@ -5425,10 +5425,10 @@
 		04964C3C241DF86A0006C91E /* gfx_Geometry */ = {
 			isa = PBXGroup;
 			children = (
-				04964C40241DF8790006C91E /* gfx_Geometry.cpp */,
 				04964C3F241DF8790006C91E /* gfx_Geometry.h */,
-				04964C3E241DF8780006C91E /* gfx_GeometryGameState.cpp */,
+				04964C40241DF8790006C91E /* gfx_Geometry.cpp */,
 				04964C3D241DF8780006C91E /* gfx_GeometryGameState.h */,
+				04964C3E241DF8780006C91E /* gfx_GeometryGameState.cpp */,
 			);
 			name = gfx_Geometry;
 			sourceTree = "<group>";
