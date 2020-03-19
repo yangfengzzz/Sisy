@@ -2,7 +2,7 @@
 #ifndef B3_MAT3x3_H
 #define B3_MAT3x3_H
 
-#include "Bullet3Common/shared/b3Quat.h"
+#include "Bullet3Common/b3Quat.h"
 
 #ifdef __cplusplus
 

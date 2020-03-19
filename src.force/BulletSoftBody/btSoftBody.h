@@ -21,14 +21,14 @@ subject to the following restrictions:
 #include "LinearMath/btTransform.h"
 #include "LinearMath/btIDebugDraw.h"
 #include "LinearMath/btVector3.h"
-#include "BulletDynamics/Dynamics/btRigidBody.h"
+#include "BulletDynamics/btRigidBody.h"
 
-#include "BulletCollision/CollisionShapes/btConcaveShape.h"
-#include "BulletCollision/CollisionDispatch/btCollisionCreateFunc.h"
+#include "BulletCollision/btConcaveShape.h"
+#include "BulletCollision/btCollisionCreateFunc.h"
 #include "btSparseSDF.h"
-#include "BulletCollision/BroadphaseCollision/btDbvt.h"
-#include "BulletDynamics/Featherstone/btMultiBodyLinkCollider.h"
-#include "BulletDynamics/Featherstone/btMultiBodyConstraint.h"
+#include "BulletCollision/btDbvt.h"
+#include "BulletDynamics/btMultiBodyLinkCollider.h"
+#include "BulletDynamics/btMultiBodyConstraint.h"
 //#ifdef BT_USE_DOUBLE_PRECISION
 //#define btRigidBodyData	btRigidBodyDoubleData
 //#define btRigidBodyDataName	"btRigidBodyDoubleData"

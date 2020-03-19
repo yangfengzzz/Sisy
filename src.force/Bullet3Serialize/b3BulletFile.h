@@ -20,7 +20,7 @@ subject to the following restrictions:
 #include "Bullet3Common/b3AlignedObjectArray.h"
 #include "b3Defines.h"
 
-#include "Bullet3Serialize/Bullet2FileLoader/b3Serializer.h"
+#include "Bullet3Serialize/b3Serializer.h"
 
 namespace bParse
 {

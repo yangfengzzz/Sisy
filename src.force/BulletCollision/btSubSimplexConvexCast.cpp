@@ -14,10 +14,10 @@ subject to the following restrictions:
 */
 
 #include "btSubSimplexConvexCast.h"
-#include "BulletCollision/CollisionShapes/btConvexShape.h"
+#include "BulletCollision/btConvexShape.h"
 
-#include "BulletCollision/CollisionShapes/btMinkowskiSumShape.h"
-#include "BulletCollision/NarrowPhaseCollision/btSimplexSolverInterface.h"
+#include "BulletCollision/btMinkowskiSumShape.h"
+#include "BulletCollision/btSimplexSolverInterface.h"
 #include "btPointCollector.h"
 #include "LinearMath/btTransformUtil.h"
 

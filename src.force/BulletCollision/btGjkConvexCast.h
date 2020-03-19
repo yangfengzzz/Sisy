@@ -16,7 +16,7 @@ subject to the following restrictions:
 #ifndef BT_GJK_CONVEX_CAST_H
 #define BT_GJK_CONVEX_CAST_H
 
-#include "BulletCollision/CollisionShapes/btCollisionMargin.h"
+#include "BulletCollision/btCollisionMargin.h"
 
 #include "LinearMath/btVector3.h"
 #include "btConvexCast.h"

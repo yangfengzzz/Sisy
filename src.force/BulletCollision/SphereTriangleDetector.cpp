@@ -15,8 +15,8 @@ subject to the following restrictions:
 
 #include "LinearMath/btScalar.h"
 #include "SphereTriangleDetector.h"
-#include "BulletCollision/CollisionShapes/btTriangleShape.h"
-#include "BulletCollision/CollisionShapes/btSphereShape.h"
+#include "BulletCollision/btTriangleShape.h"
+#include "BulletCollision/btSphereShape.h"
 
 SphereTriangleDetector::SphereTriangleDetector(btSphereShape* sphere, btTriangleShape* triangle, btScalar contactBreakingThreshold)
 	: m_sphere(sphere),

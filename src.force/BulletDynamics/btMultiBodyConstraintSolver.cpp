@@ -14,15 +14,15 @@ subject to the following restrictions:
 */
 
 #include "btMultiBodyConstraintSolver.h"
-#include "BulletCollision/NarrowPhaseCollision/btPersistentManifold.h"
+#include "BulletCollision/btPersistentManifold.h"
 #include "btMultiBodyLinkCollider.h"
 
-#include "BulletDynamics/ConstraintSolver/btSolverBody.h"
+#include "BulletDynamics/btSolverBody.h"
 #include "btMultiBodyConstraint.h"
-#include "BulletDynamics/ConstraintSolver/btContactSolverInfo.h"
+#include "BulletDynamics/btContactSolverInfo.h"
 
 #include "LinearMath/btQuickprof.h"
-#include "BulletDynamics/Featherstone/btMultiBodySolverConstraint.h"
+#include "BulletDynamics/btMultiBodySolverConstraint.h"
 #include "LinearMath/btScalar.h"
 
 btScalar btMultiBodyConstraintSolver::solveSingleIteration(int iteration, btCollisionObject** bodies, int numBodies, btPersistentManifold** manifoldPtr, int numManifolds, btTypedConstraint** constraints, int numConstraints, const btContactSolverInfo& infoGlobal, btIDebugDraw* debugDrawer)

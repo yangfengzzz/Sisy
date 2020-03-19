@@ -16,7 +16,7 @@ subject to the following restrictions:
 #ifndef BT_SIMULATION_ISLAND_MANAGER_H
 #define BT_SIMULATION_ISLAND_MANAGER_H
 
-#include "BulletCollision/CollisionDispatch/btUnionFind.h"
+#include "BulletCollision/btUnionFind.h"
 #include "btCollisionCreateFunc.h"
 #include "LinearMath/btAlignedObjectArray.h"
 #include "btCollisionObject.h"

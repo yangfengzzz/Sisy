@@ -15,22 +15,22 @@ subject to the following restrictions:
 
 #include "btDefaultCollisionConfiguration.h"
 
-#include "BulletCollision/CollisionDispatch/btConvexConvexAlgorithm.h"
-#include "BulletCollision/CollisionDispatch/btEmptyCollisionAlgorithm.h"
-#include "BulletCollision/CollisionDispatch/btConvexConcaveCollisionAlgorithm.h"
-#include "BulletCollision/CollisionDispatch/btCompoundCollisionAlgorithm.h"
-#include "BulletCollision/CollisionDispatch/btCompoundCompoundCollisionAlgorithm.h"
+#include "BulletCollision/btConvexConvexAlgorithm.h"
+#include "BulletCollision/btEmptyCollisionAlgorithm.h"
+#include "BulletCollision/btConvexConcaveCollisionAlgorithm.h"
+#include "BulletCollision/btCompoundCollisionAlgorithm.h"
+#include "BulletCollision/btCompoundCompoundCollisionAlgorithm.h"
 
-#include "BulletCollision/CollisionDispatch/btConvexPlaneCollisionAlgorithm.h"
-#include "BulletCollision/CollisionDispatch/btBoxBoxCollisionAlgorithm.h"
-#include "BulletCollision/CollisionDispatch/btSphereSphereCollisionAlgorithm.h"
+#include "BulletCollision/btConvexPlaneCollisionAlgorithm.h"
+#include "BulletCollision/btBoxBoxCollisionAlgorithm.h"
+#include "BulletCollision/btSphereSphereCollisionAlgorithm.h"
 #ifdef USE_BUGGY_SPHERE_BOX_ALGORITHM
-#include "BulletCollision/CollisionDispatch/btSphereBoxCollisionAlgorithm.h"
+#include "BulletCollision/btSphereBoxCollisionAlgorithm.h"
 #endif  //USE_BUGGY_SPHERE_BOX_ALGORITHM
-#include "BulletCollision/CollisionDispatch/btSphereTriangleCollisionAlgorithm.h"
-#include "BulletCollision/NarrowPhaseCollision/btGjkEpaPenetrationDepthSolver.h"
-#include "BulletCollision/NarrowPhaseCollision/btMinkowskiPenetrationDepthSolver.h"
-#include "BulletCollision/NarrowPhaseCollision/btVoronoiSimplexSolver.h"
+#include "BulletCollision/btSphereTriangleCollisionAlgorithm.h"
+#include "BulletCollision/btGjkEpaPenetrationDepthSolver.h"
+#include "BulletCollision/btMinkowskiPenetrationDepthSolver.h"
+#include "BulletCollision/btVoronoiSimplexSolver.h"
 
 #include "LinearMath/btPoolAllocator.h"
 

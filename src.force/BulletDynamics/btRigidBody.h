@@ -18,8 +18,8 @@ subject to the following restrictions:
 
 #include "LinearMath/btAlignedObjectArray.h"
 #include "LinearMath/btTransform.h"
-#include "BulletCollision/BroadphaseCollision/btBroadphaseProxy.h"
-#include "BulletCollision/CollisionDispatch/btCollisionObject.h"
+#include "BulletCollision/btBroadphaseProxy.h"
+#include "BulletCollision/btCollisionObject.h"
 
 class btCollisionShape;
 class btMotionState;

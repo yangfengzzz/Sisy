@@ -19,23 +19,23 @@ subject to the following restrictions:
 ///Common headerfile includes for Bullet Dynamics, including Collision Detection
 #include "btBulletCollisionCommon.h"
 
-#include "BulletDynamics/Dynamics/btDiscreteDynamicsWorld.h"
+#include "BulletDynamics/btDiscreteDynamicsWorld.h"
 
-#include "BulletDynamics/Dynamics/btSimpleDynamicsWorld.h"
-#include "BulletDynamics/Dynamics/btRigidBody.h"
+#include "BulletDynamics/btSimpleDynamicsWorld.h"
+#include "BulletDynamics/btRigidBody.h"
 
-#include "BulletDynamics/ConstraintSolver/btPoint2PointConstraint.h"
-#include "BulletDynamics/ConstraintSolver/btHingeConstraint.h"
-#include "BulletDynamics/ConstraintSolver/btConeTwistConstraint.h"
-#include "BulletDynamics/ConstraintSolver/btGeneric6DofConstraint.h"
-#include "BulletDynamics/ConstraintSolver/btSliderConstraint.h"
-#include "BulletDynamics/ConstraintSolver/btGeneric6DofSpringConstraint.h"
-#include "BulletDynamics/ConstraintSolver/btUniversalConstraint.h"
-#include "BulletDynamics/ConstraintSolver/btHinge2Constraint.h"
-#include "BulletDynamics/ConstraintSolver/btGearConstraint.h"
-#include "BulletDynamics/ConstraintSolver/btFixedConstraint.h"
+#include "BulletDynamics/btPoint2PointConstraint.h"
+#include "BulletDynamics/btHingeConstraint.h"
+#include "BulletDynamics/btConeTwistConstraint.h"
+#include "BulletDynamics/btGeneric6DofConstraint.h"
+#include "BulletDynamics/btSliderConstraint.h"
+#include "BulletDynamics/btGeneric6DofSpringConstraint.h"
+#include "BulletDynamics/btUniversalConstraint.h"
+#include "BulletDynamics/btHinge2Constraint.h"
+#include "BulletDynamics/btGearConstraint.h"
+#include "BulletDynamics/btFixedConstraint.h"
 
-#include "BulletDynamics/ConstraintSolver/btSequentialImpulseConstraintSolver.h"
+#include "BulletDynamics/btSequentialImpulseConstraintSolver.h"
 
 ///Vehicle simulation, with wheel contact simulated by raycasts
 #include "BulletDynamics/Vehicle/btRaycastVehicle.h"

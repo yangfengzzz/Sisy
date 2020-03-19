@@ -16,7 +16,7 @@ subject to the following restrictions:
 #define BT_USE_SSE_IN_API
 #endif
 
-#include "BulletCollision/CollisionShapes/btPolyhedralConvexShape.h"
+#include "BulletCollision/btPolyhedralConvexShape.h"
 #include "btConvexPolyhedron.h"
 #include "LinearMath/btConvexHullComputer.h"
 #include <new>

@@ -18,7 +18,7 @@ subject to the following restrictions:
 
 #include "LinearMath/btScalar.h"
 #include "btSolverConstraint.h"
-#include "BulletDynamics/Dynamics/btRigidBody.h"
+#include "BulletDynamics/btRigidBody.h"
 
 #ifdef BT_USE_DOUBLE_PRECISION
 #define btTypedConstraintData2 btTypedConstraintDoubleData

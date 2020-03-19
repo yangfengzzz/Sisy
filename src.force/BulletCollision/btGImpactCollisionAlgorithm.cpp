@@ -23,10 +23,10 @@ Concave-Concave Collision
 
 */
 
-#include "BulletCollision/CollisionDispatch/btManifoldResult.h"
+#include "BulletCollision/btManifoldResult.h"
 #include "LinearMath/btIDebugDraw.h"
-#include "BulletCollision/CollisionDispatch/btCollisionObject.h"
-#include "BulletCollision/CollisionShapes/btBoxShape.h"
+#include "BulletCollision/btCollisionObject.h"
+#include "BulletCollision/btBoxShape.h"
 #include "btGImpactCollisionAlgorithm.h"
 #include "btContactProcessing.h"
 #include "LinearMath/btQuickprof.h"

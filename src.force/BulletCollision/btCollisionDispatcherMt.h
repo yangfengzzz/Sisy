@@ -16,7 +16,7 @@ subject to the following restrictions:
 #ifndef BT_COLLISION_DISPATCHER_MT_H
 #define BT_COLLISION_DISPATCHER_MT_H
 
-#include "BulletCollision/CollisionDispatch/btCollisionDispatcher.h"
+#include "BulletCollision/btCollisionDispatcher.h"
 #include "LinearMath/btThreads.h"
 
 class btCollisionDispatcherMt : public btCollisionDispatcher

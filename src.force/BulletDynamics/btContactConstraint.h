@@ -19,7 +19,7 @@ subject to the following restrictions:
 #include "LinearMath/btVector3.h"
 #include "btJacobianEntry.h"
 #include "btTypedConstraint.h"
-#include "BulletCollision/NarrowPhaseCollision/btPersistentManifold.h"
+#include "BulletCollision/btPersistentManifold.h"
 
 ///btContactConstraint can be automatically created to solve contact constraints using the unified btTypedConstraint interface
 ATTRIBUTE_ALIGNED16(class)

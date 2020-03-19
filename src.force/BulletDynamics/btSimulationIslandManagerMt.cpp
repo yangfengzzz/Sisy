@@ -16,12 +16,12 @@ subject to the following restrictions:
 #include "LinearMath/btScalar.h"
 #include "LinearMath/btThreads.h"
 #include "btSimulationIslandManagerMt.h"
-#include "BulletCollision/BroadphaseCollision/btDispatcher.h"
-#include "BulletCollision/NarrowPhaseCollision/btPersistentManifold.h"
-#include "BulletCollision/CollisionDispatch/btCollisionObject.h"
-#include "BulletCollision/CollisionDispatch/btCollisionWorld.h"
-#include "BulletDynamics/ConstraintSolver/btTypedConstraint.h"
-#include "BulletDynamics/ConstraintSolver/btSequentialImpulseConstraintSolverMt.h"  // for s_minimumContactManifoldsForBatching
+#include "BulletCollision/btDispatcher.h"
+#include "BulletCollision/btPersistentManifold.h"
+#include "BulletCollision/btCollisionObject.h"
+#include "BulletCollision/btCollisionWorld.h"
+#include "BulletDynamics/btTypedConstraint.h"
+#include "BulletDynamics/btSequentialImpulseConstraintSolverMt.h"  // for s_minimumContactManifoldsForBatching
 
 //#include <stdio.h>
 #include "LinearMath/btQuickprof.h"

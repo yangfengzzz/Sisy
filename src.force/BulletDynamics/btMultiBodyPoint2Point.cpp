@@ -17,7 +17,7 @@ subject to the following restrictions:
 
 #include "btMultiBodyPoint2Point.h"
 #include "btMultiBodyLinkCollider.h"
-#include "BulletDynamics/Dynamics/btRigidBody.h"
+#include "BulletDynamics/btRigidBody.h"
 #include "LinearMath/btIDebugDraw.h"
 
 #ifndef BTMBP2PCONSTRAINT_BLOCK_ANGULAR_MOTION_TEST

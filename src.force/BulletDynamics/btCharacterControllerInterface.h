@@ -17,7 +17,7 @@ subject to the following restrictions:
 #define BT_CHARACTER_CONTROLLER_INTERFACE_H
 
 #include "LinearMath/btVector3.h"
-#include "BulletDynamics/Dynamics/btActionInterface.h"
+#include "BulletDynamics/btActionInterface.h"
 
 class btCollisionShape;
 class btRigidBody;

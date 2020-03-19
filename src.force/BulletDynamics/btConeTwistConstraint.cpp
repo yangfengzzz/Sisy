@@ -16,7 +16,7 @@ Written by: Marcus Hennix
 */
 
 #include "btConeTwistConstraint.h"
-#include "BulletDynamics/Dynamics/btRigidBody.h"
+#include "BulletDynamics/btRigidBody.h"
 #include "LinearMath/btTransformUtil.h"
 #include "LinearMath/btMinMax.h"
 #include <cmath>

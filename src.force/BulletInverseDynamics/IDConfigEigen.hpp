@@ -28,5 +28,5 @@ typedef std::vector<int>::size_type idArrayIdx;
 // HOWEVER: default storage is column-major!
 #define ID_LINEAR_MATH_USE_EIGEN
 #include "Eigen/Eigen"
-#include "details/IDEigenInterface.hpp"
+#include "IDEigenInterface.hpp"
 #endif

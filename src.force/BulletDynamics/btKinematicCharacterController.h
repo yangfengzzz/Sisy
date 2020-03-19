@@ -20,7 +20,7 @@ subject to the following restrictions:
 
 #include "btCharacterControllerInterface.h"
 
-#include "BulletCollision/BroadphaseCollision/btCollisionAlgorithm.h"
+#include "BulletCollision/btCollisionAlgorithm.h"
 
 class btCollisionShape;
 class btConvexShape;

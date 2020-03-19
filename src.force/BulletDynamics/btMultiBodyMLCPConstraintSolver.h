@@ -18,7 +18,7 @@ subject to the following restrictions:
 
 #include "LinearMath/btMatrixX.h"
 #include "LinearMath/btThreads.h"
-#include "BulletDynamics/Featherstone/btMultiBodyConstraintSolver.h"
+#include "BulletDynamics/btMultiBodyConstraintSolver.h"
 
 class btMLCPSolverInterface;
 class btMultiBody;

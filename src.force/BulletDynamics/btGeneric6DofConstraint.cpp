@@ -20,7 +20,7 @@ http://gimpact.sf.net
 */
 
 #include "btGeneric6DofConstraint.h"
-#include "BulletDynamics/Dynamics/btRigidBody.h"
+#include "BulletDynamics/btRigidBody.h"
 #include "LinearMath/btTransformUtil.h"
 #include "LinearMath/btTransformUtil.h"
 #include <new>

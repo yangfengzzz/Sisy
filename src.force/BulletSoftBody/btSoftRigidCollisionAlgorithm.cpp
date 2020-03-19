@@ -14,13 +14,13 @@ subject to the following restrictions:
 */
 
 #include "btSoftRigidCollisionAlgorithm.h"
-#include "BulletCollision/CollisionDispatch/btCollisionDispatcher.h"
-#include "BulletCollision/CollisionShapes/btSphereShape.h"
-#include "BulletCollision/CollisionShapes/btBoxShape.h"
-#include "BulletCollision/CollisionDispatch/btCollisionObject.h"
+#include "BulletCollision/btCollisionDispatcher.h"
+#include "BulletCollision/btSphereShape.h"
+#include "BulletCollision/btBoxShape.h"
+#include "BulletCollision/btCollisionObject.h"
 #include "btSoftBody.h"
 #include "BulletSoftBody/btSoftBodySolvers.h"
-#include "BulletCollision/CollisionDispatch/btCollisionObjectWrapper.h"
+#include "BulletCollision/btCollisionObjectWrapper.h"
 
 ///TODO: include all the shapes that the softbody can collide with
 ///alternatively, implement special case collision algorithms (just like for rigid collision shapes)

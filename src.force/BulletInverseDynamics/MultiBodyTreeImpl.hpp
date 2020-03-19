@@ -5,8 +5,8 @@
 #ifndef MULTI_BODY_REFERENCE_IMPL_HPP_
 #define MULTI_BODY_REFERENCE_IMPL_HPP_
 
-#include "../IDConfig.hpp"
-#include "../MultiBodyTree.hpp"
+#include "IDConfig.hpp"
+#include "MultiBodyTree.hpp"
 
 namespace btInverseDynamics
 {

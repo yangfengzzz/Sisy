@@ -16,10 +16,10 @@ subject to the following restrictions:
 
 #include "LinearMath/btScalar.h"
 #include "btSimulationIslandManager.h"
-#include "BulletCollision/BroadphaseCollision/btDispatcher.h"
-#include "BulletCollision/NarrowPhaseCollision/btPersistentManifold.h"
-#include "BulletCollision/CollisionDispatch/btCollisionObject.h"
-#include "BulletCollision/CollisionDispatch/btCollisionWorld.h"
+#include "BulletCollision/btDispatcher.h"
+#include "BulletCollision/btPersistentManifold.h"
+#include "BulletCollision/btCollisionObject.h"
+#include "BulletCollision/btCollisionWorld.h"
 
 //#include <stdio.h>
 #include "LinearMath/btQuickprof.h"

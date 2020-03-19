@@ -15,7 +15,7 @@ subject to the following restrictions:
 
 #include "btCollisionObject.h"
 #include "LinearMath/btSerializer.h"
-#include "BulletCollision/BroadphaseCollision/btBroadphaseProxy.h"
+#include "BulletCollision/btBroadphaseProxy.h"
 
 btCollisionObject::btCollisionObject()
 	: m_interpolationLinearVelocity(0.f, 0.f, 0.f),

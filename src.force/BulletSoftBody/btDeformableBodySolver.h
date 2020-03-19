@@ -20,8 +20,8 @@
 #include "btSoftBodySolvers.h"
 #include "btDeformableBackwardEulerObjective.h"
 #include "btDeformableMultiBodyDynamicsWorld.h"
-#include "BulletDynamics/Featherstone/btMultiBodyLinkCollider.h"
-#include "BulletDynamics/Featherstone/btMultiBodyConstraint.h"
+#include "BulletDynamics/btMultiBodyLinkCollider.h"
+#include "BulletDynamics/btMultiBodyConstraint.h"
 
 struct btCollisionObjectWrapper;
 class btDeformableBackwardEulerObjective;

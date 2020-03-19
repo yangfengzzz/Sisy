@@ -17,7 +17,7 @@ subject to the following restrictions:
 #include "btMultiBodyConstraintSolver.h"
 #include "btMultiBody.h"
 #include "btMultiBodyLinkCollider.h"
-#include "BulletCollision/CollisionDispatch/btSimulationIslandManager.h"
+#include "BulletCollision/btSimulationIslandManager.h"
 #include "LinearMath/btQuickprof.h"
 #include "btMultiBodyConstraint.h"
 #include "LinearMath/btIDebugDraw.h"

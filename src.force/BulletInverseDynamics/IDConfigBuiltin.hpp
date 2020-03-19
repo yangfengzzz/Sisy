@@ -34,5 +34,5 @@ typedef std::vector<int>::size_type idArrayIdx;
 	inline void* operator new[](std::size_t, void* ptr) { return ptr; }                    \
 	inline void operator delete[](void*, void*) {}
 
-#include "details/IDMatVec.hpp"
+#include "IDMatVec.hpp"
 #endif

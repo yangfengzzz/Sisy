@@ -14,9 +14,9 @@ subject to the following restrictions:
 */
 
 #include "btGjkPairDetector.h"
-#include "BulletCollision/CollisionShapes/btConvexShape.h"
-#include "BulletCollision/NarrowPhaseCollision/btSimplexSolverInterface.h"
-#include "BulletCollision/NarrowPhaseCollision/btConvexPenetrationDepthSolver.h"
+#include "BulletCollision/btConvexShape.h"
+#include "BulletCollision/btSimplexSolverInterface.h"
+#include "BulletCollision/btConvexPenetrationDepthSolver.h"
 
 #if defined(DEBUG) || defined(_DEBUG)
 //#define TEST_NON_VIRTUAL 1

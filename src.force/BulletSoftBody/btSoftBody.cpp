@@ -20,10 +20,10 @@ subject to the following restrictions:
 #include "LinearMath/btSerializer.h"
 #include "LinearMath/btImplicitQRSVD.h"
 #include "LinearMath/btAlignedAllocator.h"
-#include "BulletDynamics/Featherstone/btMultiBodyLinkCollider.h"
-#include "BulletDynamics/Featherstone/btMultiBodyConstraint.h"
-#include "BulletCollision/NarrowPhaseCollision/btGjkEpa2.h"
-#include "BulletCollision/CollisionShapes/btTriangleShape.h"
+#include "BulletDynamics/btMultiBodyLinkCollider.h"
+#include "BulletDynamics/btMultiBodyConstraint.h"
+#include "BulletCollision/btGjkEpa2.h"
+#include "BulletCollision/btTriangleShape.h"
 #include <iostream>
 //
 static inline btDbvtNode* buildTreeBottomUp(btAlignedObjectArray<btDbvtNode*>& leafNodes, btAlignedObjectArray<btAlignedObjectArray<int> >& adj)

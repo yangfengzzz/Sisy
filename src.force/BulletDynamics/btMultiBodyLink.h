@@ -18,7 +18,7 @@ subject to the following restrictions:
 
 #include "LinearMath/btQuaternion.h"
 #include "LinearMath/btVector3.h"
-#include "BulletCollision/CollisionDispatch/btCollisionObject.h"
+#include "BulletCollision/btCollisionObject.h"
 
 enum btMultiBodyLinkFlags
 {

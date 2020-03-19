@@ -16,8 +16,8 @@ subject to the following restrictions:
 #ifndef BT_SOFT_MULTIBODY_DYNAMICS_WORLD_H
 #define BT_SOFT_MULTIBODY_DYNAMICS_WORLD_H
 
-#include "BulletDynamics/Dynamics/btDiscreteDynamicsWorld.h"
-#include "BulletDynamics/Featherstone/btMultiBodyDynamicsWorld.h"
+#include "BulletDynamics/btDiscreteDynamicsWorld.h"
+#include "BulletDynamics/btMultiBodyDynamicsWorld.h"
 #include "BulletSoftBody/btSoftBody.h"
 
 #ifndef BT_SOFT_RIGID_DYNAMICS_WORLD_H

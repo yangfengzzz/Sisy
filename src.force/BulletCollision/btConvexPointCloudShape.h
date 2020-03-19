@@ -17,7 +17,7 @@ subject to the following restrictions:
 #define BT_CONVEX_POINT_CLOUD_SHAPE_H
 
 #include "btPolyhedralConvexShape.h"
-#include "BulletCollision/BroadphaseCollision/btBroadphaseProxy.h"  // for the types
+#include "BulletCollision/btBroadphaseProxy.h"  // for the types
 #include "LinearMath/btAlignedObjectArray.h"
 
 ///The btConvexPointCloudShape implements an implicit convex hull of an array of vertices.

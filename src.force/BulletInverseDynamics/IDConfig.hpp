@@ -102,6 +102,6 @@ typedef int idArrayIdx;
 #define idFree btFreeFunc
 
 #define ID_LINEAR_MATH_USE_BULLET
-#include "details/IDLinearMathInterface.hpp"
+#include "IDLinearMathInterface.hpp"
 #endif
 #endif

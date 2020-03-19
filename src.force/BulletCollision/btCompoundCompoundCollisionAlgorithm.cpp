@@ -16,13 +16,13 @@ subject to the following restrictions:
 
 #include "btCompoundCompoundCollisionAlgorithm.h"
 #include "LinearMath/btQuickprof.h"
-#include "BulletCollision/CollisionDispatch/btCollisionObject.h"
-#include "BulletCollision/CollisionShapes/btCompoundShape.h"
-#include "BulletCollision/BroadphaseCollision/btDbvt.h"
+#include "BulletCollision/btCollisionObject.h"
+#include "BulletCollision/btCompoundShape.h"
+#include "BulletCollision/btDbvt.h"
 #include "LinearMath/btIDebugDraw.h"
 #include "LinearMath/btAabbUtil2.h"
-#include "BulletCollision/CollisionDispatch/btManifoldResult.h"
-#include "BulletCollision/CollisionDispatch/btCollisionObjectWrapper.h"
+#include "BulletCollision/btManifoldResult.h"
+#include "BulletCollision/btCollisionObjectWrapper.h"
 
 //USE_LOCAL_STACK will avoid most (often all) dynamic memory allocations due to resizing in processCollision and MycollideTT
 #define USE_LOCAL_STACK 1

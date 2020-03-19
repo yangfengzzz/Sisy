@@ -19,7 +19,7 @@ April 04, 2008
 */
 
 #include "btSliderConstraint.h"
-#include "BulletDynamics/Dynamics/btRigidBody.h"
+#include "BulletDynamics/btRigidBody.h"
 #include "LinearMath/btTransformUtil.h"
 #include <new>
 

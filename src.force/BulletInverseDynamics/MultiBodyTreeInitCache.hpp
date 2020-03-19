@@ -1,9 +1,9 @@
 #ifndef MULTIBODYTREEINITCACHE_HPP_
 #define MULTIBODYTREEINITCACHE_HPP_
 
-#include "../IDConfig.hpp"
-#include "../IDMath.hpp"
-#include "../MultiBodyTree.hpp"
+#include "IDConfig.hpp"
+#include "IDMath.hpp"
+#include "MultiBodyTree.hpp"
 
 namespace btInverseDynamics
 {

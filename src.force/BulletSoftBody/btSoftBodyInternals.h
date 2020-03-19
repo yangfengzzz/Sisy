@@ -20,12 +20,12 @@ subject to the following restrictions:
 #include "btSoftBody.h"
 #include "LinearMath/btQuickprof.h"
 #include "LinearMath/btPolarDecomposition.h"
-#include "BulletCollision/BroadphaseCollision/btBroadphaseInterface.h"
-#include "BulletCollision/CollisionDispatch/btCollisionDispatcher.h"
-#include "BulletCollision/CollisionShapes/btConvexInternalShape.h"
-#include "BulletCollision/NarrowPhaseCollision/btGjkEpa2.h"
-#include "BulletDynamics/Featherstone/btMultiBodyLinkCollider.h"
-#include "BulletDynamics/Featherstone/btMultiBodyConstraint.h"
+#include "BulletCollision/btBroadphaseInterface.h"
+#include "BulletCollision/btCollisionDispatcher.h"
+#include "BulletCollision/btConvexInternalShape.h"
+#include "BulletCollision/btGjkEpa2.h"
+#include "BulletDynamics/btMultiBodyLinkCollider.h"
+#include "BulletDynamics/btMultiBodyConstraint.h"
 #include <string.h>  //for memset
 #include <cmath>
 #include "poly34.h"

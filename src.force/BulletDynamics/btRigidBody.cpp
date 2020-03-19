@@ -14,11 +14,11 @@ subject to the following restrictions:
 */
 
 #include "btRigidBody.h"
-#include "BulletCollision/CollisionShapes/btConvexShape.h"
+#include "BulletCollision/btConvexShape.h"
 #include "LinearMath/btMinMax.h"
 #include "LinearMath/btTransformUtil.h"
 #include "LinearMath/btMotionState.h"
-#include "BulletDynamics/ConstraintSolver/btTypedConstraint.h"
+#include "BulletDynamics/btTypedConstraint.h"
 #include "LinearMath/btSerializer.h"
 
 //'temporarily' global variables

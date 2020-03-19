@@ -19,7 +19,7 @@ subject to the following restrictions:
 #include "LinearMath/btTransform.h"  // Note that btVector3 might be double precision...
 #include "btGjkEpa3.h"
 #include "btGjkCollisionDescription.h"
-#include "BulletCollision/NarrowPhaseCollision/btVoronoiSimplexSolver.h"
+#include "BulletCollision/btVoronoiSimplexSolver.h"
 
 template <typename btConvexTemplate>
 bool btGjkEpaCalcPenDepth(const btConvexTemplate& a, const btConvexTemplate& b,

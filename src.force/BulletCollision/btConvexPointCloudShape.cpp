@@ -14,7 +14,7 @@ subject to the following restrictions:
 */
 
 #include "btConvexPointCloudShape.h"
-#include "BulletCollision/CollisionShapes/btCollisionMargin.h"
+#include "BulletCollision/btCollisionMargin.h"
 
 #include "LinearMath/btQuaternion.h"
 

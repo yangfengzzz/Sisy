@@ -21,8 +21,8 @@ subject to the following restrictions:
 
 class btMultiBody;
 class btMultiBodyConstraint;
-#include "BulletDynamics/ConstraintSolver/btSolverBody.h"
-#include "BulletDynamics/ConstraintSolver/btContactSolverInfo.h"
+#include "BulletDynamics/btSolverBody.h"
+#include "BulletDynamics/btContactSolverInfo.h"
 
 ///1D constraint along a normal axis between bodyA and bodyB. It can be combined to solve contact and friction constraints.
 ATTRIBUTE_ALIGNED16(struct)

@@ -18,7 +18,7 @@ subject to the following restrictions:
 
 #include "btPolyhedralConvexShape.h"
 #include "btCollisionMargin.h"
-#include "BulletCollision/BroadphaseCollision/btBroadphaseProxy.h"
+#include "BulletCollision/btBroadphaseProxy.h"
 #include "LinearMath/btVector3.h"
 #include "LinearMath/btMinMax.h"
 

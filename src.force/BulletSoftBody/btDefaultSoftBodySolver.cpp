@@ -13,12 +13,12 @@ subject to the following restrictions:
 3. This notice may not be removed or altered from any source distribution.
 */
 
-#include "BulletCollision/CollisionShapes/btTriangleIndexVertexArray.h"
-#include "BulletCollision/CollisionDispatch/btCollisionObject.h"
-#include "BulletCollision/CollisionShapes/btCollisionShape.h"
+#include "BulletCollision/btTriangleIndexVertexArray.h"
+#include "BulletCollision/btCollisionObject.h"
+#include "BulletCollision/btCollisionShape.h"
 
 #include "btDefaultSoftBodySolver.h"
-#include "BulletCollision/CollisionShapes/btCapsuleShape.h"
+#include "BulletCollision/btCapsuleShape.h"
 #include "BulletSoftBody/btSoftBody.h"
 
 btDefaultSoftBodySolver::btDefaultSoftBodySolver()

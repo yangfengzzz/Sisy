@@ -1,7 +1,7 @@
 #ifndef B3_FLOAT4_H
 #define B3_FLOAT4_H
 
-#include "Bullet3Common/shared/b3PlatformDefinitions.h"
+#include "Bullet3Common/b3PlatformDefinitions.h"
 
 #ifdef __cplusplus
 #include "Bullet3Common/b3Vector3.h"

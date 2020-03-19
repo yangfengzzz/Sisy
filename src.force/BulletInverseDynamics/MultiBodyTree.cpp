@@ -5,8 +5,8 @@
 #include <vector>
 
 #include "IDMath.hpp"
-#include "details/MultiBodyTreeImpl.hpp"
-#include "details/MultiBodyTreeInitCache.hpp"
+#include "MultiBodyTreeImpl.hpp"
+#include "MultiBodyTreeInitCache.hpp"
 
 namespace btInverseDynamics
 {

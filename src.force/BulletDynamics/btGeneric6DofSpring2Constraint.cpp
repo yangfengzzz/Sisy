@@ -38,7 +38,7 @@ http://gimpact.sf.net
 */
 
 #include "btGeneric6DofSpring2Constraint.h"
-#include "BulletDynamics/Dynamics/btRigidBody.h"
+#include "BulletDynamics/btRigidBody.h"
 #include "LinearMath/btTransformUtil.h"
 #include <cmath>
 #include <new>

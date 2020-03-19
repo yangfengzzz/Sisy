@@ -17,8 +17,8 @@
 #define BT_CONTACT_PROJECTION_H
 #include "btCGProjection.h"
 #include "btSoftBody.h"
-#include "BulletDynamics/Featherstone/btMultiBodyLinkCollider.h"
-#include "BulletDynamics/Featherstone/btMultiBodyConstraint.h"
+#include "BulletDynamics/btMultiBodyLinkCollider.h"
+#include "BulletDynamics/btMultiBodyConstraint.h"
 #include "btDeformableContactConstraint.h"
 #include "LinearMath/btHashMap.h"
 #include <vector>

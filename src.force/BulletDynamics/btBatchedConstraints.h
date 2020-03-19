@@ -18,8 +18,8 @@ subject to the following restrictions:
 
 #include "LinearMath/btThreads.h"
 #include "LinearMath/btAlignedObjectArray.h"
-#include "BulletDynamics/ConstraintSolver/btSolverBody.h"
-#include "BulletDynamics/ConstraintSolver/btSolverConstraint.h"
+#include "BulletDynamics/btSolverBody.h"
+#include "BulletDynamics/btSolverConstraint.h"
 
 class btIDebugDraw;
 

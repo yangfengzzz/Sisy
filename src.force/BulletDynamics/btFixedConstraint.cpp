@@ -14,7 +14,7 @@ subject to the following restrictions:
 */
 
 #include "btFixedConstraint.h"
-#include "BulletDynamics/Dynamics/btRigidBody.h"
+#include "BulletDynamics/btRigidBody.h"
 #include "LinearMath/btTransformUtil.h"
 #include <new>
 
