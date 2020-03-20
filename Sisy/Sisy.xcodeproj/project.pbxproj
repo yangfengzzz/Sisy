@@ -1483,6 +1483,7 @@
 		04E0DB752423665E00310B48 /* BasicDemoGraphicsSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04D93CE424233E9600CCBE3E /* BasicDemoGraphicsSystem.cpp */; };
 		04E0DB79242385DE00310B48 /* BulletConverter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DB77242385DE00310B48 /* BulletConverter.cpp */; };
 		04E0DB7B242393CA00310B48 /* MainLoopSingleThreaded.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DB7A242393CA00310B48 /* MainLoopSingleThreaded.cpp */; };
+		04E0DB7F2424408200310B48 /* MyDebugDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DB7D2424408200310B48 /* MyDebugDrawer.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -3348,6 +3349,8 @@
 		04E0DB77242385DE00310B48 /* BulletConverter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BulletConverter.cpp; sourceTree = "<group>"; };
 		04E0DB78242385DE00310B48 /* BulletConverter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BulletConverter.hpp; sourceTree = "<group>"; };
 		04E0DB7A242393CA00310B48 /* MainLoopSingleThreaded.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MainLoopSingleThreaded.cpp; path = System/Desktop/MainLoopSingleThreaded.cpp; sourceTree = "<group>"; };
+		04E0DB7D2424408200310B48 /* MyDebugDrawer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MyDebugDrawer.cpp; sourceTree = "<group>"; };
+		04E0DB7E2424408200310B48 /* MyDebugDrawer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MyDebugDrawer.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3477,6 +3480,8 @@
 				04D93CC624233E2F00CCBE3E /* GameEntity.h */,
 				04D93CC024233E2E00CCBE3E /* GameEntityManager.cpp */,
 				04D93CD024233E3000CCBE3E /* GameEntityManager.h */,
+				04E0DB7E2424408200310B48 /* MyDebugDrawer.hpp */,
+				04E0DB7D2424408200310B48 /* MyDebugDrawer.cpp */,
 				04D93CEF24233FE100CCBE3E /* System */,
 				04D93CE924233F5600CCBE3E /* Threading */,
 			);
@@ -7196,6 +7201,7 @@
 				04D93CD324233E3000CCBE3E /* GameEntityManager.cpp in Sources */,
 				04D93CEE24233F6100CCBE3E /* MessageQueueSystem.cpp in Sources */,
 				04D93CD824233E3000CCBE3E /* GraphicsSystem.cpp in Sources */,
+				04E0DB7F2424408200310B48 /* MyDebugDrawer.cpp in Sources */,
 				04E0DB79242385DE00310B48 /* BulletConverter.cpp in Sources */,
 				04E0DB752423665E00310B48 /* BasicDemoGraphicsSystem.cpp in Sources */,
 				04D93CD724233E3000CCBE3E /* BaseSystem.cpp in Sources */,
