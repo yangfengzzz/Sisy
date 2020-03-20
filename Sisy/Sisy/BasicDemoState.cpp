@@ -116,6 +116,9 @@ void MyGameState::createScene01(void)
                     mSceneNode[idx]->setPosition( 0.2 * i,
                                                  2 + .2 * k,
                                                  0.2 * j);
+                    mDebugNode[idx] = bulletBody[idx]->debugDrawObject(btVector3(btScalar(.3),
+                                                                                 btScalar(0.3),
+                                                                                 btScalar(0.3)));
                     
                     Ogre::String datablockName = "Test" + Ogre::StringConverter::toString( idx);
                     Ogre::HlmsPbsDatablock *datablock = static_cast<Ogre::HlmsPbsDatablock*>(
@@ -206,6 +209,8 @@ void MyGameState::generateDebugText( float timeSinceLast, Ogre::String &outText 
     TutorialGameState::generateDebugText( timeSinceLast, outText );
     outText += "\nPress F2 to show/hide animated objects. ";
     outText += (visibilityMask & 0x000000001) ? "[On]" : "[Off]";
+    outText += "\nPress F3 to show/hide Decal's debug visualization. ";
+    outText += mDebugNode[0]->getAttachedObject(0)->isVisible() ? "[On]" : "[Off]";
 }
 
 //-----------------------------------------------------------------------------------
@@ -225,6 +230,12 @@ void MyGameState::keyReleased( const SDL_KeyboardEvent &arg )
         visibilityMask &= ~0x00000001;
         visibilityMask |= (Ogre::uint32)showMovingObjects;
         mGraphicsSystem->getSceneManager()->setVisibilityMask( visibilityMask );
+    }
+    else if( arg.keysym.sym == SDLK_F3 )
+    {
+        for (int i = 0; i < 125; i++) {
+            mDebugNode[i]->flipVisibility();
+        }
     }
     else
     {

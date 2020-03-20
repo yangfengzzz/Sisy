@@ -10,6 +10,7 @@ class JetRigidActor;
 class MyGameState : public jet::TutorialGameState
 {
     Ogre::SceneNode* mSceneNode[125];
+    Ogre::SceneNode* mDebugNode[125];
     JetRigidActor* bulletBody[125];
     
     Ogre::SceneNode* mLightNodes[3];

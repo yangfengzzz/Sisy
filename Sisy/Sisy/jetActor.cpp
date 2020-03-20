@@ -39,8 +39,7 @@ Ogre::SceneNode* JetActor::drawTransform(const btTransform& transform,
     
     manualObject->end();
     
-    Ogre::SceneNode* sceneNodeLines = m_app->getSceneManager()->getRootSceneNode( Ogre::SCENE_DYNAMIC )->
-    createChildSceneNode( Ogre::SCENE_DYNAMIC );
+    Ogre::SceneNode* sceneNodeLines = m_node->createChildSceneNode( Ogre::SCENE_DYNAMIC );
     sceneNodeLines->attachObject(manualObject);
     
     return sceneNodeLines;

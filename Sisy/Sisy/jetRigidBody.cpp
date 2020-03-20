@@ -77,15 +77,8 @@ Ogre::SceneNode* JetRigidActor::debugDrawObject(const btVector3& color){
     Ogre::ManualObject* debugObject = m_shape->debugDrawObject(color,
                                                                m_app->getSceneManager());
     
-    sceneNodeLines = m_app->getSceneManager()->getRootSceneNode( Ogre::SCENE_DYNAMIC )->
-    createChildSceneNode( Ogre::SCENE_DYNAMIC );
+    sceneNodeLines = m_node->createChildSceneNode( Ogre::SCENE_DYNAMIC );
     sceneNodeLines->attachObject(debugObject);
-        
-    btVector3 pos = m_body->getCenterOfMassPosition();
-    btQuaternion orn = m_body->getCenterOfMassTransform().getRotation();
-    
-    sceneNodeLines->setPosition(pos.x(), pos.y(), pos.z());
-    sceneNodeLines->setOrientation(orn.x(), orn.y(), orn.z(), orn.w());
     
     return sceneNodeLines;
 }
