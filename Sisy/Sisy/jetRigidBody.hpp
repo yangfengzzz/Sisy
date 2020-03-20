@@ -13,15 +13,17 @@
 #include "btRigidBody.h"
 
 namespace jet{
-class JetRigidBody : public JetActor{
+class JetRigidActor : public JetActor{
 public:
-    JetRigidBody(btDiscreteDynamicsWorld* m_dynamicsWorld,
-                 Demo::GraphicsSystem * app,
-                 float mass,
-                 const btTransform& startTransform,
-                 btCollisionShape* shape);
+    JetRigidActor(btDiscreteDynamicsWorld* m_dynamicsWorld,
+                  GraphicsSystem * app,
+                  float mass,
+                  const btTransform& startTransform,
+                  btCollisionShape* shape);
     
     virtual void createRenderItem(Ogre::String name) override;
+    
+    btRigidBody* getBody(){return m_body;}
     
 private:
     btRigidBody* m_body;

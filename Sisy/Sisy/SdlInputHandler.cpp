@@ -9,7 +9,7 @@
 
 #include <SDL_syswm.h>
 
-namespace Demo{
+namespace jet{
 SdlInputHandler::SdlInputHandler( SDL_Window *sdlWindow,
                                  MouseListener *mouseListener,
                                  KeyboardListener *keyboardListener,

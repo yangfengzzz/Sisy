@@ -11,11 +11,11 @@
 #include "OgreRoot.h"
 
 namespace jet{
-JetRigidBody::JetRigidBody(btDiscreteDynamicsWorld* m_dynamicsWorld,
-                           Demo::GraphicsSystem* app,
-                           float mass,
-                           const btTransform& startTransform,
-                           btCollisionShape* shape):
+JetRigidActor::JetRigidActor(btDiscreteDynamicsWorld* m_dynamicsWorld,
+                             GraphicsSystem* app,
+                             float mass,
+                             const btTransform& startTransform,
+                             btCollisionShape* shape):
 JetActor(m_dynamicsWorld, app){
     btAssert((!shape || shape->getShapeType() != INVALID_SHAPE_PROXYTYPE));
     
@@ -46,21 +46,21 @@ JetActor(m_dynamicsWorld, app){
     m_dynamicsWorld->addRigidBody(m_body);
 }
 //-------------------------------------------------------------------------
-void JetRigidBody::createRenderItem(Ogre::String name){
+void JetRigidActor::createRenderItem(Ogre::String name){
     Ogre::SceneManager *sceneManager = m_app->getSceneManager();
-    Ogre::Item *item = sceneManager->createItem(name,
-                                                Ogre::ResourceGroupManager::
-                                                AUTODETECT_RESOURCE_GROUP_NAME,
-                                                Ogre::SCENE_DYNAMIC );
-    Ogre::SceneNode *sceneNode = sceneManager->getRootSceneNode( Ogre::SCENE_DYNAMIC )->
+    m_item = sceneManager->createItem(name,
+                                      Ogre::ResourceGroupManager::
+                                      AUTODETECT_RESOURCE_GROUP_NAME,
+                                      Ogre::SCENE_DYNAMIC );
+    m_node = sceneManager->getRootSceneNode( Ogre::SCENE_DYNAMIC )->
     createChildSceneNode( Ogre::SCENE_DYNAMIC );
-    sceneNode->attachObject( item );
+    m_node->attachObject( m_item );
     
     btVector3 pos = m_body->getCenterOfMassPosition();
     btQuaternion orn = m_body->getCenterOfMassTransform().getRotation();
     
-    sceneNode->setPosition(pos.x(), pos.y(), pos.z());
-    sceneNode->setOrientation(orn.x(), orn.y(), orn.z(), orn.w());
+    m_node->setPosition(pos.x(), pos.y(), pos.z());
+    m_node->setOrientation(orn.x(), orn.y(), orn.z(), orn.w());
 }
 //-------------------------------------------------------------------------
 }

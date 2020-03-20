@@ -21,12 +21,12 @@ INT WINAPI WinMainApp( HINSTANCE hInst, HINSTANCE hPrevInstance, LPSTR strCmdLin
 int mainApp( int argc, const char *argv[] )
 #endif
 {
-    return Demo::MainEntryPoints::mainAppSingleThreaded( DEMO_MAIN_ENTRY_PARAMS );
+    return jet::MainEntryPoints::mainAppSingleThreaded( DEMO_MAIN_ENTRY_PARAMS );
 }
 
-namespace Demo
+namespace jet
 {
-    class MyGraphicsSystem : public GraphicsSystem
+    class MyGraphicsSystem : public jet::GraphicsSystem
     {
         virtual Ogre::CompositorWorkspace* setupCompositor()
         {
@@ -37,7 +37,7 @@ namespace Demo
 
         virtual void setupResources(void)
         {
-            GraphicsSystem::setupResources();
+            jet::GraphicsSystem::setupResources();
 
             Ogre::ConfigFile cf;
             cf.load(mResourcePath + "resources2.cfg");
@@ -55,16 +55,16 @@ namespace Demo
         }
 
     public:
-        MyGraphicsSystem( GameState *gameState ) :
-            GraphicsSystem( gameState )
+        MyGraphicsSystem( jet::GameState *gameState ) :
+            jet::GraphicsSystem( gameState )
         {
         }
     };
 
-    void MainEntryPoints::createSystems( GameState **outGraphicsGameState,
-                                         GraphicsSystem **outGraphicsSystem,
-                                         GameState **outLogicGameState,
-                                         LogicSystem **outLogicSystem )
+    void jet::MainEntryPoints::createSystems( jet::GameState **outGraphicsGameState,
+                                             jet::GraphicsSystem **outGraphicsSystem,
+                                             jet::GameState **outLogicGameState,
+                                             jet::LogicSystem **outLogicSystem )
     {
         MyGameState *gfxGameState = new MyGameState(
         ""
@@ -72,7 +72,7 @@ namespace Demo
         "LEGAL: Uses Saint Peter's Basilica (C) by Emil Persson under CC Attrib 3.0 Unported\n"
         "See Samples/Media/materials/textures/Cubemaps/License.txt for more information." );
 
-        GraphicsSystem *graphicsSystem = new MyGraphicsSystem( gfxGameState );
+        jet::GraphicsSystem *graphicsSystem = new MyGraphicsSystem( gfxGameState );
 
         gfxGameState->_notifyGraphicsSystem( graphicsSystem );
 
@@ -80,16 +80,16 @@ namespace Demo
         *outGraphicsSystem = graphicsSystem;
     }
 
-    void MainEntryPoints::destroySystems( GameState *graphicsGameState,
-                                          GraphicsSystem *graphicsSystem,
-                                          GameState *logicGameState,
-                                          LogicSystem *logicSystem )
+    void jet::MainEntryPoints::destroySystems( GameState *graphicsGameState,
+                                              GraphicsSystem *graphicsSystem,
+                                              GameState *logicGameState,
+                                              LogicSystem *logicSystem )
     {
         delete graphicsSystem;
         delete graphicsGameState;
     }
 
-    const char* MainEntryPoints::getWindowTitle(void)
+    const char* jet::MainEntryPoints::getWindowTitle(void)
     {
         return "Screen Space Decals";
     }

@@ -44,7 +44,7 @@ THE SOFTWARE.
 #endif
 #include "OgreRoot.h"
 
-namespace Demo
+namespace jet
 {
     StaticPluginLoader::StaticPluginLoader()
 #if defined( OGRE_STATIC_LIB )

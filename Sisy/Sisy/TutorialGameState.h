@@ -14,7 +14,7 @@ namespace v1
 }
 }
 
-namespace Demo{
+namespace jet{
 class GraphicsSystem;
 class CameraController;
 class BulletConverter;
@@ -51,7 +51,6 @@ protected:
     btVector3 m_oldPickingPos;
     btVector3 m_hitPos;
     btScalar m_oldPickingDist;
-    BulletConverter     *mBulletHelper;
     
 public:
     TutorialGameState( const Ogre::String &helpDescription );

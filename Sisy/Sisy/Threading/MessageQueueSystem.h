@@ -9,7 +9,7 @@
 
 #include <map>
 
-namespace Demo{
+namespace jet{
 namespace Mq
 {
     class MessageQueueSystem

@@ -5,7 +5,7 @@
 #include "BaseSystem.h"
 #include "OgrePrerequisites.h"
 
-namespace Demo{
+namespace jet{
 class GameEntityManager;
 
 class LogicSystem : public BaseSystem

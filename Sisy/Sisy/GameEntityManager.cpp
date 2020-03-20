@@ -4,7 +4,7 @@
 
 #include "LogicSystem.h"
 
-namespace Demo{
+namespace jet{
 const size_t cNumTransforms = 250;
 
 GameEntityManager::GameEntityManager( Mq::MessageQueueSystem *graphicsSystem,

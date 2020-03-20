@@ -1,7 +1,7 @@
 
 #include "MessageQueueSystem.h"
 
-namespace Demo{
+namespace jet{
 namespace Mq
 {
     const size_t MessageQueueSystem::cSizeOfHeader = Ogre::alignToNextMultiple(

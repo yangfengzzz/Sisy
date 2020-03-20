@@ -17,7 +17,7 @@
 #include <SDL.h>
 #endif
 
-namespace Demo{
+namespace jet{
 class SdlInputHandler;
 
 class GraphicsSystem : public BaseSystem, public Ogre::UniformScalableTask

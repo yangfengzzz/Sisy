@@ -4,7 +4,7 @@
 
 #include "InputListeners.h"
 
-namespace Demo{
+namespace jet{
 class GameState : public MouseListener, public KeyboardListener, public JoystickListener
 {
 public:

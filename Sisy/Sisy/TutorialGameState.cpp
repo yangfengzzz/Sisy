@@ -19,9 +19,9 @@
 #include "OgreGpuProgramManager.h"
 #include "BulletConverter.hpp"
 
-using namespace Demo;
+using namespace jet;
 
-namespace Demo{
+namespace jet{
 TutorialGameState::TutorialGameState( const Ogre::String &helpDescription ) :
 mGraphicsSystem( 0 ),
 mCameraController( 0 ),
@@ -41,7 +41,6 @@ TutorialGameState::~TutorialGameState()
 void TutorialGameState::_notifyGraphicsSystem( GraphicsSystem *graphicsSystem )
 {
     mGraphicsSystem = graphicsSystem;
-    mBulletHelper = new BulletConverter(graphicsSystem);
 }
 //-----------------------------------------------------------------------------------
 void TutorialGameState::createScene01(void)

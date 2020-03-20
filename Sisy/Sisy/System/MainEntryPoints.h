@@ -11,14 +11,13 @@
 #include <windows.h>
 #endif
 
-namespace Demo
-    {
-    class GameState;
-    class GraphicsSystem;
-    class LogicSystem;
-    }
+namespace jet{
+class GameState;
+class GraphicsSystem;
+class LogicSystem;
+}
 
-namespace Demo{
+namespace jet{
 /** Most of our demos use the same basic setup for game loop. If you want to understand
  how it works in depth, see Tutorial01_Initialization through Tutorial06_Multithreading
  @par

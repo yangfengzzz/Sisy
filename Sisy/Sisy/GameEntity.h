@@ -6,7 +6,7 @@
 #include "OgreQuaternion.h"
 #include "OgreStringVector.h"
 
-namespace Demo{
+namespace jet{
 #define NUM_GAME_ENTITY_BUFFERS 4
 
 enum MovableObjectType

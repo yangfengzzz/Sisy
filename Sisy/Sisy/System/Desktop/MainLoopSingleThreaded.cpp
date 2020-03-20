@@ -31,23 +31,21 @@
 
 #include "../MainEntryPoints.h"
 
-#include "GraphicsSystem.h"
-#include "LogicSystem.h"
-#include "GameState.h"
-#include "SdlInputHandler.h"
+#include "../../GraphicsSystem.h"
+#include "../../LogicSystem.h"
+#include "../../GameState.h"
+#include "../../SdlInputHandler.h"
 
 #include "OgreWindow.h"
 #include "OgreTimer.h"
 
 #include "Threading/OgreThreads.h"
 
-using namespace Demo;
-
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 INT WINAPI Demo::MainEntryPoints::mainAppSingleThreaded( HINSTANCE hInst, HINSTANCE hPrevInstance,
                                                         LPSTR strCmdLine, INT nCmdShow )
 #else
-int Demo::MainEntryPoints::mainAppSingleThreaded( int argc, const char *argv[] )
+int jet::MainEntryPoints::mainAppSingleThreaded( int argc, const char *argv[] )
 #endif
 {
     GameState *graphicsGameState = 0;
@@ -88,7 +86,7 @@ int Demo::MainEntryPoints::mainAppSingleThreaded( int argc, const char *argv[] )
         
 #if OGRE_USE_SDL2
         //Do this after creating the scene for easier the debugging (the mouse doesn't hide itself)
-        SdlInputHandler *inputHandler = graphicsSystem->getInputHandler();
+        jet::SdlInputHandler *inputHandler = graphicsSystem->getInputHandler();
         inputHandler->setGrabMousePointer( true );
         inputHandler->setMouseVisible( false );
         inputHandler->setMouseRelative( true );

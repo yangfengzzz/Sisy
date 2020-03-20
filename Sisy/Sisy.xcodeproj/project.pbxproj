@@ -1481,9 +1481,7 @@
 		04D93D07242349A700CCBE3E /* CollisionShape2TriangleMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04D93D06242349A700CCBE3E /* CollisionShape2TriangleMesh.cpp */; };
 		04E0DB742423665500310B48 /* BasicDemoState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04D93CE324233E9600CCBE3E /* BasicDemoState.cpp */; };
 		04E0DB752423665E00310B48 /* BasicDemoGraphicsSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04D93CE424233E9600CCBE3E /* BasicDemoGraphicsSystem.cpp */; };
-		04E0DB79242385DE00310B48 /* BulletConverter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DB77242385DE00310B48 /* BulletConverter.cpp */; };
 		04E0DB7B242393CA00310B48 /* MainLoopSingleThreaded.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DB7A242393CA00310B48 /* MainLoopSingleThreaded.cpp */; };
-		04E0DB7F2424408200310B48 /* MyDebugDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DB7D2424408200310B48 /* MyDebugDrawer.cpp */; };
 		04E0DB822424657E00310B48 /* jetShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DB802424657E00310B48 /* jetShape.cpp */; };
 		04E0DB852424663800310B48 /* jetBoxShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DB832424663800310B48 /* jetBoxShape.cpp */; };
 		04E0DB88242469C300310B48 /* jetActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DB86242469C300310B48 /* jetActor.cpp */; };
@@ -3350,11 +3348,7 @@
 		04D93D05242349A700CCBE3E /* CollisionShape2TriangleMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollisionShape2TriangleMesh.h; sourceTree = "<group>"; };
 		04D93D06242349A700CCBE3E /* CollisionShape2TriangleMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CollisionShape2TriangleMesh.cpp; sourceTree = "<group>"; };
 		04D93D0824234A2200CCBE3E /* ShapeData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShapeData.h; sourceTree = "<group>"; };
-		04E0DB77242385DE00310B48 /* BulletConverter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BulletConverter.cpp; sourceTree = "<group>"; };
-		04E0DB78242385DE00310B48 /* BulletConverter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BulletConverter.hpp; sourceTree = "<group>"; };
 		04E0DB7A242393CA00310B48 /* MainLoopSingleThreaded.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MainLoopSingleThreaded.cpp; path = System/Desktop/MainLoopSingleThreaded.cpp; sourceTree = "<group>"; };
-		04E0DB7D2424408200310B48 /* MyDebugDrawer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MyDebugDrawer.cpp; sourceTree = "<group>"; };
-		04E0DB7E2424408200310B48 /* MyDebugDrawer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MyDebugDrawer.hpp; sourceTree = "<group>"; };
 		04E0DB802424657E00310B48 /* jetShape.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = jetShape.cpp; sourceTree = "<group>"; };
 		04E0DB812424657E00310B48 /* jetShape.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = jetShape.hpp; sourceTree = "<group>"; };
 		04E0DB832424663800310B48 /* jetBoxShape.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = jetBoxShape.cpp; sourceTree = "<group>"; };
@@ -3465,37 +3459,33 @@
 			isa = PBXGroup;
 			children = (
 				04E0DB7C24242AEB00310B48 /* BasicDemo */,
-				04D93D0824234A2200CCBE3E /* ShapeData.h */,
 				04D93D05242349A700CCBE3E /* CollisionShape2TriangleMesh.h */,
 				04D93D06242349A700CCBE3E /* CollisionShape2TriangleMesh.cpp */,
 				04D93D04242348DB00CCBE3E /* InstanceGraphicsShape.h */,
-				04E0DB78242385DE00310B48 /* BulletConverter.hpp */,
-				04E0DB77242385DE00310B48 /* BulletConverter.cpp */,
+				04D93CD224233E3000CCBE3E /* MainEntryPointHelper.h */,
+				04D93CF9242341D800CCBE3E /* CommonExampleInterface.h */,
+				04D93CFA242341F400CCBE3E /* CommonRigidBodyBase.h */,
+				04D93CC624233E2F00CCBE3E /* GameEntity.h */,
+				04D93CD024233E3000CCBE3E /* GameEntityManager.h */,
+				04D93CC024233E2E00CCBE3E /* GameEntityManager.cpp */,
+				04D93CEF24233FE100CCBE3E /* System */,
+				04D93CE924233F5600CCBE3E /* Threading */,
+				04D93CCF24233E3000CCBE3E /* CameraController.h */,
+				04D93CD124233E3000CCBE3E /* CameraController.cpp */,
+				04D93CC524233E2F00CCBE3E /* SdlInputHandler.h */,
+				04D93CC324233E2E00CCBE3E /* SdlEmulationLayer.h */,
+				04D93CC224233E2E00CCBE3E /* SdlInputHandler.cpp */,
+				04D93CC124233E2E00CCBE3E /* InputListeners.h */,
+				04D93CCB24233E2F00CCBE3E /* GameState.h */,
+				04D93CC924233E2F00CCBE3E /* TutorialGameState.h */,
+				04D93CC424233E2F00CCBE3E /* TutorialGameState.cpp */,
 				04D93CCA24233E2F00CCBE3E /* BaseSystem.h */,
 				04D93CCC24233E2F00CCBE3E /* BaseSystem.cpp */,
 				04D93CC724233E2F00CCBE3E /* LogicSystem.h */,
 				04D93CC824233E2F00CCBE3E /* LogicSystem.cpp */,
 				04D93CCD24233E2F00CCBE3E /* GraphicsSystem.h */,
 				04D93CCE24233E2F00CCBE3E /* GraphicsSystem.cpp */,
-				04D93CD224233E3000CCBE3E /* MainEntryPointHelper.h */,
-				04D93CCF24233E3000CCBE3E /* CameraController.h */,
-				04D93CD124233E3000CCBE3E /* CameraController.cpp */,
-				04D93CC124233E2E00CCBE3E /* InputListeners.h */,
-				04D93CC324233E2E00CCBE3E /* SdlEmulationLayer.h */,
-				04D93CC524233E2F00CCBE3E /* SdlInputHandler.h */,
-				04D93CC224233E2E00CCBE3E /* SdlInputHandler.cpp */,
-				04D93CCB24233E2F00CCBE3E /* GameState.h */,
-				04D93CC924233E2F00CCBE3E /* TutorialGameState.h */,
-				04D93CC424233E2F00CCBE3E /* TutorialGameState.cpp */,
-				04D93CF9242341D800CCBE3E /* CommonExampleInterface.h */,
-				04D93CFA242341F400CCBE3E /* CommonRigidBodyBase.h */,
-				04D93CC624233E2F00CCBE3E /* GameEntity.h */,
-				04D93CC024233E2E00CCBE3E /* GameEntityManager.cpp */,
-				04D93CD024233E3000CCBE3E /* GameEntityManager.h */,
-				04E0DB7E2424408200310B48 /* MyDebugDrawer.hpp */,
-				04E0DB7D2424408200310B48 /* MyDebugDrawer.cpp */,
-				04D93CEF24233FE100CCBE3E /* System */,
-				04D93CE924233F5600CCBE3E /* Threading */,
+				04D93D0824234A2200CCBE3E /* ShapeData.h */,
 				04E0DB812424657E00310B48 /* jetShape.hpp */,
 				04E0DB802424657E00310B48 /* jetShape.cpp */,
 				04E0DB842424663800310B48 /* jetBoxShape.hpp */,
@@ -7221,8 +7211,6 @@
 				04D93CD324233E3000CCBE3E /* GameEntityManager.cpp in Sources */,
 				04D93CEE24233F6100CCBE3E /* MessageQueueSystem.cpp in Sources */,
 				04D93CD824233E3000CCBE3E /* GraphicsSystem.cpp in Sources */,
-				04E0DB7F2424408200310B48 /* MyDebugDrawer.cpp in Sources */,
-				04E0DB79242385DE00310B48 /* BulletConverter.cpp in Sources */,
 				04E0DB752423665E00310B48 /* BasicDemoGraphicsSystem.cpp in Sources */,
 				04D93CD724233E3000CCBE3E /* BaseSystem.cpp in Sources */,
 				04D93CD524233E3000CCBE3E /* TutorialGameState.cpp in Sources */,

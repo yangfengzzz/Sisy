@@ -20,7 +20,7 @@
 #include "ShapeData.h"
 #include "btBulletDynamicsCommon.h"
 
-namespace Demo {
+namespace jet {
 BulletConverter::BulletConverter(GraphicsSystem *graphicsSystem ){
     m_glApp = graphicsSystem;
 }

@@ -5,7 +5,7 @@
 #include <vector>
 #include <assert.h>
 
-namespace Demo{
+namespace jet{
 namespace Mq
 {
     enum MessageId

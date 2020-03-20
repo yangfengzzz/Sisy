@@ -47,7 +47,7 @@ namespace Ogre
     class Root;
 }
 
-namespace Demo
+namespace jet
 {
     /// Utility class to load plugins statically
     class StaticPluginLoader

@@ -23,7 +23,7 @@
 #include <SDL_syswm.h>
 #endif
 
-namespace Demo{
+namespace jet{
 LogicSystem::LogicSystem( GameState *gameState ) :
 BaseSystem( gameState ),
 mGraphicsSystem( 0 ),

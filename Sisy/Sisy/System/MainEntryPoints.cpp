@@ -32,6 +32,6 @@
 
 #include "MainEntryPoints.h"
 
-namespace Demo{
+namespace jet{
 double MainEntryPoints::Frametime = 1.0 / 60.0;
 }

@@ -31,7 +31,7 @@
 
 #include <SDL_syswm.h>
 
-namespace Demo{
+namespace jet{
 extern unsigned long WindowContentViewHandle(const SDL_SysWMinfo &info);
 }
 

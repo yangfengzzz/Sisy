@@ -13,7 +13,7 @@
 
 #include <SDL.h>
 
-namespace Demo{
+namespace jet{
 class MouseListener;
 class KeyboardListener;
 class JoystickListener;

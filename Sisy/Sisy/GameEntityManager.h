@@ -5,7 +5,7 @@
 #include "Threading/MessageQueueSystem.h"
 #include "GameEntity.h"
 
-namespace Demo{
+namespace jet{
 class GraphicsSystem;
 class LogicSystem;
 

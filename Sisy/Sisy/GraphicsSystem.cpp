@@ -48,7 +48,7 @@
 #endif
 #endif
 
-namespace Demo{
+namespace jet{
 GraphicsSystem::GraphicsSystem( GameState *gameState,
                                Ogre::ColourValue backgroundColour ) :
 BaseSystem( gameState ),

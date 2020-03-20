@@ -18,19 +18,22 @@ namespace jet{
 class JetActor{
 public:
     JetActor(btDiscreteDynamicsWorld* m_dynamicsWorld,
-             Demo::GraphicsSystem * app){
+             GraphicsSystem * app){
         m_world = m_dynamicsWorld;
         m_app = app;
     }
     
     virtual void createRenderItem(Ogre::String name) = 0;
     
+    Ogre::Item* getItem(){return m_item; }
+    Ogre::SceneNode* getSceneNode(){return m_node; }
+    
 protected:
     Ogre::SceneNode* m_node;
     Ogre::Item* m_item;
     
     btDiscreteDynamicsWorld* m_world;
-    Demo::GraphicsSystem * m_app;
+    GraphicsSystem * m_app;
 };
 }
 

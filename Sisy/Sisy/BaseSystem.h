@@ -4,7 +4,7 @@
 
 #include "Threading/MessageQueueSystem.h"
 
-namespace Demo{
+namespace jet{
 class GameState;
 
 class BaseSystem : public Mq::MessageQueueSystem

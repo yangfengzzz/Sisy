@@ -8,10 +8,10 @@
 
 #include "jetBoxShape.hpp"
 #include "btBoxShape.h"
-#include "InstanceGraphicsShape.h"
 #include "btAlignedObjectArray.h"
-#include "ShapeData.h"
 #include "btBulletDynamicsCommon.h"
+
+#include "ShapeData.h"
 
 namespace jet{
 JetBoxShape::JetBoxShape(const btVector3& boxHalfExtents){
@@ -25,7 +25,6 @@ void JetBoxShape::createRenderMesh(Ogre::String name){
 std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*>
 JetBoxShape::createCollisionShapeGraphicsObject(btCollisionShape* collisionShape,
                                                 Ogre::String name){
-    btAlignedObjectArray<GLInstanceVertex> gfxVertices;
     btAlignedObjectArray<Ogre::uint16> indices;
     std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*> mesh;
     

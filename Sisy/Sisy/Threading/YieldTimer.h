@@ -4,7 +4,7 @@
 
 #include "OgreTimer.h"
 
-namespace Demo{
+namespace jet{
 class YieldTimer
 {
     Ogre::Timer *mExternalTimer;

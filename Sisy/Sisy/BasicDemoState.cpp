@@ -3,7 +3,6 @@
 #include "GraphicsSystem.h"
 #include "CameraController.h"
 #include "OgreSceneManager.h"
-#include "OgreItem.h"
 
 #include "OgreHlmsPbsDatablock.h"
 #include "OgreHlmsSamplerblock.h"
@@ -13,17 +12,16 @@
 #include "OgreHlmsPbs.h"
 
 #include "OgreTextureGpuManager.h"
-
 #include "OgreTextAreaOverlayElement.h"
-#include "BulletConverter.hpp"
 
-using namespace Demo;
+#include "jetBoxShape.hpp"
+#include "jetRigidBody.hpp"
 
 #define ARRAY_SIZE_Y 5
 #define ARRAY_SIZE_X 5
 #define ARRAY_SIZE_Z 5
 
-namespace Demo{
+namespace jet{
 MyGameState::MyGameState( const Ogre::String &helpDescription ) :
 TutorialGameState( helpDescription )
 {
@@ -33,24 +31,14 @@ void MyGameState::createScene01(void)
 {
     createEmptyDynamicsWorld();
     btAssert(m_dynamicsWorld);
-    debug = new MyDebugDrawer(mGraphicsSystem);
-    m_dynamicsWorld->setDebugDrawer(debug);
-    
-    debug->setDebugMode(
-                        (btIDebugDraw::DBG_DrawWireframe + btIDebugDraw::DBG_DrawAabb)^btIDebugDraw::DBG_DrawFrames
-                        //btIDebugDraw::DBG_DrawContactPoints
-                        );
     
     Ogre::SceneManager *sceneManager = mGraphicsSystem->getSceneManager();
     
     ///create a few basic rigid bodies
-    btBoxShape* groundShape = createBoxShape(btVector3(btScalar(10.), btScalar(10.), btScalar(10.)));
-    auto ground = mBulletHelper->createCollisionShapeGraphicsObject(groundShape, "ground");
+    JetBoxShape* groundShape = new JetBoxShape(btVector3(btScalar(10.), btScalar(10.), btScalar(10.)));
+    groundShape->createRenderMesh("ground");
     
-    //groundShape->initializePolyhedralFeatures();
-    //btCollisionShape* groundShape = new btStaticPlaneShape(btVector3(0,1,0),50);
-    
-    m_collisionShapes.push_back(groundShape);
+    m_collisionShapes.push_back(groundShape->getShape());
     
     btTransform groundTransform;
     groundTransform.setIdentity();
@@ -58,13 +46,11 @@ void MyGameState::createScene01(void)
     
     {
         btScalar mass(0.);
-        createRigidBody(mass, groundTransform, groundShape, btVector4(0, 0, 1, 1));
-        Ogre::Item *item = sceneManager->createItem( ground.first, Ogre::SCENE_DYNAMIC );
+        JetRigidActor* plane = new JetRigidActor(m_dynamicsWorld, mGraphicsSystem,
+                                                 mass, groundTransform, groundShape->getShape());
+        plane->createRenderItem("ground");
+        Ogre::Item* item = plane->getItem();
         item->setDatablock( "Marble" );
-        Ogre::SceneNode *sceneNode = sceneManager->getRootSceneNode( Ogre::SCENE_DYNAMIC )->
-        createChildSceneNode( Ogre::SCENE_DYNAMIC );
-        sceneNode->attachObject( item );
-        sceneNode->setPosition( 0, -10, 0 );
         
         //Change the addressing mode of the roughness map to wrap via code.
         //Detail maps default to wrap, but the rest to clamp.
@@ -84,12 +70,11 @@ void MyGameState::createScene01(void)
     {
         //create a few dynamic rigidbodies
         // Re-using the same collision is better for memory usage and performance
-        
-        btBoxShape* colShape = createBoxShape(btVector3(.1, .1, .1));
-        auto box = mBulletHelper->createCollisionShapeGraphicsObject(colShape, "box");
+        JetBoxShape* colShape = new JetBoxShape(btVector3(.1, .1, .1));
+        colShape->createRenderMesh("box");
         
         //btCollisionShape* colShape = new btSphereShape(btScalar(1.));
-        m_collisionShapes.push_back(colShape);
+        m_collisionShapes.push_back(colShape->getShape());
         
         /// Create Dynamic Objects
         btTransform startTransform;
@@ -102,7 +87,7 @@ void MyGameState::createScene01(void)
         
         btVector3 localInertia(0, 0, 0);
         if (isDynamic)
-            colShape->calculateLocalInertia(mass, localInertia);
+            colShape->getShape()->calculateLocalInertia(mass, localInertia);
         
         Ogre::HlmsManager *hlmsManager = mGraphicsSystem->getRoot()->getHlmsManager();
         assert( dynamic_cast<Ogre::HlmsPbs*>( hlmsManager->getHlms( Ogre::HLMS_PBS ) ) );
@@ -118,20 +103,17 @@ void MyGameState::createScene01(void)
                                                        btScalar(0.2 * i),
                                                        btScalar(2 + .2 * k),
                                                        btScalar(0.2 * j)));
+                    bulletBody[idx] = new JetRigidActor(m_dynamicsWorld, mGraphicsSystem,
+                                                        mass, startTransform, colShape->getShape());
+                    bulletBody[idx]->createRenderItem("box");
                     
-                    bulletBody[idx] = createRigidBody(mass, startTransform, colShape);
-                    
-                    Ogre::Item *item = sceneManager->createItem( box.first,
-                                                                Ogre::SCENE_DYNAMIC );
+                    Ogre::Item *item = bulletBody[idx]->getItem();
                     item->setVisibilityFlags( 0x000000001 );
                     
-                    mSceneNode[idx] = sceneManager->getRootSceneNode( Ogre::SCENE_DYNAMIC )->
-                    createChildSceneNode( Ogre::SCENE_DYNAMIC );
-                    
+                    mSceneNode[idx] = bulletBody[idx]->getSceneNode();
                     mSceneNode[idx]->setPosition( 0.2 * i,
                                                  2 + .2 * k,
                                                  0.2 * j);
-                    mSceneNode[idx]->attachObject( item );
                     
                     Ogre::String datablockName = "Test" + Ogre::StringConverter::toString( idx);
                     Ogre::HlmsPbsDatablock *datablock = static_cast<Ogre::HlmsPbsDatablock*>(
@@ -205,8 +187,8 @@ void MyGameState::update( float timeSinceLast )
     stepSimulation(timeSinceLast);
     
     for (int i = 0; i < 125; i++) {
-        btVector3 pos = bulletBody[i]->getCenterOfMassPosition();
-        btQuaternion orn = bulletBody[i]->getCenterOfMassTransform().getRotation();
+        btVector3 pos = bulletBody[i]->getBody()->getCenterOfMassPosition();
+        btQuaternion orn = bulletBody[i]->getBody()->getCenterOfMassTransform().getRotation();
         
         mSceneNode[i]->setPosition(pos.x(), pos.y(), pos.z());
         mSceneNode[i]->setOrientation(orn.x(), orn.y(), orn.z(), orn.w());
@@ -222,8 +204,6 @@ void MyGameState::generateDebugText( float timeSinceLast, Ogre::String &outText 
     TutorialGameState::generateDebugText( timeSinceLast, outText );
     outText += "\nPress F2 to show/hide animated objects. ";
     outText += (visibilityMask & 0x000000001) ? "[On]" : "[Off]";
-    outText += "\nPress F3 to show/hide Decal's debug visualization. ";
-    outText += debug->isVisible() ? "[On]" : "[Off]";
 }
 
 //-----------------------------------------------------------------------------------
@@ -243,11 +223,6 @@ void MyGameState::keyReleased( const SDL_KeyboardEvent &arg )
         visibilityMask &= ~0x00000001;
         visibilityMask |= (Ogre::uint32)showMovingObjects;
         mGraphicsSystem->getSceneManager()->setVisibilityMask( visibilityMask );
-    }
-    else if( arg.keysym.sym == SDLK_F3 )
-    {
-        debug->reverseVisible();
-        m_dynamicsWorld->debugDrawWorld();
     }
     else
     {

@@ -13,7 +13,7 @@
 #include "btVector3.h"
 #include "btCollisionShape.h"
 
-namespace Demo {
+namespace jet {
 class GraphicsSystem;
 
 class BulletConverter{

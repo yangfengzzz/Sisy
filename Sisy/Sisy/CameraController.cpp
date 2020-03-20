@@ -6,9 +6,7 @@
 #include "OgreCamera.h"
 #include "OgreWindow.h"
 
-using namespace Demo;
-
-namespace Demo{
+namespace jet{
 CameraController::CameraController( GraphicsSystem *graphicsSystem, bool useSceneNode ) :
 mUseSceneNode( useSceneNode ),
 mSpeedMofifier( false ),
