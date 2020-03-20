@@ -35,9 +35,27 @@ void MyDebugDrawer::flushLines()
         }
         manualObject->end();
         
+        Ogre::SceneNode *sceneNodeLines = sceneManager->getRootSceneNode( Ogre::SCENE_DYNAMIC )->
+                                     createChildSceneNode( Ogre::SCENE_DYNAMIC );
+        sceneNodeLines->attachObject(manualObject);
+        sceneNodeLines->setVisible( true );
+        visibleFlag = false;
+        nodes.push_back(sceneNodeLines);
+        
         m_linePoints.clear();
         m_lineIndices.clear();
     }
+}
+
+void MyDebugDrawer::reverseVisible(){
+    for (int i = 0; i < nodes.size(); i++) {
+        nodes[i]->flipVisibility();
+    }
+    visibleFlag = !visibleFlag;
+}
+
+bool MyDebugDrawer::isVisible(){
+    return visibleFlag;
 }
 
 }

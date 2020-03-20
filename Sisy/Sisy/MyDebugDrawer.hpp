@@ -36,6 +36,9 @@ MyDebugDrawer : public btIDebugDraw
 
     btAlignedObjectArray<MyDebugVec3> m_linePoints;
     btAlignedObjectArray<unsigned int> m_lineIndices;
+    
+    std::vector<Ogre::SceneNode*> nodes;
+    bool visibleFlag;
 
     btVector3 m_currentLineColor;
     DefaultColors m_ourColors;
@@ -110,6 +113,10 @@ public:
     }
 
     virtual void flushLines();
+    
+    void reverseVisible();
+    
+    bool isVisible();
 };
 
 }

@@ -5115,10 +5115,10 @@
 		04964B6D241DF5B10006C91E /* V2ManualObject */ = {
 			isa = PBXGroup;
 			children = (
-				04964B70241DF5BD0006C91E /* V2ManualObject.cpp */,
 				04964B71241DF5BD0006C91E /* V2ManualObject.h */,
-				04964B6E241DF5BC0006C91E /* V2ManualObjectGameState.cpp */,
+				04964B70241DF5BD0006C91E /* V2ManualObject.cpp */,
 				04964B6F241DF5BC0006C91E /* V2ManualObjectGameState.h */,
+				04964B6E241DF5BC0006C91E /* V2ManualObjectGameState.cpp */,
 			);
 			name = V2ManualObject;
 			sourceTree = "<group>";
