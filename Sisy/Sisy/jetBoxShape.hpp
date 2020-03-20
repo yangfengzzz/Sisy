@@ -18,6 +18,9 @@ public:
     
     virtual void createRenderMesh(Ogre::String name) override;
     
+    virtual Ogre::ManualObject* debugDrawObject(const btVector3& color,
+                                                Ogre::SceneManager* scene) override;
+    
 private:
     std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*>
     virtual createCollisionShapeGraphicsObject(btCollisionShape* collisionShape,

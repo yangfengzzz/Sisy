@@ -47,7 +47,8 @@ void MyGameState::createScene01(void)
     {
         btScalar mass(0.);
         JetRigidActor* plane = new JetRigidActor(m_dynamicsWorld, mGraphicsSystem,
-                                                 mass, groundTransform, groundShape->getShape());
+                                                 groundShape,
+                                                 mass, groundTransform);
         plane->createRenderItem("ground");
         Ogre::Item* item = plane->getItem();
         item->setDatablock( "Marble" );
@@ -104,7 +105,8 @@ void MyGameState::createScene01(void)
                                                        btScalar(2 + .2 * k),
                                                        btScalar(0.2 * j)));
                     bulletBody[idx] = new JetRigidActor(m_dynamicsWorld, mGraphicsSystem,
-                                                        mass, startTransform, colShape->getShape());
+                                                        colShape,
+                                                        mass, startTransform);
                     bulletBody[idx]->createRenderItem("box");
                     
                     Ogre::Item *item = bulletBody[idx]->getItem();

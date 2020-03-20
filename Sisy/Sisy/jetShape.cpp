@@ -134,4 +134,12 @@ JetShape::createDynamicMesh(const float* vertices, int numvertices,
     return std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*>( mesh, vertexBuffer );
 }
 //-------------------------------------------------------------------------
+void JetShape::drawLine(const btVector3& bbMin, const btVector3& bbMax,
+                        int idx1, int idx2,
+                        Ogre::ManualObject* manual){
+    manual->position(bbMin[0], bbMin[1], bbMin[2]);
+    manual->position(bbMax[0], bbMax[1], bbMax[2]);
+    manual->line(idx1, idx2);
+}
+//-------------------------------------------------------------------------
 }

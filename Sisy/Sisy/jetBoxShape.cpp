@@ -10,6 +10,7 @@
 #include "btBoxShape.h"
 #include "btAlignedObjectArray.h"
 #include "btBulletDynamicsCommon.h"
+#include "OgreSceneManager.h"
 
 #include "ShapeData.h"
 
@@ -20,6 +21,43 @@ JetBoxShape::JetBoxShape(const btVector3& boxHalfExtents){
 //-------------------------------------------------------------------------
 void JetBoxShape::createRenderMesh(Ogre::String name){
     m_mesh = createCollisionShapeGraphicsObject(m_shape, name).first;
+}
+
+Ogre::ManualObject* JetBoxShape::debugDrawObject(const btVector3& color,
+                                                 Ogre::SceneManager* scene){
+    const btBoxShape* boxShape = static_cast<const btBoxShape*>(m_shape);
+    btVector3 bbMax = boxShape->getHalfExtentsWithMargin();
+    btVector3 bbMin = -bbMax;
+    Ogre::ManualObject * manualObject = scene->createManualObject();
+
+    manualObject->begin("BaseWhite", Ogre::OT_LINE_LIST);
+    drawLine( btVector3(bbMin[0], bbMin[1], bbMin[2]),  btVector3(bbMax[0], bbMin[1], bbMin[2]),
+             0, 1, manualObject);
+    drawLine( btVector3(bbMax[0], bbMin[1], bbMin[2]),  btVector3(bbMax[0], bbMax[1], bbMin[2]),
+             2, 3, manualObject);
+    drawLine( btVector3(bbMax[0], bbMax[1], bbMin[2]),  btVector3(bbMin[0], bbMax[1], bbMin[2]),
+             4, 5, manualObject);
+    drawLine( btVector3(bbMin[0], bbMax[1], bbMin[2]),  btVector3(bbMin[0], bbMin[1], bbMin[2]),
+             6, 7, manualObject);
+    drawLine( btVector3(bbMin[0], bbMin[1], bbMin[2]),  btVector3(bbMin[0], bbMin[1], bbMax[2]),
+             8, 9, manualObject);
+    drawLine( btVector3(bbMax[0], bbMin[1], bbMin[2]),  btVector3(bbMax[0], bbMin[1], bbMax[2]),
+             10, 11, manualObject);
+    drawLine( btVector3(bbMax[0], bbMax[1], bbMin[2]),  btVector3(bbMax[0], bbMax[1], bbMax[2]),
+             12, 13, manualObject);
+    drawLine( btVector3(bbMin[0], bbMax[1], bbMin[2]),  btVector3(bbMin[0], bbMax[1], bbMax[2]),
+             14, 15, manualObject);
+    drawLine( btVector3(bbMin[0], bbMin[1], bbMax[2]),  btVector3(bbMax[0], bbMin[1], bbMax[2]),
+             16, 17, manualObject);
+    drawLine( btVector3(bbMax[0], bbMin[1], bbMax[2]),  btVector3(bbMax[0], bbMax[1], bbMax[2]),
+             18, 19, manualObject);
+    drawLine( btVector3(bbMax[0], bbMax[1], bbMax[2]),  btVector3(bbMin[0], bbMax[1], bbMax[2]),
+             20, 21, manualObject);
+    drawLine( btVector3(bbMin[0], bbMax[1], bbMax[2]),  btVector3(bbMin[0], bbMin[1], bbMax[2]),
+             22, 23, manualObject);
+    manualObject->end();
+    
+    return manualObject;
 }
 //-------------------------------------------------------------------------
 std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*>

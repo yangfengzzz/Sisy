@@ -13,18 +13,18 @@
 namespace jet{
 JetRigidActor::JetRigidActor(btDiscreteDynamicsWorld* m_dynamicsWorld,
                              GraphicsSystem* app,
+                             JetShape* shape,
                              float mass,
-                             const btTransform& startTransform,
-                             btCollisionShape* shape):
-JetActor(m_dynamicsWorld, app){
-    btAssert((!shape || shape->getShapeType() != INVALID_SHAPE_PROXYTYPE));
+                             const btTransform& startTransform):
+JetActor(m_dynamicsWorld, app, shape){
+    btAssert((!shape || shape->getShape()->getShapeType() != INVALID_SHAPE_PROXYTYPE));
     
     //rigidbody is dynamic if and only if mass is non zero, otherwise static
     bool isDynamic = (mass != 0.f);
     
     btVector3 localInertia(0, 0, 0);
     if (isDynamic)
-        shape->calculateLocalInertia(mass, localInertia);
+        shape->getShape()->calculateLocalInertia(mass, localInertia);
     
     //using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
     
@@ -32,7 +32,8 @@ JetActor(m_dynamicsWorld, app){
 #ifdef USE_MOTIONSTATE
     btDefaultMotionState* myMotionState = new btDefaultMotionState(startTransform);
     
-    btRigidBody::btRigidBodyConstructionInfo cInfo(mass, myMotionState, shape, localInertia);
+    btRigidBody::btRigidBodyConstructionInfo cInfo(mass, myMotionState,
+                                                   shape->getShape(), localInertia);
     
     m_body = new btRigidBody(cInfo);
     //body->setContactProcessingThreshold(m_defaultContactProcessingThreshold);
@@ -61,6 +62,32 @@ void JetRigidActor::createRenderItem(Ogre::String name){
     
     m_node->setPosition(pos.x(), pos.y(), pos.z());
     m_node->setOrientation(orn.x(), orn.y(), orn.z(), orn.w());
+}
+//-------------------------------------------------------------------------
+Ogre::SceneNode* JetRigidActor::debugDrawObject(const btVector3& color){
+    const btTransform& worldTransform = m_body->getWorldTransform();
+    Ogre::SceneNode *sceneNodeLines;
+    
+    // Draw a small simplex at the center of the object
+    if (getDebugMode() & JetActor::DBG_DrawFrames)
+    {
+        sceneNodeLines = drawTransform(worldTransform, .1);
+    }
+    
+    Ogre::ManualObject* debugObject = m_shape->debugDrawObject(color,
+                                                               m_app->getSceneManager());
+    
+    sceneNodeLines = m_app->getSceneManager()->getRootSceneNode( Ogre::SCENE_DYNAMIC )->
+    createChildSceneNode( Ogre::SCENE_DYNAMIC );
+    sceneNodeLines->attachObject(debugObject);
+        
+    btVector3 pos = m_body->getCenterOfMassPosition();
+    btQuaternion orn = m_body->getCenterOfMassTransform().getRotation();
+    
+    sceneNodeLines->setPosition(pos.x(), pos.y(), pos.z());
+    sceneNodeLines->setOrientation(orn.x(), orn.y(), orn.z(), orn.w());
+    
+    return sceneNodeLines;
 }
 //-------------------------------------------------------------------------
 }

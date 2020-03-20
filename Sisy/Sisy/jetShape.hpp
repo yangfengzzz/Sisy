@@ -11,6 +11,7 @@
 
 #include "btCollisionShape.h"
 #include "OgreMesh2.h"
+#include "OgreManualObject2.h"
 
 namespace jet{
 
@@ -23,6 +24,9 @@ public:
     
     virtual void createRenderMesh(Ogre::String name) = 0;
     
+    virtual Ogre::ManualObject* debugDrawObject(const btVector3& color,
+                                                Ogre::SceneManager* scene) = 0;
+    
 protected:
     Ogre::IndexBufferPacked*
     createIndexBuffer(const Ogre::uint16* indices, int numIndices);
@@ -34,6 +38,10 @@ protected:
     std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*>
     virtual createCollisionShapeGraphicsObject(btCollisionShape* collisionShape,
                                                Ogre::String name) = 0;
+    
+    void drawLine(const btVector3& bbMin, const btVector3& bbMax,
+                  int idx1, int idx2,
+                  Ogre::ManualObject* manual);
     
     Ogre::MeshPtr m_mesh;
     btCollisionShape* m_shape;
