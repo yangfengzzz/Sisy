@@ -21,7 +21,9 @@ public:
     Ogre::MeshPtr getMesh(){return m_mesh; }
     btCollisionShape* getShape(){return m_shape; }
     
-public:
+    virtual void createRenderMesh(Ogre::String name) = 0;
+    
+protected:
     Ogre::IndexBufferPacked*
     createIndexBuffer(const Ogre::uint16* indices, int numIndices);
 
@@ -33,7 +35,6 @@ public:
     virtual createCollisionShapeGraphicsObject(btCollisionShape* collisionShape,
                                                Ogre::String name) = 0;
     
-protected:
     Ogre::MeshPtr m_mesh;
     btCollisionShape* m_shape;
 };

@@ -18,7 +18,7 @@ JetBoxShape::JetBoxShape(const btVector3& boxHalfExtents){
     m_shape = new btBoxShape(boxHalfExtents);
 }
 //-------------------------------------------------------------------------
-void JetBoxShape::createRenderObject(Ogre::String name){
+void JetBoxShape::createRenderMesh(Ogre::String name){
     m_mesh = createCollisionShapeGraphicsObject(m_shape, name).first;
 }
 //-------------------------------------------------------------------------

@@ -16,7 +16,7 @@ class JetBoxShape : public JetShape{
 public:
     JetBoxShape(const btVector3& boxHalfExtents);
     
-    void createRenderObject(Ogre::String name);
+    virtual void createRenderMesh(Ogre::String name) override;
     
 private:
     std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*>
