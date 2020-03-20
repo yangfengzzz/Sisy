@@ -1484,6 +1484,8 @@
 		04E0DB79242385DE00310B48 /* BulletConverter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DB77242385DE00310B48 /* BulletConverter.cpp */; };
 		04E0DB7B242393CA00310B48 /* MainLoopSingleThreaded.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DB7A242393CA00310B48 /* MainLoopSingleThreaded.cpp */; };
 		04E0DB7F2424408200310B48 /* MyDebugDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DB7D2424408200310B48 /* MyDebugDrawer.cpp */; };
+		04E0DB822424657E00310B48 /* jetShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DB802424657E00310B48 /* jetShape.cpp */; };
+		04E0DB852424663800310B48 /* jetBoxShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DB832424663800310B48 /* jetBoxShape.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -3351,6 +3353,10 @@
 		04E0DB7A242393CA00310B48 /* MainLoopSingleThreaded.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MainLoopSingleThreaded.cpp; path = System/Desktop/MainLoopSingleThreaded.cpp; sourceTree = "<group>"; };
 		04E0DB7D2424408200310B48 /* MyDebugDrawer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MyDebugDrawer.cpp; sourceTree = "<group>"; };
 		04E0DB7E2424408200310B48 /* MyDebugDrawer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MyDebugDrawer.hpp; sourceTree = "<group>"; };
+		04E0DB802424657E00310B48 /* jetShape.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = jetShape.cpp; sourceTree = "<group>"; };
+		04E0DB812424657E00310B48 /* jetShape.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = jetShape.hpp; sourceTree = "<group>"; };
+		04E0DB832424663800310B48 /* jetBoxShape.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = jetBoxShape.cpp; sourceTree = "<group>"; };
+		04E0DB842424663800310B48 /* jetBoxShape.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = jetBoxShape.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3484,6 +3490,10 @@
 				04E0DB7D2424408200310B48 /* MyDebugDrawer.cpp */,
 				04D93CEF24233FE100CCBE3E /* System */,
 				04D93CE924233F5600CCBE3E /* Threading */,
+				04E0DB812424657E00310B48 /* jetShape.hpp */,
+				04E0DB802424657E00310B48 /* jetShape.cpp */,
+				04E0DB842424663800310B48 /* jetBoxShape.hpp */,
+				04E0DB832424663800310B48 /* jetBoxShape.cpp */,
 			);
 			path = Sisy;
 			sourceTree = "<group>";
@@ -7208,8 +7218,10 @@
 				04D93CD524233E3000CCBE3E /* TutorialGameState.cpp in Sources */,
 				04D93CD924233E3000CCBE3E /* CameraController.cpp in Sources */,
 				04D93D07242349A700CCBE3E /* CollisionShape2TriangleMesh.cpp in Sources */,
+				04E0DB852424663800310B48 /* jetBoxShape.cpp in Sources */,
 				04D93CD424233E3000CCBE3E /* SdlInputHandler.cpp in Sources */,
 				04D93CD624233E3000CCBE3E /* LogicSystem.cpp in Sources */,
+				04E0DB822424657E00310B48 /* jetShape.cpp in Sources */,
 				04D93CF824233FFA00CCBE3E /* OSXUtils.mm in Sources */,
 				04E0DB7B242393CA00310B48 /* MainLoopSingleThreaded.cpp in Sources */,
 				04E0DB742423665500310B48 /* BasicDemoState.cpp in Sources */,
