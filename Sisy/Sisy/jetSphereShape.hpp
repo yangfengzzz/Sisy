@@ -20,7 +20,6 @@ public:
     
     virtual Ogre::ManualObject* debugDrawObject(const btVector3& color,
                                                 Ogre::SceneManager* scene) override;
-    
 private:
     std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*>
     virtual createCollisionShapeGraphicsObject(btCollisionShape* collisionShape,
@@ -35,7 +34,10 @@ private:
                          Ogre::ManualObject* manual,
                          btScalar stepDegrees = btScalar(10.f),
                          bool drawCenter = true);
-
+    
+private:
+    void clearManualIdx(){manual_idx = 0;}
+    int manual_idx;
 };
 }
 

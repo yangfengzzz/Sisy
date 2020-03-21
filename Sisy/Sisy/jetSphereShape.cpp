@@ -17,6 +17,7 @@
 namespace jet{
 JetSphereShape::JetSphereShape(btScalar radius){
     m_shape = new btSphereShape(radius);
+    manual_idx = 0;
 }
 //-------------------------------------------------------------------------
 void JetSphereShape::createRenderMesh(Ogre::String name){
@@ -34,8 +35,8 @@ Ogre::ManualObject* JetSphereShape::debugDrawObject(const btVector3& color,
     btScalar stepDegrees = 30.f;
     btVector3 up(0, 1, 0);
     
+    clearManualIdx();
     Ogre::ManualObject * manualObject = scene->createManualObject();
-
     manualObject->begin("BaseWhite", Ogre::OT_LINE_LIST);
     btVector3 axis(1, 0, 0);
     drawSpherePatch(up, axis, radius, minTh, maxTh, minPs, maxPs, color,
@@ -111,7 +112,6 @@ void JetSphereShape::drawSpherePatch(const btVector3& up,
     if (n_vert < 2) n_vert = 2;
     btScalar step_v = (maxPs - minPs) / btScalar(n_vert - 1);
     
-    int idx = 0;
     for (int i = 0; i < n_hor; i++)
     {
         btScalar th = minTh + btScalar(i) * step_h;
@@ -125,21 +125,21 @@ void JetSphereShape::drawSpherePatch(const btVector3& up,
             pvB[j] = center + cth * cps * iv + cth * sps * jv + sth * kv;
             if (i)
             {
-                drawLine(pvA[j], pvB[j], idx, idx+1,
+                drawLine(pvA[j], pvB[j], manual_idx, manual_idx+1,
                          manual);
-                idx += 2;
+                manual_idx += 2;
             }
             else if (drawS)
             {
-                drawLine(spole, pvB[j], idx, idx+1,
+                drawLine(spole, pvB[j], manual_idx, manual_idx+1,
                          manual);
-                idx += 2;
+                manual_idx += 2;
             }
             if (j)
             {
-                drawLine(pvB[j - 1], pvB[j], idx, idx+1,
+                drawLine(pvB[j - 1], pvB[j], manual_idx, manual_idx+1,
                          manual);
-                idx += 2;
+                manual_idx += 2;
             }
             else
             {
@@ -147,9 +147,9 @@ void JetSphereShape::drawSpherePatch(const btVector3& up,
             }
             if ((i == (n_hor - 1)) && drawN)
             {
-                drawLine(npole, pvB[j], idx, idx+1,
+                drawLine(npole, pvB[j], manual_idx, manual_idx+1,
                          manual);
-                idx += 2;
+                manual_idx += 2;
             }
 
             if (drawCenter)
@@ -158,18 +158,18 @@ void JetSphereShape::drawSpherePatch(const btVector3& up,
                 {
                     if (j == (n_vert - 1))
                     {
-                        drawLine(arcStart, pvB[j], idx, idx+1,
+                        drawLine(arcStart, pvB[j], manual_idx, manual_idx+1,
                                  manual);
-                        idx += 2;
+                        manual_idx += 2;
                     }
                 }
                 else
                 {
                     if (((!i) || (i == (n_hor - 1))) && ((!j) || (j == (n_vert - 1))))
                     {
-                        drawLine(center, pvB[j], idx, idx+1,
+                        drawLine(center, pvB[j], manual_idx, manual_idx+1,
                                  manual);
-                        idx += 2;
+                        manual_idx += 2;
                     }
                 }
             }
