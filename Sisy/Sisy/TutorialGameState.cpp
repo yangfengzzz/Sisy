@@ -202,8 +202,8 @@ void TutorialGameState::mouseMoved( const SDL_Event &arg )
         float width  = static_cast<float>( mGraphicsSystem->getRenderWindow()->getWidth() );
         float height = static_cast<float>( mGraphicsSystem->getRenderWindow()->getHeight() );
         
-        Ogre::Ray ray = mGraphicsSystem->getCamera()->getCameraToViewportRay(arg.motion.x/width,
-                                                                             arg.motion.y/height);
+        Ogre::Ray ray = mGraphicsSystem->getCamera()->getCameraToViewportRay(arg.motion.x/width*2,
+                                                                             arg.motion.y/height*2);
         Ogre::Vector3 pos = ray.getPoint(10000);
         movePickedBody(btVector3(ray.getOrigin().x,
                                  ray.getOrigin().y,
@@ -219,8 +219,8 @@ void TutorialGameState::mousePressed( const SDL_MouseButtonEvent &arg, Ogre::uin
     
     float width  = static_cast<float>( mGraphicsSystem->getRenderWindow()->getWidth() );
     float height = static_cast<float>( mGraphicsSystem->getRenderWindow()->getHeight() );
-    Ogre::Ray ray = mGraphicsSystem->getCamera()->getCameraToViewportRay(arg.x/width,
-                                                                         arg.y/height);
+    Ogre::Ray ray = mGraphicsSystem->getCamera()->getCameraToViewportRay(arg.x/width*2,
+                                                                         arg.y/height*2);
     Ogre::Vector3 pos = ray.getPoint(10000);
     pickBody(btVector3(ray.getOrigin().x,
                        ray.getOrigin().y,
