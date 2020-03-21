@@ -151,25 +151,24 @@ JetShape::createCollisionShapeGraphicsObject(btCollisionShape* collisionShape,
     btTransform startTrans;
     startTrans.setIdentity();
     //todo: create some textured objects for popular objects, like plane, cube, sphere, capsule
-    btAlignedObjectArray<GLInstanceVertex> gfxVertices;
     btAlignedObjectArray<Ogre::uint16> indices;
     btAlignedObjectArray<btVector3> vertexPositions;
     btAlignedObjectArray<btVector3> vertexNormals;
     CollisionShape2TriangleMesh(m_shape, startTrans, vertexPositions, vertexNormals, indices);
-    gfxVertices.resize(vertexPositions.size());
+    
+    btAlignedObjectArray<float> gfxVertices;
+    gfxVertices.resize(vertexPositions.size()*6);
     for (int i = 0; i < vertexPositions.size(); i++)
     {
-        for (int j = 0; j < 4; j++)
-        {
-            gfxVertices[i].xyzw[j] = vertexPositions[i][j];
-        }
-        for (int j = 0; j < 3; j++)
-        {
-            gfxVertices[i].normal[j] = vertexNormals[i][j];
-        }
+        gfxVertices[i * 6 + 0] = vertexPositions[i][0];
+        gfxVertices[i * 6 + 1] = vertexPositions[i][1];
+        gfxVertices[i * 6 + 2] = vertexPositions[i][2];
+        gfxVertices[i * 6 + 3] = vertexNormals[i][0];
+        gfxVertices[i * 6 + 4] = vertexNormals[i][1];
+        gfxVertices[i * 6 + 5] = vertexNormals[i][2];
     }
     
-    mesh = createDynamicMesh(&gfxVertices[0].xyzw[0], gfxVertices.size(),
+    mesh = createDynamicMesh(&gfxVertices[0], vertexPositions.size(),
                              &indices[0], indices.size(),
                              name);
     

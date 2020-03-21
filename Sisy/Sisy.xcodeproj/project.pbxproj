@@ -3468,6 +3468,7 @@
 			isa = PBXGroup;
 			children = (
 				04E0DB7C24242AEB00310B48 /* BasicDemo */,
+				04D93D04242348DB00CCBE3E /* InstanceGraphicsShape.h */,
 				04D93CD224233E3000CCBE3E /* MainEntryPointHelper.h */,
 				04D93CF9242341D800CCBE3E /* CommonExampleInterface.h */,
 				04D93CFA242341F400CCBE3E /* CommonRigidBodyBase.h */,
@@ -3493,7 +3494,6 @@
 				04D93CCE24233E2F00CCBE3E /* GraphicsSystem.cpp */,
 				04D93D05242349A700CCBE3E /* CollisionShape2TriangleMesh.h */,
 				04D93D06242349A700CCBE3E /* CollisionShape2TriangleMesh.cpp */,
-				04D93D04242348DB00CCBE3E /* InstanceGraphicsShape.h */,
 				04D93D0824234A2200CCBE3E /* ShapeData.h */,
 				04E0DB812424657E00310B48 /* jetShape.hpp */,
 				04E0DB802424657E00310B48 /* jetShape.cpp */,

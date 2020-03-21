@@ -38,7 +38,7 @@ void CollisionShape2TriangleMesh(btCollisionShape* collisionShape,
 			verts[2] = planeOrigin - vec0 * vecLen - vec1 * vecLen;
 			verts[3] = planeOrigin + vec0 * vecLen - vec1 * vecLen;
 
-			int startIndex = vertexPositions.size();
+			Ogre::uint16 startIndex = vertexPositions.size();
 			indicesOut.push_back(startIndex + 0);
 			indicesOut.push_back(startIndex + 1);
 			indicesOut.push_back(startIndex + 2);
@@ -63,7 +63,7 @@ void CollisionShape2TriangleMesh(btCollisionShape* collisionShape,
 			btVector3 trimeshScaling = trimesh->getLocalScaling();
 			btStridingMeshInterface* meshInterface = trimesh->getMeshInterface();
 			btAlignedObjectArray<btVector3> vertices;
-			btAlignedObjectArray<int> indices;
+			btAlignedObjectArray<Ogre::uint16> indices;
 
 			for (int partId = 0; partId < meshInterface->getNumSubParts(); partId++)
 			{
@@ -104,11 +104,11 @@ void CollisionShape2TriangleMesh(btCollisionShape* collisionShape,
 														 btScalar(graphicsbase[2] * trimeshScaling.getZ()));
 						}
 					}
-					indices.push_back(vertices.size());
+					indices.push_back((Ogre::uint16)vertices.size());
 					vertices.push_back(triangleVerts[0]);
-					indices.push_back(vertices.size());
+					indices.push_back((Ogre::uint16)vertices.size());
 					vertices.push_back(triangleVerts[1]);
-					indices.push_back(vertices.size());
+					indices.push_back((Ogre::uint16)vertices.size());
 					vertices.push_back(triangleVerts[2]);
 
 					btVector3 triNormal = (triangleVerts[1] - triangleVerts[0]).cross(triangleVerts[2] - triangleVerts[0]);
@@ -121,7 +121,7 @@ void CollisionShape2TriangleMesh(btCollisionShape* collisionShape,
 						for (int v = 0; v < 3; v++)
 						{
 							btVector3 pos = parentTransform * triangleVerts[v];
-							indicesOut.push_back(vertexPositions.size());
+							indicesOut.push_back((Ogre::uint16)vertexPositions.size());
 							vertexPositions.push_back(pos);
 							vertexNormals.push_back(triNormal);
 						}
@@ -157,9 +157,9 @@ void CollisionShape2TriangleMesh(btCollisionShape* collisionShape,
 						{
 							for (int ii = 2; ii < pol->m_faces[f].m_indices.size(); ii++)
 							{
-								indicesOut.push_back(pol->m_faces[f].m_indices[0]);
-								indicesOut.push_back(pol->m_faces[f].m_indices[ii - 1]);
-								indicesOut.push_back(pol->m_faces[f].m_indices[ii]);
+								indicesOut.push_back((Ogre::uint16)pol->m_faces[f].m_indices[0]);
+								indicesOut.push_back((Ogre::uint16)pol->m_faces[f].m_indices[ii - 1]);
+								indicesOut.push_back((Ogre::uint16)pol->m_faces[f].m_indices[ii]);
 							}
 						}
 					}
@@ -190,7 +190,7 @@ void CollisionShape2TriangleMesh(btCollisionShape* collisionShape,
 								{
 									int index = hull->getIndexPointer()[t * 3 + v];
 									btVector3 pos = parentTransform * hull->getVertexPointer()[index];
-									indicesOut.push_back(vertexPositions.size());
+									indicesOut.push_back((Ogre::uint16)vertexPositions.size());
 									vertexPositions.push_back(pos);
 									vertexNormals.push_back(triNormal);
 								}
