@@ -12,6 +12,11 @@
 #include "OgreRenderSystem.h"
 #include "OgreRoot.h"
 
+#include "btAlignedObjectArray.h"
+#include "btBulletDynamicsCommon.h"
+#include "CollisionShape2TriangleMesh.h"
+#include "InstanceGraphicsShape.h"
+
 namespace jet{
 Ogre::IndexBufferPacked*
 JetShape::createIndexBuffer(const Ogre::uint16* indices, int numIndices){
@@ -134,6 +139,53 @@ JetShape::createDynamicMesh(const float* vertices, int numvertices,
     return std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*>( mesh, vertexBuffer );
 }
 //-------------------------------------------------------------------------
+void JetShape::createRenderMesh(Ogre::String name){
+    m_mesh = createCollisionShapeGraphicsObject(m_shape, name).first;
+}
+//-------------------------------------------------------------------------
+std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*>
+JetShape::createCollisionShapeGraphicsObject(btCollisionShape* collisionShape,
+                                             Ogre::String name){
+    std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*> mesh;
+    
+    btTransform startTrans;
+    startTrans.setIdentity();
+    //todo: create some textured objects for popular objects, like plane, cube, sphere, capsule
+    btAlignedObjectArray<GLInstanceVertex> gfxVertices;
+    btAlignedObjectArray<Ogre::uint16> indices;
+    btAlignedObjectArray<btVector3> vertexPositions;
+    btAlignedObjectArray<btVector3> vertexNormals;
+    CollisionShape2TriangleMesh(m_shape, startTrans, vertexPositions, vertexNormals, indices);
+    gfxVertices.resize(vertexPositions.size());
+    for (int i = 0; i < vertexPositions.size(); i++)
+    {
+        for (int j = 0; j < 4; j++)
+        {
+            gfxVertices[i].xyzw[j] = vertexPositions[i][j];
+        }
+        for (int j = 0; j < 3; j++)
+        {
+            gfxVertices[i].normal[j] = vertexNormals[i][j];
+        }
+    }
+    
+    mesh = createDynamicMesh(&gfxVertices[0].xyzw[0], gfxVertices.size(),
+                             &indices[0], indices.size(),
+                             name);
+    
+    btTransform t = btTransform::getIdentity();
+    btVector3 aabbMin;
+    btVector3 aabbMax;
+    collisionShape->getAabb(t, aabbMin, aabbMax);
+    mesh.first->_setBounds(Ogre::Aabb(Ogre::Vector3(aabbMin.x(), aabbMin.y(), aabbMin.z()),
+                                      Ogre::Vector3(aabbMax.x(), aabbMax.y(), aabbMax.z()) ), false );
+    mesh.first->_setBoundingSphereRadius((aabbMax-aabbMin).length());
+    
+    return mesh;
+}
+//-------------------------------------------------------------------------
+//-------------------------------------------------------------------------
+//-------------------------------------------------------------------------
 void JetShape::drawLine(const btVector3& bbMin, const btVector3& bbMax,
                         int idx1, int idx2,
                         Ogre::ManualObject* manual){
@@ -157,7 +209,7 @@ void JetShape::drawSpherePatch(const btVector3& center,
                                const btVector3& color,
                                Ogre::ManualObject* manual,
                                btScalar stepDegrees,
-                               bool drawCenter){    
+                               bool drawCenter){
     btVector3 vA[74];
     btVector3 vB[74];
     btVector3 *pvA = vA, *pvB = vB, *pT;
@@ -221,21 +273,15 @@ void JetShape::drawSpherePatch(const btVector3& center,
             pvB[j] = center + cth * cps * iv + cth * sps * jv + sth * kv;
             if (i)
             {
-                drawLine(pvA[j], pvB[j], manual_idx, manual_idx+1,
-                         manual);
-                manual_idx += 2;
+                drawLine(pvA[j], pvB[j], manual);
             }
             else if (drawS)
             {
-                drawLine(spole, pvB[j], manual_idx, manual_idx+1,
-                         manual);
-                manual_idx += 2;
+                drawLine(spole, pvB[j], manual);
             }
             if (j)
             {
-                drawLine(pvB[j - 1], pvB[j], manual_idx, manual_idx+1,
-                         manual);
-                manual_idx += 2;
+                drawLine(pvB[j - 1], pvB[j],  manual);
             }
             else
             {
@@ -243,9 +289,7 @@ void JetShape::drawSpherePatch(const btVector3& center,
             }
             if ((i == (n_hor - 1)) && drawN)
             {
-                drawLine(npole, pvB[j], manual_idx, manual_idx+1,
-                         manual);
-                manual_idx += 2;
+                drawLine(npole, pvB[j], manual);
             }
             
             if (drawCenter)
@@ -254,18 +298,14 @@ void JetShape::drawSpherePatch(const btVector3& center,
                 {
                     if (j == (n_vert - 1))
                     {
-                        drawLine(arcStart, pvB[j], manual_idx, manual_idx+1,
-                                 manual);
-                        manual_idx += 2;
+                        drawLine(arcStart, pvB[j], manual);
                     }
                 }
                 else
                 {
                     if (((!i) || (i == (n_hor - 1))) && ((!j) || (j == (n_vert - 1))))
                     {
-                        drawLine(center, pvB[j], manual_idx, manual_idx+1,
-                                 manual);
-                        manual_idx += 2;
+                        drawLine(center, pvB[j], manual);
                     }
                 }
             }
@@ -273,6 +313,34 @@ void JetShape::drawSpherePatch(const btVector3& center,
         pT = pvA;
         pvA = pvB;
         pvB = pT;
+    }
+}
+void JetShape::drawArc(const btVector3& center, const btVector3& normal, const btVector3& axis,
+                       btScalar radiusA, btScalar radiusB, btScalar minAngle, btScalar maxAngle,
+                       const btVector3& color, bool drawSect,
+                       Ogre::ManualObject* manual,
+                       btScalar stepDegrees)
+{
+    const btVector3& vx = axis;
+    btVector3 vy = normal.cross(axis);
+    btScalar step = stepDegrees * SIMD_RADS_PER_DEG;
+    int nSteps = (int)btFabs((maxAngle - minAngle) / step);
+    if (!nSteps) nSteps = 1;
+    btVector3 prev = center + radiusA * vx * btCos(minAngle) + radiusB * vy * btSin(minAngle);
+    if (drawSect)
+    {
+        drawLine(center, prev, manual);
+    }
+    for (int i = 1; i <= nSteps; i++)
+    {
+        btScalar angle = minAngle + (maxAngle - minAngle) * btScalar(i) / btScalar(nSteps);
+        btVector3 next = center + radiusA * vx * btCos(angle) + radiusB * vy * btSin(angle);
+        drawLine(prev, next, manual);
+        prev = next;
+    }
+    if (drawSect)
+    {
+        drawLine(center, prev, manual);
     }
 }
 //-------------------------------------------------------------------------

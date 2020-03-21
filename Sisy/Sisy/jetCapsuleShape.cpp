@@ -19,10 +19,6 @@ JetCapsuleShape::JetCapsuleShape(btScalar radius, btScalar height){
     m_shape = new btCapsuleShape(radius, height);
 }
 //-------------------------------------------------------------------------
-void JetCapsuleShape::createRenderMesh(Ogre::String name){
-    m_mesh = createCollisionShapeGraphicsObject(m_shape, name).first;
-}
-//-------------------------------------------------------------------------
 Ogre::ManualObject* JetCapsuleShape::debugDrawObject(const btVector3& color,
                                                      Ogre::SceneManager* scene){
     const btCapsuleShape* capsuleShape = static_cast<const btCapsuleShape*>(m_shape);

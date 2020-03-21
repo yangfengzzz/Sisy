@@ -19,10 +19,6 @@ JetSphereShape::JetSphereShape(btScalar radius){
     m_shape = new btSphereShape(radius);
 }
 //-------------------------------------------------------------------------
-void JetSphereShape::createRenderMesh(Ogre::String name){
-    m_mesh = createCollisionShapeGraphicsObject(m_shape, name).first;
-}
-//-------------------------------------------------------------------------
 Ogre::ManualObject* JetSphereShape::debugDrawObject(const btVector3& color,
                                                     Ogre::SceneManager* scene){
     const btSphereShape* sphereShape = static_cast<const btSphereShape*>(m_shape);

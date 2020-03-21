@@ -19,10 +19,6 @@ JetBoxShape::JetBoxShape(const btVector3& boxHalfExtents){
     m_shape = new btBoxShape(boxHalfExtents);
 }
 //-------------------------------------------------------------------------
-void JetBoxShape::createRenderMesh(Ogre::String name){
-    m_mesh = createCollisionShapeGraphicsObject(m_shape, name).first;
-}
-
 Ogre::ManualObject* JetBoxShape::debugDrawObject(const btVector3& color,
                                                  Ogre::SceneManager* scene){
     const btBoxShape* boxShape = static_cast<const btBoxShape*>(m_shape);

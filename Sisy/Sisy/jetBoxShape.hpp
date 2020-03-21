@@ -15,9 +15,7 @@ namespace jet {
 class JetBoxShape : public JetShape{
 public:
     JetBoxShape(const btVector3& boxHalfExtents);
-    
-    virtual void createRenderMesh(Ogre::String name) override;
-    
+        
     virtual Ogre::ManualObject* debugDrawObject(const btVector3& color,
                                                 Ogre::SceneManager* scene) override;
     

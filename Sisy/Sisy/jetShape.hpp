@@ -24,7 +24,7 @@ public:
     Ogre::MeshPtr getMesh(){return m_mesh; }
     btCollisionShape* getShape(){return m_shape; }
     
-    virtual void createRenderMesh(Ogre::String name) = 0;
+    virtual void createRenderMesh(Ogre::String name);
     
     virtual Ogre::ManualObject* debugDrawObject(const btVector3& color,
                                                 Ogre::SceneManager* scene) = 0;
@@ -39,7 +39,7 @@ protected:
 
     std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*>
     virtual createCollisionShapeGraphicsObject(btCollisionShape* collisionShape,
-                                               Ogre::String name) = 0;
+                                               Ogre::String name);
     
     Ogre::MeshPtr m_mesh;
     btCollisionShape* m_shape;
@@ -58,6 +58,14 @@ protected:
                          Ogre::ManualObject* manual,
                          btScalar stepDegrees = btScalar(10.f),
                          bool drawCenter = true);
+    
+    void drawArc(const btVector3& center,
+                 const btVector3& normal,
+                 const btVector3& axis,
+                 btScalar radiusA, btScalar radiusB, btScalar minAngle, btScalar maxAngle,
+                 const btVector3& color, bool drawSect,
+                 Ogre::ManualObject* manual,
+                 btScalar stepDegrees = btScalar(10.f));
     
     void clearManualIdx(){manual_idx = 0;}
     

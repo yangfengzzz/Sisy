@@ -15,9 +15,7 @@ namespace jet {
 class JetCapsuleShape : public JetShape{
 public:
     JetCapsuleShape(btScalar radius, btScalar height);
-    
-    virtual void createRenderMesh(Ogre::String name) override;
-    
+        
     virtual Ogre::ManualObject* debugDrawObject(const btVector3& color,
                                                 Ogre::SceneManager* scene) override;
     
