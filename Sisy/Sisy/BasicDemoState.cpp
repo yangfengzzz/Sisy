@@ -15,7 +15,7 @@
 #include "OgreTextAreaOverlayElement.h"
 
 #include "jetBoxShape.hpp"
-#include "jetConeShape.hpp"
+#include "jetCylinderShape.hpp"
 #include "jetRigidBody.hpp"
 
 #define ARRAY_SIZE_Y 5
@@ -72,7 +72,7 @@ void MyGameState::createScene01(void)
     {
         //create a few dynamic rigidbodies
         // Re-using the same collision is better for memory usage and performance
-        JetConeShape* colShape = new JetConeShape(0.1, 0.5);
+        JetCylinderShape* colShape = new JetCylinderShape(btVector3(0.5, 0.5, 0.5));
         colShape->createRenderMesh("box");
         
         //btCollisionShape* colShape = new btSphereShape(btScalar(1.));
