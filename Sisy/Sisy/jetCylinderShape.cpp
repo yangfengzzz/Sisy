@@ -62,4 +62,10 @@ Ogre::ManualObject* JetCylinderShape::debugDrawObject(const btVector3& color,
     return manualObject;
 }
 //-------------------------------------------------------------------------
+JetCylinderShapeX::JetCylinderShapeX(const btVector3& halfExtents){
+    m_shape = new btCylinderShapeX(halfExtents);
+}
+JetCylinderShapeZ::JetCylinderShapeZ(const btVector3& halfExtents){
+    m_shape = new btCylinderShapeZ(halfExtents);
+}
 }

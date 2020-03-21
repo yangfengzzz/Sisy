@@ -68,4 +68,11 @@ Ogre::ManualObject* JetConeShape::debugDrawObject(const btVector3& color,
     manualObject->end();
     return manualObject;
 }
+//-------------------------------------------------------------------------
+JetConeShapeX::JetConeShapeX(btScalar radius, btScalar height){
+    m_shape = new btConeShapeX(radius, height);
+}
+JetConeShapeZ::JetConeShapeZ(btScalar radius, btScalar height){
+    m_shape = new btConeShapeZ(radius, height);
+}
 }

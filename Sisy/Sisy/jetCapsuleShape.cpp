@@ -141,4 +141,10 @@ JetCapsuleShape::createCollisionShapeGraphicsObject(btCollisionShape* collisionS
     return mesh;
 }
 //-------------------------------------------------------------------------
+JetCapsuleShapeX::JetCapsuleShapeX(btScalar radius, btScalar height){
+    m_shape = new btCapsuleShapeX(radius, height);
+}
+JetCapsuleShapeZ::JetCapsuleShapeZ(btScalar radius, btScalar height){
+    m_shape = new btCapsuleShapeZ(radius, height);
+}
 }

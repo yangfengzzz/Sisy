@@ -14,11 +14,20 @@
 namespace jet {
 class JetCylinderShape : public JetShape{
 public:
+    JetCylinderShape(){}
     JetCylinderShape(const btVector3& halfExtents);
         
     virtual Ogre::ManualObject* debugDrawObject(const btVector3& color,
                                                 Ogre::SceneManager* scene) override;
+};
+class JetCylinderShapeX : public JetCylinderShape{
+public:
+    JetCylinderShapeX(const btVector3& halfExtents);
+};
 
+class JetCylinderShapeZ : public JetCylinderShape{
+public:
+    JetCylinderShapeZ(const btVector3& halfExtents);
 };
 }
 
