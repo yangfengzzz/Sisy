@@ -17,7 +17,6 @@
 namespace jet{
 JetSphereShape::JetSphereShape(btScalar radius){
     m_shape = new btSphereShape(radius);
-    manual_idx = 0;
 }
 //-------------------------------------------------------------------------
 void JetSphereShape::createRenderMesh(Ogre::String name){
@@ -33,151 +32,27 @@ Ogre::ManualObject* JetSphereShape::debugDrawObject(const btVector3& color,
     btScalar minPs = -SIMD_HALF_PI;
     btScalar maxPs = SIMD_HALF_PI;
     btScalar stepDegrees = 30.f;
+    btVector3 center(0, 0, 0);
     btVector3 up(0, 1, 0);
     
     clearManualIdx();
     Ogre::ManualObject * manualObject = scene->createManualObject();
     manualObject->begin("BaseWhite", Ogre::OT_LINE_LIST);
+    
     btVector3 axis(1, 0, 0);
-    drawSpherePatch(up, axis, radius, minTh, maxTh, minPs, maxPs, color,
+    drawSpherePatch(center, up, axis, radius,
+                    minTh, maxTh, minPs, maxPs, color,
                     manualObject,
                     stepDegrees, false);
     
     axis = btVector3(-1, 0, 0);
-    drawSpherePatch(up, axis, radius, minTh, maxTh, minPs, maxPs, color,
+    drawSpherePatch(center, up, axis, radius,
+                    minTh, maxTh, minPs, maxPs, color,
                     manualObject,
                     stepDegrees, false);
     manualObject->end();
     
     return manualObject;
-}
-void JetSphereShape::drawSpherePatch(const btVector3& up,
-                                     const btVector3& axis,
-                                     btScalar radius,
-                                     btScalar minTh, btScalar maxTh,
-                                     btScalar minPs, btScalar maxPs,
-                                     const btVector3& color,
-                                     Ogre::ManualObject* manual,
-                                     btScalar stepDegrees,
-                                     bool drawCenter){
-    btVector3 center(0, 0, 0);
-    
-    btVector3 vA[74];
-    btVector3 vB[74];
-    btVector3 *pvA = vA, *pvB = vB, *pT;
-    btVector3 npole = center + up * radius;
-    btVector3 spole = center - up * radius;
-    btVector3 arcStart;
-    btScalar step = stepDegrees * SIMD_RADS_PER_DEG;
-    const btVector3& kv = up;
-    const btVector3& iv = axis;
-    btVector3 jv = kv.cross(iv);
-    bool drawN = false;
-    bool drawS = false;
-    if (minTh <= -SIMD_HALF_PI)
-    {
-        minTh = -SIMD_HALF_PI + step;
-        drawN = true;
-    }
-    if (maxTh >= SIMD_HALF_PI)
-    {
-        maxTh = SIMD_HALF_PI - step;
-        drawS = true;
-    }
-    if (minTh > maxTh)
-    {
-        minTh = -SIMD_HALF_PI + step;
-        maxTh = SIMD_HALF_PI - step;
-        drawN = drawS = true;
-    }
-    int n_hor = (int)((maxTh - minTh) / step) + 1;
-    if (n_hor < 2) n_hor = 2;
-    btScalar step_h = (maxTh - minTh) / btScalar(n_hor - 1);
-    bool isClosed = false;
-    if (minPs > maxPs)
-    {
-        minPs = -SIMD_PI + step;
-        maxPs = SIMD_PI;
-        isClosed = true;
-    }
-    else if ((maxPs - minPs) >= SIMD_PI * btScalar(2.f))
-    {
-        isClosed = true;
-    }
-    else
-    {
-        isClosed = false;
-    }
-    int n_vert = (int)((maxPs - minPs) / step) + 1;
-    if (n_vert < 2) n_vert = 2;
-    btScalar step_v = (maxPs - minPs) / btScalar(n_vert - 1);
-    
-    for (int i = 0; i < n_hor; i++)
-    {
-        btScalar th = minTh + btScalar(i) * step_h;
-        btScalar sth = radius * btSin(th);
-        btScalar cth = radius * btCos(th);
-        for (int j = 0; j < n_vert; j++)
-        {
-            btScalar psi = minPs + btScalar(j) * step_v;
-            btScalar sps = btSin(psi);
-            btScalar cps = btCos(psi);
-            pvB[j] = center + cth * cps * iv + cth * sps * jv + sth * kv;
-            if (i)
-            {
-                drawLine(pvA[j], pvB[j], manual_idx, manual_idx+1,
-                         manual);
-                manual_idx += 2;
-            }
-            else if (drawS)
-            {
-                drawLine(spole, pvB[j], manual_idx, manual_idx+1,
-                         manual);
-                manual_idx += 2;
-            }
-            if (j)
-            {
-                drawLine(pvB[j - 1], pvB[j], manual_idx, manual_idx+1,
-                         manual);
-                manual_idx += 2;
-            }
-            else
-            {
-                arcStart = pvB[j];
-            }
-            if ((i == (n_hor - 1)) && drawN)
-            {
-                drawLine(npole, pvB[j], manual_idx, manual_idx+1,
-                         manual);
-                manual_idx += 2;
-            }
-
-            if (drawCenter)
-            {
-                if (isClosed)
-                {
-                    if (j == (n_vert - 1))
-                    {
-                        drawLine(arcStart, pvB[j], manual_idx, manual_idx+1,
-                                 manual);
-                        manual_idx += 2;
-                    }
-                }
-                else
-                {
-                    if (((!i) || (i == (n_hor - 1))) && ((!j) || (j == (n_vert - 1))))
-                    {
-                        drawLine(center, pvB[j], manual_idx, manual_idx+1,
-                                 manual);
-                        manual_idx += 2;
-                    }
-                }
-            }
-        }
-        pT = pvA;
-        pvA = pvB;
-        pvB = pT;
-    }
 }
 //-------------------------------------------------------------------------
 std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*>
@@ -218,7 +93,7 @@ JetSphereShape::createCollisionShapeGraphicsObject(btCollisionShape* collisionSh
                                  textured_detailed_sphere_indices, numIndices,
                                  name);
         
-        mesh.first->_setBounds(Ogre::Aabb(Ogre::Vector3(radius),
+        mesh.first->_setBounds(Ogre::Aabb(Ogre::Vector3(-radius),
                                           Ogre::Vector3(radius) ), false );
         mesh.first->_setBoundingSphereRadius(sphereSize);
     }

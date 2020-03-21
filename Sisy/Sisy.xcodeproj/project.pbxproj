@@ -1487,6 +1487,7 @@
 		04E0DB88242469C300310B48 /* jetActor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DB86242469C300310B48 /* jetActor.cpp */; };
 		04E0DB8B24246A8300310B48 /* jetRigidBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DB8924246A8300310B48 /* jetRigidBody.cpp */; };
 		04E0DB8E2425F34F00310B48 /* jetSphereShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DB8C2425F34F00310B48 /* jetSphereShape.cpp */; };
+		04E0DB922426090300310B48 /* jetCapsuleShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DB902426090300310B48 /* jetCapsuleShape.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -3360,6 +3361,8 @@
 		04E0DB8A24246A8300310B48 /* jetRigidBody.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = jetRigidBody.hpp; sourceTree = "<group>"; };
 		04E0DB8C2425F34F00310B48 /* jetSphereShape.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = jetSphereShape.cpp; sourceTree = "<group>"; };
 		04E0DB8D2425F34F00310B48 /* jetSphereShape.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = jetSphereShape.hpp; sourceTree = "<group>"; };
+		04E0DB902426090300310B48 /* jetCapsuleShape.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = jetCapsuleShape.cpp; sourceTree = "<group>"; };
+		04E0DB912426090300310B48 /* jetCapsuleShape.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = jetCapsuleShape.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -6140,6 +6143,8 @@
 				04E0DB832424663800310B48 /* jetBoxShape.cpp */,
 				04E0DB8D2425F34F00310B48 /* jetSphereShape.hpp */,
 				04E0DB8C2425F34F00310B48 /* jetSphereShape.cpp */,
+				04E0DB912426090300310B48 /* jetCapsuleShape.hpp */,
+				04E0DB902426090300310B48 /* jetCapsuleShape.cpp */,
 			);
 			name = jetShape;
 			sourceTree = "<group>";
@@ -7230,6 +7235,7 @@
 				04D93CD524233E3000CCBE3E /* TutorialGameState.cpp in Sources */,
 				04E0DB88242469C300310B48 /* jetActor.cpp in Sources */,
 				04D93CD924233E3000CCBE3E /* CameraController.cpp in Sources */,
+				04E0DB922426090300310B48 /* jetCapsuleShape.cpp in Sources */,
 				04D93D07242349A700CCBE3E /* CollisionShape2TriangleMesh.cpp in Sources */,
 				04E0DB852424663800310B48 /* jetBoxShape.cpp in Sources */,
 				04D93CD424233E3000CCBE3E /* SdlInputHandler.cpp in Sources */,

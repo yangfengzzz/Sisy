@@ -17,7 +17,9 @@ namespace jet{
 
 class JetShape {
 public:
-    JetShape(){}
+    JetShape(){
+        manual_idx = 0;
+    }
     
     Ogre::MeshPtr getMesh(){return m_mesh; }
     btCollisionShape* getShape(){return m_shape; }
@@ -39,12 +41,32 @@ protected:
     virtual createCollisionShapeGraphicsObject(btCollisionShape* collisionShape,
                                                Ogre::String name) = 0;
     
+    Ogre::MeshPtr m_mesh;
+    btCollisionShape* m_shape;
+    
+protected:
+    void drawLine(const btVector3& bbMin, const btVector3& bbMax,
+                  Ogre::ManualObject* manual);
+    
+    void drawSpherePatch(const btVector3& center,
+                         const btVector3& up,
+                         const btVector3& axis,
+                         btScalar radius,
+                         btScalar minTh, btScalar maxTh,
+                         btScalar minPs, btScalar maxPs,
+                         const btVector3& color,
+                         Ogre::ManualObject* manual,
+                         btScalar stepDegrees = btScalar(10.f),
+                         bool drawCenter = true);
+    
+    void clearManualIdx(){manual_idx = 0;}
+    
+private:
     void drawLine(const btVector3& bbMin, const btVector3& bbMax,
                   int idx1, int idx2,
                   Ogre::ManualObject* manual);
     
-    Ogre::MeshPtr m_mesh;
-    btCollisionShape* m_shape;
+    int manual_idx;
 };
 
 }
