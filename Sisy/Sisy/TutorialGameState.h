@@ -66,17 +66,19 @@ public:
     virtual void keyReleased( const SDL_KeyboardEvent &arg );
     
     virtual void mouseMoved( const SDL_Event &arg );
+    virtual void mousePressed( const SDL_MouseButtonEvent &arg, Ogre::uint8 id );
+    virtual void mouseReleased( const SDL_MouseButtonEvent &arg, Ogre::uint8 id );
     
 public:
     void createEmptyDynamicsWorld();
     
-    btBoxShape* createBoxShape(const btVector3& halfExtents);
-    
-    btRigidBody* createRigidBody(float mass, const btTransform& startTransform,
-                                 btCollisionShape* shape,
-                                 const btVector4& color = btVector4(1, 0, 0, 1));
-    
     void stepSimulation(float deltaTime);
+    
+    bool pickBody(const btVector3& rayFromWorld, const btVector3& rayToWorld);
+    
+    bool movePickedBody(const btVector3& rayFromWorld, const btVector3& rayToWorld);
+    
+    void removePickingConstraint();
 };
 }
 

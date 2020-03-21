@@ -12,7 +12,8 @@
 
 #include "OgreRoot.h"
 #include "OgreFrameStats.h"
-
+#include "OgreCamera.h"
+#include "OgreWindow.h"
 #include "OgreHlmsManager.h"
 #include "OgreHlms.h"
 #include "OgreHlmsCompute.h"
@@ -195,11 +196,45 @@ void TutorialGameState::keyReleased( const SDL_KeyboardEvent &arg )
 //-----------------------------------------------------------------------------------
 void TutorialGameState::mouseMoved( const SDL_Event &arg )
 {
-    if( mCameraController )
+    if( mCameraController ){
         mCameraController->mouseMoved( arg );
+        
+        float width  = static_cast<float>( mGraphicsSystem->getRenderWindow()->getWidth() );
+        float height = static_cast<float>( mGraphicsSystem->getRenderWindow()->getHeight() );
+        
+        Ogre::Ray ray = mGraphicsSystem->getCamera()->getCameraToViewportRay(arg.motion.x/width,
+                                                                             arg.motion.y/height);
+        Ogre::Vector3 pos = ray.getPoint(10000);
+        movePickedBody(btVector3(ray.getOrigin().x,
+                                 ray.getOrigin().y,
+                                 ray.getOrigin().z),
+                       btVector3(pos.x,
+                                 pos.y,
+                                 pos.z));
+    }
     
     GameState::mouseMoved( arg );
 }
+void TutorialGameState::mousePressed( const SDL_MouseButtonEvent &arg, Ogre::uint8 id ){
+    
+    float width  = static_cast<float>( mGraphicsSystem->getRenderWindow()->getWidth() );
+    float height = static_cast<float>( mGraphicsSystem->getRenderWindow()->getHeight() );
+    Ogre::Ray ray = mGraphicsSystem->getCamera()->getCameraToViewportRay(arg.x/width,
+                                                                         arg.y/height);
+    Ogre::Vector3 pos = ray.getPoint(10000);
+    pickBody(btVector3(ray.getOrigin().x,
+                       ray.getOrigin().y,
+                       ray.getOrigin().z),
+             btVector3(pos.x,
+                       pos.y,
+                       pos.z));
+}
+
+void TutorialGameState::mouseReleased( const SDL_MouseButtonEvent &arg, Ogre::uint8 id ){
+    removePickingConstraint();
+}
+//---------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------
 void TutorialGameState::createEmptyDynamicsWorld()
 {
@@ -222,46 +257,6 @@ void TutorialGameState::createEmptyDynamicsWorld()
     m_dynamicsWorld->setGravity(btVector3(0, -10, 0));
 }
 //---------------------------------------------------------------------------------
-btBoxShape* TutorialGameState::createBoxShape(const btVector3& halfExtents)
-{
-    btBoxShape* box = new btBoxShape(halfExtents);
-    return box;
-}
-//---------------------------------------------------------------------------------
-btRigidBody* TutorialGameState::createRigidBody(float mass, const btTransform& startTransform,
-                                                btCollisionShape* shape,
-                                                const btVector4& color)
-{
-    btAssert((!shape || shape->getShapeType() != INVALID_SHAPE_PROXYTYPE));
-    
-    //rigidbody is dynamic if and only if mass is non zero, otherwise static
-    bool isDynamic = (mass != 0.f);
-    
-    btVector3 localInertia(0, 0, 0);
-    if (isDynamic)
-        shape->calculateLocalInertia(mass, localInertia);
-    
-    //using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
-    
-#define USE_MOTIONSTATE 1
-#ifdef USE_MOTIONSTATE
-    btDefaultMotionState* myMotionState = new btDefaultMotionState(startTransform);
-    
-    btRigidBody::btRigidBodyConstructionInfo cInfo(mass, myMotionState, shape, localInertia);
-    
-    btRigidBody* body = new btRigidBody(cInfo);
-    //body->setContactProcessingThreshold(m_defaultContactProcessingThreshold);
-    
-#else
-    btRigidBody* body = new btRigidBody(mass, 0, shape, localInertia);
-    body->setWorldTransform(startTransform);
-#endif  //
-    
-    body->setUserIndex(-1);
-    m_dynamicsWorld->addRigidBody(body);
-    return body;
-}
-//---------------------------------------------------------------------------------
 void TutorialGameState::stepSimulation(float deltaTime)
 {
     if (m_dynamicsWorld)
@@ -269,4 +264,85 @@ void TutorialGameState::stepSimulation(float deltaTime)
         m_dynamicsWorld->stepSimulation(deltaTime);
     }
 }
+//---------------------------------------------------------------------------------
+bool TutorialGameState::pickBody(const btVector3& rayFromWorld,
+                                 const btVector3& rayToWorld){
+    if (m_dynamicsWorld == 0)
+        return false;
+    
+    btCollisionWorld::ClosestRayResultCallback rayCallback(rayFromWorld, rayToWorld);
+    
+    rayCallback.m_flags |= btTriangleRaycastCallback::kF_UseGjkConvexCastRaytest;
+    m_dynamicsWorld->rayTest(rayFromWorld, rayToWorld, rayCallback);
+    if (rayCallback.hasHit())
+    {
+        btVector3 pickPos = rayCallback.m_hitPointWorld;
+        btRigidBody* body = (btRigidBody*)btRigidBody::upcast(rayCallback.m_collisionObject);
+        if (body)
+        {
+            //other exclusions?
+            if (!(body->isStaticObject() || body->isKinematicObject()))
+            {
+                m_pickedBody = body;
+                m_savedState = m_pickedBody->getActivationState();
+                m_pickedBody->setActivationState(DISABLE_DEACTIVATION);
+                //printf("pickPos=%f,%f,%f\n",pickPos.getX(),pickPos.getY(),pickPos.getZ());
+                btVector3 localPivot = body->getCenterOfMassTransform().inverse() * pickPos;
+                btPoint2PointConstraint* p2p = new btPoint2PointConstraint(*body, localPivot);
+                m_dynamicsWorld->addConstraint(p2p, true);
+                m_pickedConstraint = p2p;
+                btScalar mousePickClamping = 30.f;
+                p2p->m_setting.m_impulseClamp = mousePickClamping;
+                //very weak constraint for picking
+                p2p->m_setting.m_tau = 0.001f;
+            }
+        }
+        
+        //                    pickObject(pickPos, rayCallback.m_collisionObject);
+        m_oldPickingPos = rayToWorld;
+        m_hitPos = pickPos;
+        m_oldPickingDist = (pickPos - rayFromWorld).length();
+        //                    printf("hit !\n");
+        //add p2p
+    }
+    return false;
+}
+//---------------------------------------------------------------------------------
+bool TutorialGameState::movePickedBody(const btVector3& rayFromWorld,
+                                       const btVector3& rayToWorld)
+{
+    if (m_pickedBody && m_pickedConstraint)
+    {
+        btPoint2PointConstraint* pickCon = static_cast<btPoint2PointConstraint*>(m_pickedConstraint);
+        if (pickCon)
+        {
+            //keep it at the same picking distance
+            
+            btVector3 newPivotB;
+            
+            btVector3 dir = rayToWorld - rayFromWorld;
+            dir.normalize();
+            dir *= m_oldPickingDist;
+            
+            newPivotB = rayFromWorld + dir;
+            pickCon->setPivotB(newPivotB);
+            return true;
+        }
+    }
+    return false;
+}
+//---------------------------------------------------------------------------------
+void TutorialGameState::removePickingConstraint()
+{
+    if (m_pickedConstraint)
+    {
+        m_pickedBody->forceActivationState(m_savedState);
+        m_pickedBody->activate();
+        m_dynamicsWorld->removeConstraint(m_pickedConstraint);
+        delete m_pickedConstraint;
+        m_pickedConstraint = 0;
+        m_pickedBody = 0;
+    }
+}
+//---------------------------------------------------------------------------------
 }
