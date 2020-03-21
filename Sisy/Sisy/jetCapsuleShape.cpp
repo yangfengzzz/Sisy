@@ -111,7 +111,7 @@ JetCapsuleShape::createCollisionShapeGraphicsObject(btCollisionShape* collisionS
         
         btAlignedObjectArray<float> transformedVertices;
         int numVertices = sizeof(textured_detailed_sphere_vertices) / strideInBytes;
-        transformedVertices.resize(numVertices * 9);
+        transformedVertices.resize(numVertices * 6);
         for (int i = 0; i < numVertices; i++)
         {
             btVector3 vert;
@@ -133,7 +133,7 @@ JetCapsuleShape::createCollisionShapeGraphicsObject(btCollisionShape* collisionS
             transformedVertices[i * 6 + 5] = textured_detailed_sphere_vertices[i * 9 + 6];
         }
         
-        int numIndices = sizeof(textured_detailed_sphere_indices) / sizeof(int);
+        int numIndices = sizeof(textured_detailed_sphere_indices) / sizeof(Ogre::uint16);
         mesh = createDynamicMesh(&transformedVertices[0], numVertices,
                                  textured_detailed_sphere_indices, numIndices,
                                  name);
