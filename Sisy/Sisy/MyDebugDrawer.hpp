@@ -10,9 +10,10 @@
 #define MyDebugDrawer_hpp
 
 #include "btBulletDynamicsCommon.h"
-#include "GraphicsSystem.h"
+#include "OgreManualObject2.h"
+#include "OgreHlmsUnlitDatablock.h"
 
-namespace Demo{
+namespace jet{
 #define BT_LINE_BATCH_SIZE 512
 struct MyDebugVec3
 {
@@ -31,23 +32,22 @@ struct MyDebugVec3
 ATTRIBUTE_ALIGNED16(class)
 MyDebugDrawer : public btIDebugDraw
 {
-    GraphicsSystem* m_glApp;
+    Ogre::ManualObject* m_glApp;
+    const Ogre::String& m_datablockName;
     int m_debugMode;
-
-    btAlignedObjectArray<MyDebugVec3> m_linePoints;
-    btAlignedObjectArray<unsigned int> m_lineIndices;
-    
-    std::vector<Ogre::SceneNode*> nodes;
-    bool visibleFlag;
-
     btVector3 m_currentLineColor;
     DefaultColors m_ourColors;
+    
+    btAlignedObjectArray<MyDebugVec3> m_linePoints;
+    btAlignedObjectArray<unsigned int> m_lineIndices;
 
 public:
     BT_DECLARE_ALIGNED_ALLOCATOR();
 
-    MyDebugDrawer(GraphicsSystem * app)
+    MyDebugDrawer(Ogre::ManualObject* app,
+                  const Ogre::String& name)
     : m_glApp(app),
+    m_datablockName(name),
     m_debugMode(btIDebugDraw::DBG_DrawWireframe | btIDebugDraw::DBG_DrawAabb),
     m_currentLineColor(-1, -1, -1)
     {
@@ -113,10 +113,6 @@ public:
     }
 
     virtual void flushLines();
-    
-    void reverseVisible();
-    
-    bool isVisible();
 };
 
 }
