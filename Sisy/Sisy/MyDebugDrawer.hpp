@@ -10,7 +10,7 @@
 #define MyDebugDrawer_hpp
 
 #include "btBulletDynamicsCommon.h"
-#include "OgreManualObject2.h"
+#include "OgreSceneManager.h"
 #include "OgreHlmsUnlitDatablock.h"
 
 namespace jet{
@@ -32,25 +32,35 @@ struct MyDebugVec3
 ATTRIBUTE_ALIGNED16(class)
 MyDebugDrawer : public btIDebugDraw
 {
-    Ogre::ManualObject* m_glApp;
-    const Ogre::String& m_datablockName;
+    Ogre::SceneNode* m_node;
+    Ogre::SceneManager* m_scene;
+    const Ogre::String m_datablockName;
+    Ogre::uint32 flags;
     int m_debugMode;
     btVector3 m_currentLineColor;
     DefaultColors m_ourColors;
     
     btAlignedObjectArray<MyDebugVec3> m_linePoints;
     btAlignedObjectArray<unsigned int> m_lineIndices;
+    
+    Ogre::ManualObject* manual;
 
 public:
     BT_DECLARE_ALIGNED_ALLOCATOR();
 
-    MyDebugDrawer(Ogre::ManualObject* app,
-                  const Ogre::String& name)
-    : m_glApp(app),
+    MyDebugDrawer(Ogre::SceneNode* node,
+                  Ogre::SceneManager* scene,
+                  const Ogre::String& name,
+                  Ogre::uint32 flags)
+    : m_node(node),
+    m_scene(scene),
     m_datablockName(name),
+    flags(flags),
     m_debugMode(btIDebugDraw::DBG_DrawWireframe | btIDebugDraw::DBG_DrawAabb),
     m_currentLineColor(-1, -1, -1)
     {
+        manual = m_scene->createManualObject();
+        m_node->attachObject(manual);
     }
 
     virtual ~MyDebugDrawer()

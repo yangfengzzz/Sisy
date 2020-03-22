@@ -7,6 +7,8 @@
 //
 
 #include "MyDebugDrawer.hpp"
+#include "OgreSceneManager.h"
+
 
 namespace jet{
 
@@ -15,22 +17,23 @@ void MyDebugDrawer::flushLines()
     int sz = m_linePoints.size();
     if (sz)
     {
-        m_glApp->clear();
-        m_glApp->begin(m_datablockName, Ogre::OT_LINE_LIST);
+//        Ogre::ManualObject* manual = m_scene->createManualObject();
+        manual->setVisibilityFlags(flags);
+        manual->begin(m_datablockName, Ogre::OT_LINE_LIST);
         for (int i = 0; i < sz; i+=2) {
-            m_glApp->position(m_linePoints[i].x,
-                                   m_linePoints[i].y,
-                                   m_linePoints[i].z);
-            m_glApp->position(m_linePoints[i+1].x,
-                                   m_linePoints[i+1].y,
-                                   m_linePoints[i+1].z);
-            m_glApp->line(m_lineIndices[i], m_lineIndices[i+1]);
-            m_glApp->colour(m_currentLineColor.x(),
-                            m_currentLineColor.y(),
-                            m_currentLineColor.z(),
-                            1.f);
+            manual->position(m_linePoints[i].x,
+                             m_linePoints[i].y,
+                             m_linePoints[i].z);
+            manual->position(m_linePoints[i+1].x,
+                             m_linePoints[i+1].y,
+                             m_linePoints[i+1].z);
+            manual->line(m_lineIndices[i], m_lineIndices[i+1]);
         }
-        m_glApp->end();
+        manual->colour(m_currentLineColor.x(),
+                       m_currentLineColor.y(),
+                       m_currentLineColor.z(),
+                       1.f);
+        manual->end();
         
         m_linePoints.clear();
         m_lineIndices.clear();
