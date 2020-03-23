@@ -15,24 +15,17 @@
 namespace jet{
 class JetRigidActor : public JetActor{
 public:
-
-    
-public:
     JetRigidActor(btDiscreteDynamicsWorld* m_dynamicsWorld,
                   GraphicsSystem* app,
                   JetShape* shape,
                   float mass,
-                  const btTransform& startTransform);
-    
-    void createRenderItem(Ogre::String name) override;
-    
-    Ogre::SceneNode* debugDrawObject(const btVector3& color) override;
+                  const btTransform& startTransform,
+                  Ogre::String name);
     
     btRigidBody* getBody(){return m_body;}
     
 private:
     btRigidBody* m_body;
-
 };
 }
 

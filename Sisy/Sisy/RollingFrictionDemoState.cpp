@@ -82,8 +82,8 @@ void MyGameState::createScene01(void)
         btScalar mass(0.);
         JetRigidActor* plane = new JetRigidActor(m_dynamicsWorld, mGraphicsSystem,
                                                  groundShape,
-                                                 mass, groundTransform);
-        plane->createRenderItem("ground1");
+                                                 mass, groundTransform,
+                                                 "ground1");
         Ogre::Item* item = plane->getItem();
         item->setDatablock( "Marble" );
         plane->getBody()->setFriction(.5);
@@ -118,8 +118,8 @@ void MyGameState::createScene01(void)
         
         JetRigidActor* plane = new JetRigidActor(m_dynamicsWorld, mGraphicsSystem,
                                                  groundShape,
-                                                 mass, groundTransform);
-        plane->createRenderItem("ground2");
+                                                 mass, groundTransform,
+                                                 "ground2");
         Ogre::Item* item = plane->getItem();
         item->setDatablock( "Marble" );
         plane->getBody()->setFriction(.1);
@@ -192,7 +192,8 @@ void MyGameState::createScene01(void)
                         
                         bulletBody[idx] = new JetRigidActor(m_dynamicsWorld, mGraphicsSystem,
                                                             colShape,
-                                                            mass, startTransform);
+                                                            mass, startTransform,
+                                                            "dynamics_"+std::to_string(idx % NUM_SHAPES));
                         
                         bulletBody[idx]->getBody()->setFriction(1.f);
                         bulletBody[idx]->getBody()->setRollingFriction(.1);
@@ -200,9 +201,7 @@ void MyGameState::createScene01(void)
                         bulletBody[idx]->getBody()
                         ->setAnisotropicFriction(colShape->getShape()->getAnisotropicRollingFrictionDirection(),
                                                  btCollisionObject::CF_ANISOTROPIC_ROLLING_FRICTION);
-                        
-                        bulletBody[idx]->createRenderItem("dynamics_"+std::to_string(idx % NUM_SHAPES));
-                        
+                                                
                         Ogre::Item *item = bulletBody[idx]->getItem();
                         item->setVisibilityFlags( 0x000000001 );
                         
@@ -241,7 +240,7 @@ void MyGameState::createScene01(void)
     manual->setVisibilityFlags( 0x000000010 );
     mDebugNode->attachObject( manual );
 
-    debug = new MyDebugDrawer(manual, "BaseWhite");
+    debug = new OgreDebugDrawer(manual, "BaseWhite");
     m_dynamicsWorld->setDebugDrawer(debug);
     
     Ogre::Light *light = sceneManager->createLight();
@@ -291,14 +290,6 @@ void MyGameState::createScene01(void)
 void MyGameState::update( float timeSinceLast )
 {
     stepSimulation(timeSinceLast);
-    
-    for (int i = 0; i < 125; i++) {
-        btVector3 pos = bulletBody[i]->getBody()->getCenterOfMassPosition();
-        btQuaternion orn = bulletBody[i]->getBody()->getCenterOfMassTransform().getRotation();
-        
-        mSceneNode[i]->setPosition(pos.x(), pos.y(), pos.z());
-        mSceneNode[i]->setOrientation(orn.w(), orn.x(), orn.y(), orn.z());
-    }
     
     manual->clear();
     m_dynamicsWorld->debugDrawWorld();

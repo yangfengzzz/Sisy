@@ -29,7 +29,7 @@ struct MyDebugVec3
 };
 
 ATTRIBUTE_ALIGNED16(class)
-MyDebugDrawer : public btIDebugDraw
+OgreDebugDrawer : public btIDebugDraw
 {
     Ogre::ManualObject* m_manual;
     const Ogre::String m_datablockName;
@@ -41,24 +41,17 @@ MyDebugDrawer : public btIDebugDraw
     btAlignedObjectArray<MyDebugVec3> m_linePoints;
     btAlignedObjectArray<unsigned int> m_lineIndices;
     
-    bool isFirst;
-    int sectionIdx;
-    
 public:
     BT_DECLARE_ALIGNED_ALLOCATOR();
     
-    MyDebugDrawer(Ogre::ManualObject* node,
-                  const Ogre::String& name)
+    OgreDebugDrawer(Ogre::ManualObject* node,
+                    const Ogre::String& name)
     : m_manual(node),
     m_datablockName(name),
     m_debugMode(btIDebugDraw::DBG_DrawWireframe | btIDebugDraw::DBG_DrawAabb),
-    m_currentLineColor(-1, -1, -1)
-    {
-        isFirst = true;
-        sectionIdx = 0;
-    }
+    m_currentLineColor(-1, -1, -1){}
     
-    virtual ~MyDebugDrawer()
+    virtual ~OgreDebugDrawer()
     {
     }
     virtual DefaultColors getDefaultColors() const
@@ -119,10 +112,6 @@ public:
     }
     
     virtual void flushLines();
-    
-    void setIsFirst(bool state){isFirst = state; }
-    
-    void refresh(){sectionIdx = 0; }
 };
 
 }

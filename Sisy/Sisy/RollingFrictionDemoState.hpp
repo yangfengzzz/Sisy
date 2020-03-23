@@ -12,7 +12,7 @@
 #include "OgrePrerequisites.h"
 #include "TutorialGameState.h"
 
-#include "MyDebugDrawer.hpp"
+#include "OgreDebugDrawer.hpp"
 
 namespace jet{
 class JetRigidActor;
@@ -20,7 +20,7 @@ class MyGameState : public jet::TutorialGameState
 {
     Ogre::SceneNode* mSceneNode[125];
     Ogre::SceneNode* mDebugNode;
-    MyDebugDrawer* debug;
+    OgreDebugDrawer* debug;
     Ogre::ManualObject* manual;
     JetRigidActor* bulletBody[125];
     

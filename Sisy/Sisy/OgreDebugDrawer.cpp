@@ -6,23 +6,18 @@
 //  Copyright © 2020 杨丰. All rights reserved.
 //
 
-#include "MyDebugDrawer.hpp"
+#include "OgreDebugDrawer.hpp"
 #include "OgreSceneManager.h"
 
 
 namespace jet{
 
-void MyDebugDrawer::flushLines()
+void OgreDebugDrawer::flushLines()
 {
     int sz = m_linePoints.size();
     if (sz)
     {
-//        if (isFirst) {
-            m_manual->begin(m_datablockName, Ogre::OT_LINE_LIST);
-//        }else{
-//            m_manual->beginUpdate(sectionIdx);
-//        }
-        
+        m_manual->begin(m_datablockName, Ogre::OT_LINE_LIST);
         for (int i = 0; i < sz; i+=2) {
             m_manual->position(m_linePoints[i].x,
                                m_linePoints[i].y,
@@ -40,7 +35,6 @@ void MyDebugDrawer::flushLines()
         
         m_linePoints.clear();
         m_lineIndices.clear();
-        sectionIdx++;
     }
 }
 
