@@ -12,6 +12,9 @@
 #include "btBulletDynamicsCommon.h"
 #include "OgreSceneManager.h"
 #include "OgreHlmsUnlitDatablock.h"
+#include "OgreHlmsUnlit.h"
+
+#define BT_LINE_BATCH_SIZE 409600
 
 namespace jet{
 struct MyDebugVec3
@@ -32,7 +35,7 @@ ATTRIBUTE_ALIGNED16(class)
 OgreDebugDrawer : public btIDebugDraw
 {
     Ogre::ManualObject* m_manual;
-    const Ogre::String m_datablockName;
+    Ogre::HlmsUnlit *m_hlmsUnlit;
     
     int m_debugMode;
     btVector3 m_currentLineColor;
@@ -45,11 +48,7 @@ public:
     BT_DECLARE_ALIGNED_ALLOCATOR();
     
     OgreDebugDrawer(Ogre::ManualObject* node,
-                    const Ogre::String& name)
-    : m_manual(node),
-    m_datablockName(name),
-    m_debugMode(btIDebugDraw::DBG_DrawWireframe | btIDebugDraw::DBG_DrawAabb),
-    m_currentLineColor(-1, -1, -1){}
+                    Ogre::HlmsUnlit *hlmsUnlit);
     
     virtual ~OgreDebugDrawer()
     {
@@ -66,15 +65,11 @@ public:
     
     virtual void drawLine(const btVector3& from1, const btVector3& to1, const btVector3& color1)
     {
-        //float from[4] = {from1[0],from1[1],from1[2],from1[3]};
-        //float to[4] = {to1[0],to1[1],to1[2],to1[3]};
-        //float color[4] = {color1[0],color1[1],color1[2],color1[3]};
-        //m_glApp->m_instancingRenderer->drawLine(from,to,color);
-        //        if (m_currentLineColor != color1)
-        //        {
-        //            flushLines();
-        //            m_currentLineColor = color1;
-        //        }
+        if (m_currentLineColor != color1 || m_linePoints.size() >= BT_LINE_BATCH_SIZE)
+        {
+            flushLines();
+            m_currentLineColor = color1;
+        }
         MyDebugVec3 from(from1);
         MyDebugVec3 to(to1);
         

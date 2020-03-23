@@ -282,17 +282,8 @@ void MyGameState::createScene01(void)
     Ogre::HlmsManager *hlmsManager = mGraphicsSystem->getRoot()->getHlmsManager();
     assert( dynamic_cast<Ogre::HlmsUnlit*>( hlmsManager->getHlms( Ogre::HLMS_UNLIT ) ) );
     Ogre::HlmsUnlit *hlmsUnlit = static_cast<Ogre::HlmsUnlit*>( hlmsManager->getHlms(Ogre::HLMS_UNLIT) );
-    Ogre::String datablockName = "debugDatalock";
-    Ogre::HlmsUnlitDatablock *datablock
-    = static_cast<Ogre::HlmsUnlitDatablock*>(
-                                           hlmsUnlit->createDatablock(datablockName,
-                                                                      datablockName,
-                                                                      Ogre::HlmsMacroblock(),
-                                                                      Ogre::HlmsBlendblock(),
-                                                                      Ogre::HlmsParamVec() ) );
-    datablock->setUseColour(true);
     
-    debug = new OgreDebugDrawer(manual, "debugDatalock");
+    debug = new OgreDebugDrawer(manual, hlmsUnlit);
     m_dynamicsWorld->setDebugDrawer(debug);
     
     Ogre::Light *light = sceneManager->createLight();
