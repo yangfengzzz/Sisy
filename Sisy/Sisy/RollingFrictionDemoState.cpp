@@ -210,9 +210,6 @@ void MyGameState::createScene01(void)
                         mSceneNode[idx]->setPosition( 0.2 * i,
                                                      2 + .2 * k,
                                                      0.2 * j);
-                        mDebugNode[idx] = bulletBody[idx]->debugDrawObject(btVector3(btScalar(.3),
-                                                                                     btScalar(0.3),
-                                                                                     btScalar(0.3)));
                         
                         Ogre::String datablockName = "Test" + Ogre::StringConverter::toString( idx);
                         Ogre::HlmsPbsDatablock *datablock = static_cast<Ogre::HlmsPbsDatablock*>(
@@ -237,6 +234,15 @@ void MyGameState::createScene01(void)
     
     Ogre::SceneManager *sceneManager = mGraphicsSystem->getSceneManager();
     Ogre::SceneNode *rootNode = sceneManager->getRootSceneNode();
+    
+    mDebugNode = sceneManager->getRootSceneNode( Ogre::SCENE_DYNAMIC )->
+    createChildSceneNode( Ogre::SCENE_DYNAMIC );
+    manual = sceneManager->createManualObject();
+    manual->setVisibilityFlags( 0x000000010 );
+    mDebugNode->attachObject( manual );
+
+    debug = new MyDebugDrawer(manual, "BaseWhite");
+    m_dynamicsWorld->setDebugDrawer(debug);
     
     Ogre::Light *light = sceneManager->createLight();
     Ogre::SceneNode *lightNode = rootNode->createChildSceneNode();
@@ -291,8 +297,11 @@ void MyGameState::update( float timeSinceLast )
         btQuaternion orn = bulletBody[i]->getBody()->getCenterOfMassTransform().getRotation();
         
         mSceneNode[i]->setPosition(pos.x(), pos.y(), pos.z());
-        mSceneNode[i]->setOrientation(orn.x(), orn.y(), orn.z(), orn.w());
+        mSceneNode[i]->setOrientation(orn.w(), orn.x(), orn.y(), orn.z());
     }
+    
+    manual->clear();
+    m_dynamicsWorld->debugDrawWorld();
     
     TutorialGameState::update( timeSinceLast );
 }
@@ -305,7 +314,7 @@ void MyGameState::generateDebugText( float timeSinceLast, Ogre::String &outText 
     outText += "\nPress F2 to show/hide animated objects. ";
     outText += (visibilityMask & 0x000000001) ? "[On]" : "[Off]";
     outText += "\nPress F3 to show/hide Decal's debug visualization. ";
-    outText += mDebugNode[0]->getAttachedObject(0)->isVisible() ? "[On]" : "[Off]";
+    outText += (visibilityMask & 0x000000010) ? "[On]" : "[Off]";
 }
 
 //-----------------------------------------------------------------------------------
@@ -328,9 +337,12 @@ void MyGameState::keyReleased( const SDL_KeyboardEvent &arg )
     }
     else if( arg.keysym.sym == SDLK_F3 )
     {
-        for (int i = 0; i < 125; i++) {
-            mDebugNode[i]->flipVisibility();
-        }
+        Ogre::uint32 visibilityMask = mGraphicsSystem->getSceneManager()->getVisibilityMask();
+        bool showMovingObjects = (visibilityMask & 0x00000010);
+        showMovingObjects = !showMovingObjects;
+        visibilityMask &= ~0x00000010;
+        visibilityMask |= (Ogre::uint32)showMovingObjects;
+        mGraphicsSystem->getSceneManager()->setVisibilityMask( visibilityMask );
     }
     else
     {
