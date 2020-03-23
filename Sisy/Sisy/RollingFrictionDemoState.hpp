@@ -17,12 +17,12 @@
 namespace jet{
 class JetRigidActor;
 class MyGameState : public jet::TutorialGameState
-{
-    Ogre::SceneNode* mSceneNode[125];
+{    
     Ogre::SceneNode* mDebugNode;
     OgreDebugDrawer* debug;
     Ogre::ManualObject* manual;
-    JetRigidActor* bulletBody[125];
+    
+    RigidActor bulletBody[125];
     
     Ogre::SceneNode* mLightNodes[3];
     

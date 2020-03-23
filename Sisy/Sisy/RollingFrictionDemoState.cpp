@@ -17,7 +17,7 @@
 #include "OgreRoot.h"
 #include "OgreHlmsManager.h"
 #include "OgreHlmsPbs.h"
-
+#include "OgreItem.h"
 #include "OgreTextureGpuManager.h"
 #include "OgreTextAreaOverlayElement.h"
 
@@ -26,7 +26,6 @@
 #include "jetCapsuleShape.hpp"
 #include "jetConeShape.hpp"
 #include "jetCylinderShape.hpp"
-#include "jetRigidBody.hpp"
 
 ///create 125 (5x5x5) dynamic object
 #define ARRAY_SIZE_Y 5
@@ -80,19 +79,18 @@ void MyGameState::createScene01(void)
         groundTransform.setRotation(btQuaternion(btVector3(0, 1, 0), SIMD_PI * 0.03));
         
         btScalar mass(0.);
-        JetRigidActor* plane = new JetRigidActor(m_dynamicsWorld, mGraphicsSystem,
-                                                 groundShape,
-                                                 mass, groundTransform,
-                                                 "ground1");
-        Ogre::Item* item = plane->getItem();
-        item->setDatablock( "Marble" );
-        plane->getBody()->setFriction(.5);
+        RigidActor plane = createRigidBody(mass, groundTransform,
+                                           groundShape->getShape(),
+                                           "ground1");
+        plane.item->setDatablock( "Marble" );
+        plane.body->setFriction(.5);
         
         //Change the addressing mode of the roughness map to wrap via code.
         //Detail maps default to wrap, but the rest to clamp.
-        assert( dynamic_cast<Ogre::HlmsPbsDatablock*>( item->getSubItem(0)->getDatablock() ) );
-        Ogre::HlmsPbsDatablock *datablock = static_cast<Ogre::HlmsPbsDatablock*>(
-                                                                                 item->getSubItem(0)->getDatablock() );
+        assert( dynamic_cast<Ogre::HlmsPbsDatablock*>( plane.item->getSubItem(0)->getDatablock() ) );
+        Ogre::HlmsPbsDatablock *datablock
+        = static_cast<Ogre::HlmsPbsDatablock*>(
+                                               plane.item->getSubItem(0)->getDatablock() );
         //Make a hard copy of the sampler block
         Ogre::HlmsSamplerblock samplerblock( *datablock->getSamplerblock( Ogre::PBSM_ROUGHNESS ) );
         samplerblock.mU = Ogre::TAM_WRAP;
@@ -116,19 +114,18 @@ void MyGameState::createScene01(void)
         //We can also use DemoApplication::localCreateRigidBody, but for clarity it is provided here:
         btScalar mass(0.);
         
-        JetRigidActor* plane = new JetRigidActor(m_dynamicsWorld, mGraphicsSystem,
-                                                 groundShape,
-                                                 mass, groundTransform,
-                                                 "ground2");
-        Ogre::Item* item = plane->getItem();
-        item->setDatablock( "Marble" );
-        plane->getBody()->setFriction(.1);
+        RigidActor plane = createRigidBody(mass, groundTransform,
+                                           groundShape->getShape(),
+                                           "ground2");
+        plane.item->setDatablock( "Marble" );
+        plane.body->setFriction(.1);
         
         //Change the addressing mode of the roughness map to wrap via code.
         //Detail maps default to wrap, but the rest to clamp.
-        assert( dynamic_cast<Ogre::HlmsPbsDatablock*>( item->getSubItem(0)->getDatablock() ) );
-        Ogre::HlmsPbsDatablock *datablock = static_cast<Ogre::HlmsPbsDatablock*>(
-                                                                                 item->getSubItem(0)->getDatablock() );
+        assert( dynamic_cast<Ogre::HlmsPbsDatablock*>( plane.item->getSubItem(0)->getDatablock() ) );
+        Ogre::HlmsPbsDatablock *datablock
+        = static_cast<Ogre::HlmsPbsDatablock*>(
+                                               plane.item->getSubItem(0)->getDatablock() );
         //Make a hard copy of the sampler block
         Ogre::HlmsSamplerblock samplerblock( *datablock->getSamplerblock( Ogre::PBSM_ROUGHNESS ) );
         samplerblock.mU = Ogre::TAM_WRAP;
@@ -187,28 +184,25 @@ void MyGameState::createScene01(void)
                                                                      btScalar(2.0 * i + start_x),
                                                                      btScalar(2.0 * j + start_z),
                                                                      btScalar(20 + 2.0 * k + start_y)));
-                                                
+                        
                         JetShape* colShape = colShapes[idx % NUM_SHAPES];
                         
-                        bulletBody[idx] = new JetRigidActor(m_dynamicsWorld, mGraphicsSystem,
-                                                            colShape,
-                                                            mass, startTransform,
-                                                            "dynamics_"+std::to_string(idx % NUM_SHAPES));
+                        bulletBody[idx] = createRigidBody(mass, startTransform,
+                                                          colShape->getShape(),
+                                                          "dynamics_"+std::to_string(idx % NUM_SHAPES));
                         
-                        bulletBody[idx]->getBody()->setFriction(1.f);
-                        bulletBody[idx]->getBody()->setRollingFriction(.1);
-                        bulletBody[idx]->getBody()->setSpinningFriction(0.1);
-                        bulletBody[idx]->getBody()
+                        bulletBody[idx].body->setFriction(1.f);
+                        bulletBody[idx].body->setRollingFriction(.1);
+                        bulletBody[idx].body->setSpinningFriction(0.1);
+                        bulletBody[idx].body
                         ->setAnisotropicFriction(colShape->getShape()->getAnisotropicRollingFrictionDirection(),
                                                  btCollisionObject::CF_ANISOTROPIC_ROLLING_FRICTION);
-                                                
-                        Ogre::Item *item = bulletBody[idx]->getItem();
-                        item->setVisibilityFlags( 0x000000001 );
                         
-                        mSceneNode[idx] = bulletBody[idx]->getSceneNode();
-                        mSceneNode[idx]->setPosition( 0.2 * i,
-                                                     2 + .2 * k,
-                                                     0.2 * j);
+                        bulletBody[idx].item->setVisibilityFlags( 0x000000001 );
+                        
+                        bulletBody[idx].node->setPosition( 0.2 * i,
+                                                          2 + .2 * k,
+                                                          0.2 * j);
                         
                         Ogre::String datablockName = "Test" + Ogre::StringConverter::toString( idx);
                         Ogre::HlmsPbsDatablock *datablock = static_cast<Ogre::HlmsPbsDatablock*>(
@@ -223,7 +217,7 @@ void MyGameState::createScene01(void)
                         datablock->setRoughness(0.02f);
                         datablock->setFresnel( Ogre::Vector3( 1 ), false );
                         datablock->setTransparency( 0.9 );
-                        item->setDatablock( datablock );
+                        bulletBody[idx].item->setDatablock( datablock );
                         idx++;
                     }
                 }
@@ -239,7 +233,7 @@ void MyGameState::createScene01(void)
     manual = sceneManager->createManualObject();
     manual->setVisibilityFlags( 0x000000010 );
     mDebugNode->attachObject( manual );
-
+    
     debug = new OgreDebugDrawer(manual, "BaseWhite");
     m_dynamicsWorld->setDebugDrawer(debug);
     

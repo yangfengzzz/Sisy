@@ -52,6 +52,12 @@ protected:
     btVector3 m_hitPos;
     btScalar m_oldPickingDist;
     
+    struct RigidActor{
+        Ogre::Item* item;
+        Ogre::SceneNode* node;
+        btRigidBody* body;
+    };
+    
 public:
     TutorialGameState( const Ogre::String &helpDescription );
     virtual ~TutorialGameState();
@@ -79,6 +85,10 @@ public:
     bool movePickedBody(const btVector3& rayFromWorld, const btVector3& rayToWorld);
     
     void removePickingConstraint();
+    
+    RigidActor createRigidBody(float mass, const btTransform& startTransform,
+                               btCollisionShape* shape,
+                               Ogre::String name);
 };
 }
 
