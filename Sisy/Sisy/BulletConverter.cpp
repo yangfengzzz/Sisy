@@ -35,16 +35,55 @@ BulletConverter::createCollisionShapeGraphicsObject(btCollisionShape* collisionS
         return mesh;
     }
     
+    if (collisionShape->getShapeType() == TERRAIN_SHAPE_PROXYTYPE)
+    {
+    }
+    
+    if (collisionShape->getShapeType() == SOFTBODY_SHAPE_PROXYTYPE)
+    {
+    }
+    
+    if (collisionShape->getShapeType() == MULTI_SPHERE_SHAPE_PROXYTYPE)
+    {
+    }
+    
     if (collisionShape->getShapeType() == SPHERE_SHAPE_PROXYTYPE)
     {
         sphereCreator(collisionShape, name);
         return mesh;
     }
     
+    if (collisionShape->getShapeType() == COMPOUND_SHAPE_PROXYTYPE)
+    {
+        btCompoundShape* compound = (btCompoundShape*)collisionShape;
+        if (compound->getNumChildShapes() == 1)
+        {
+            if (compound->getChildShape(0)->getShapeType() == SPHERE_SHAPE_PROXYTYPE)
+            {
+                sphereCreator(compound->getChildShape(0), name);
+                return mesh;
+            }
+            
+            if (compound->getChildShape(0)->getShapeType() == CAPSULE_SHAPE_PROXYTYPE)
+            {
+                capsuleCreator(compound->getChildShape(0), name);
+                return mesh;
+            }
+            
+            if (compound->getChildShape(0)->getShapeType() == MULTI_SPHERE_SHAPE_PROXYTYPE)
+            {
+            }
+        }
+    }
+    
     if (collisionShape->getShapeType() == CAPSULE_SHAPE_PROXYTYPE)
     {
         capsuleCreator(collisionShape, name);
         return mesh;
+    }
+    
+    if (collisionShape->getShapeType() == STATIC_PLANE_PROXYTYPE)
+    {
     }
     
     defaultCreator(collisionShape, name);

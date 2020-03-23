@@ -1480,11 +1480,11 @@
 		04D93CF824233FFA00CCBE3E /* OSXUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D93CF724233FFA00CCBE3E /* OSXUtils.mm */; };
 		04D93D07242349A700CCBE3E /* CollisionShape2TriangleMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04D93D06242349A700CCBE3E /* CollisionShape2TriangleMesh.cpp */; };
 		04E0DB7B242393CA00310B48 /* MainLoopSingleThreaded.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DB7A242393CA00310B48 /* MainLoopSingleThreaded.cpp */; };
-		04E0DB9C2426D36D00310B48 /* RollingFrictionDemoState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DB9A2426D36D00310B48 /* RollingFrictionDemoState.cpp */; };
-		04E0DB9F2426D38200310B48 /* RollingFrictionDemoGraphicsSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DB9D2426D38200310B48 /* RollingFrictionDemoGraphicsSystem.cpp */; };
 		04E0DBA5242828D400310B48 /* OgreDebugDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DBA3242828D400310B48 /* OgreDebugDrawer.cpp */; };
 		04E0DBA924285F0100310B48 /* OgreMotionState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DBA724285F0100310B48 /* OgreMotionState.cpp */; };
 		04E0DBAC2428765700310B48 /* BulletConverter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DBAB2428765700310B48 /* BulletConverter.cpp */; };
+		04E0DBB024297D8500310B48 /* ConstraintDemoState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DBAE24297D8500310B48 /* ConstraintDemoState.cpp */; };
+		04E0DBB324297D9000310B48 /* ConstraintDemoGraphicsSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DBB124297D9000310B48 /* ConstraintDemoGraphicsSystem.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -3358,6 +3358,10 @@
 		04E0DBA824285F0100310B48 /* OgreMotionState.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = OgreMotionState.hpp; sourceTree = "<group>"; };
 		04E0DBAA2428765700310B48 /* BulletConverter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BulletConverter.hpp; sourceTree = "<group>"; };
 		04E0DBAB2428765700310B48 /* BulletConverter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BulletConverter.cpp; sourceTree = "<group>"; };
+		04E0DBAE24297D8500310B48 /* ConstraintDemoState.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ConstraintDemoState.cpp; sourceTree = "<group>"; };
+		04E0DBAF24297D8500310B48 /* ConstraintDemoState.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ConstraintDemoState.hpp; sourceTree = "<group>"; };
+		04E0DBB124297D9000310B48 /* ConstraintDemoGraphicsSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ConstraintDemoGraphicsSystem.cpp; sourceTree = "<group>"; };
+		04E0DBB224297D9000310B48 /* ConstraintDemoGraphicsSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ConstraintDemoGraphicsSystem.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3459,6 +3463,7 @@
 		0496428E241D9EDA0006C91E /* Sisy */ = {
 			isa = PBXGroup;
 			children = (
+				04E0DBAD24297D7800310B48 /* ConstraintDemo */,
 				04E0DB992426D33B00310B48 /* RollingFrictionDemo */,
 				04E0DB7C24242AEB00310B48 /* BasicDemo */,
 				04D93D04242348DB00CCBE3E /* InstanceGraphicsShape.h */,
@@ -6142,6 +6147,17 @@
 			name = RollingFrictionDemo;
 			sourceTree = "<group>";
 		};
+		04E0DBAD24297D7800310B48 /* ConstraintDemo */ = {
+			isa = PBXGroup;
+			children = (
+				04E0DBAF24297D8500310B48 /* ConstraintDemoState.hpp */,
+				04E0DBAE24297D8500310B48 /* ConstraintDemoState.cpp */,
+				04E0DBB224297D9000310B48 /* ConstraintDemoGraphicsSystem.hpp */,
+				04E0DBB124297D9000310B48 /* ConstraintDemoGraphicsSystem.cpp */,
+			);
+			name = ConstraintDemo;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -7220,17 +7236,17 @@
 			files = (
 				04D93CF524233FF000CCBE3E /* MainEntryPoints.cpp in Sources */,
 				04D93CD324233E3000CCBE3E /* GameEntityManager.cpp in Sources */,
+				04E0DBB024297D8500310B48 /* ConstraintDemoState.cpp in Sources */,
 				04D93CEE24233F6100CCBE3E /* MessageQueueSystem.cpp in Sources */,
 				04D93CD824233E3000CCBE3E /* GraphicsSystem.cpp in Sources */,
 				04D93CD724233E3000CCBE3E /* BaseSystem.cpp in Sources */,
 				04D93CD524233E3000CCBE3E /* TutorialGameState.cpp in Sources */,
-				04E0DB9F2426D38200310B48 /* RollingFrictionDemoGraphicsSystem.cpp in Sources */,
 				04D93CD924233E3000CCBE3E /* CameraController.cpp in Sources */,
 				04E0DBAC2428765700310B48 /* BulletConverter.cpp in Sources */,
 				04D93D07242349A700CCBE3E /* CollisionShape2TriangleMesh.cpp in Sources */,
 				04D93CD424233E3000CCBE3E /* SdlInputHandler.cpp in Sources */,
-				04E0DB9C2426D36D00310B48 /* RollingFrictionDemoState.cpp in Sources */,
 				04D93CD624233E3000CCBE3E /* LogicSystem.cpp in Sources */,
+				04E0DBB324297D9000310B48 /* ConstraintDemoGraphicsSystem.cpp in Sources */,
 				04D93CF824233FFA00CCBE3E /* OSXUtils.mm in Sources */,
 				04E0DBA5242828D400310B48 /* OgreDebugDrawer.cpp in Sources */,
 				04E0DB7B242393CA00310B48 /* MainLoopSingleThreaded.cpp in Sources */,
