@@ -22,8 +22,7 @@ class MyGameState : public jet::TutorialGameState
     OgreDebugDrawer* debug;
     Ogre::ManualObject* manual;
     
-    RigidActor bulletBody[125];
-    
+    std::vector<Ogre::SceneNode*> bulletBody;
     Ogre::SceneNode* mLightNodes[3];
     
     virtual void generateDebugText( float timeSinceLast,
@@ -37,6 +36,9 @@ public:
     virtual void update( float timeSinceLast );
     
     virtual void keyReleased( const SDL_KeyboardEvent &arg );
+    
+private:
+    void createPhysicalWorld();
 };
 }
 

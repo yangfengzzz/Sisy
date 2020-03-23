@@ -20,24 +20,38 @@ class BulletConverter{
 public:
     BulletConverter(GraphicsSystem *graphicsSystem );
     
-public:
-    Ogre::IndexBufferPacked*
-    createIndexBuffer(const Ogre::uint16* indices, int numIndices);
-
-    std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*>
-    createDynamicMesh(const float* vertices, int numvertices,
-                      const Ogre::uint16* indices, int numIndices, Ogre::String name);
-
     std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*>
     createCollisionShapeGraphicsObject(btCollisionShape* collisionShape,
                                        Ogre::String name);
     
+public:
+    std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*>
+    defaultCreator(btCollisionShape* collisionShape,
+                   Ogre::String name);
+    
+    std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*>
+    boxCreator(btCollisionShape* collisionShape,
+               Ogre::String name);
+    
+    std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*>
+    sphereCreator(btCollisionShape* collisionShape,
+                  Ogre::String name);
+    
+    std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*>
+    capsuleCreator(btCollisionShape* collisionShape,
+                   Ogre::String name);
+    
+public:
+    Ogre::IndexBufferPacked*
+    createIndexBuffer(const Ogre::uint16* indices, int numIndices);
+    
+    std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*>
+    createDynamicMesh(const float* vertices, int numvertices,
+                      const Ogre::uint16* indices, int numIndices, Ogre::String name);
+    
 private:
     GraphicsSystem* m_glApp;
 };
-
-
-
 
 }
 

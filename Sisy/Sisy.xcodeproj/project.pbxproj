@@ -1480,16 +1480,11 @@
 		04D93CF824233FFA00CCBE3E /* OSXUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D93CF724233FFA00CCBE3E /* OSXUtils.mm */; };
 		04D93D07242349A700CCBE3E /* CollisionShape2TriangleMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04D93D06242349A700CCBE3E /* CollisionShape2TriangleMesh.cpp */; };
 		04E0DB7B242393CA00310B48 /* MainLoopSingleThreaded.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DB7A242393CA00310B48 /* MainLoopSingleThreaded.cpp */; };
-		04E0DB822424657E00310B48 /* jetShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DB802424657E00310B48 /* jetShape.cpp */; };
-		04E0DB852424663800310B48 /* jetBoxShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DB832424663800310B48 /* jetBoxShape.cpp */; };
-		04E0DB8E2425F34F00310B48 /* jetSphereShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DB8C2425F34F00310B48 /* jetSphereShape.cpp */; };
-		04E0DB922426090300310B48 /* jetCapsuleShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DB902426090300310B48 /* jetCapsuleShape.cpp */; };
-		04E0DB95242610A100310B48 /* jetConeShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DB93242610A100310B48 /* jetConeShape.cpp */; };
-		04E0DB98242634C000310B48 /* jetCylinderShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DB96242634C000310B48 /* jetCylinderShape.cpp */; };
 		04E0DB9C2426D36D00310B48 /* RollingFrictionDemoState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DB9A2426D36D00310B48 /* RollingFrictionDemoState.cpp */; };
 		04E0DB9F2426D38200310B48 /* RollingFrictionDemoGraphicsSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DB9D2426D38200310B48 /* RollingFrictionDemoGraphicsSystem.cpp */; };
 		04E0DBA5242828D400310B48 /* OgreDebugDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DBA3242828D400310B48 /* OgreDebugDrawer.cpp */; };
 		04E0DBA924285F0100310B48 /* OgreMotionState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DBA724285F0100310B48 /* OgreMotionState.cpp */; };
+		04E0DBAC2428765700310B48 /* BulletConverter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DBAB2428765700310B48 /* BulletConverter.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -3353,18 +3348,6 @@
 		04D93D06242349A700CCBE3E /* CollisionShape2TriangleMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CollisionShape2TriangleMesh.cpp; sourceTree = "<group>"; };
 		04D93D0824234A2200CCBE3E /* ShapeData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShapeData.h; sourceTree = "<group>"; };
 		04E0DB7A242393CA00310B48 /* MainLoopSingleThreaded.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MainLoopSingleThreaded.cpp; path = System/Desktop/MainLoopSingleThreaded.cpp; sourceTree = "<group>"; };
-		04E0DB802424657E00310B48 /* jetShape.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = jetShape.cpp; sourceTree = "<group>"; };
-		04E0DB812424657E00310B48 /* jetShape.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = jetShape.hpp; sourceTree = "<group>"; };
-		04E0DB832424663800310B48 /* jetBoxShape.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = jetBoxShape.cpp; sourceTree = "<group>"; };
-		04E0DB842424663800310B48 /* jetBoxShape.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = jetBoxShape.hpp; sourceTree = "<group>"; };
-		04E0DB8C2425F34F00310B48 /* jetSphereShape.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = jetSphereShape.cpp; sourceTree = "<group>"; };
-		04E0DB8D2425F34F00310B48 /* jetSphereShape.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = jetSphereShape.hpp; sourceTree = "<group>"; };
-		04E0DB902426090300310B48 /* jetCapsuleShape.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = jetCapsuleShape.cpp; sourceTree = "<group>"; };
-		04E0DB912426090300310B48 /* jetCapsuleShape.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = jetCapsuleShape.hpp; sourceTree = "<group>"; };
-		04E0DB93242610A100310B48 /* jetConeShape.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = jetConeShape.cpp; sourceTree = "<group>"; };
-		04E0DB94242610A100310B48 /* jetConeShape.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = jetConeShape.hpp; sourceTree = "<group>"; };
-		04E0DB96242634C000310B48 /* jetCylinderShape.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = jetCylinderShape.cpp; sourceTree = "<group>"; };
-		04E0DB97242634C000310B48 /* jetCylinderShape.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = jetCylinderShape.hpp; sourceTree = "<group>"; };
 		04E0DB9A2426D36D00310B48 /* RollingFrictionDemoState.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RollingFrictionDemoState.cpp; sourceTree = "<group>"; };
 		04E0DB9B2426D36D00310B48 /* RollingFrictionDemoState.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RollingFrictionDemoState.hpp; sourceTree = "<group>"; };
 		04E0DB9D2426D38200310B48 /* RollingFrictionDemoGraphicsSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RollingFrictionDemoGraphicsSystem.cpp; sourceTree = "<group>"; };
@@ -3373,6 +3356,8 @@
 		04E0DBA4242828D400310B48 /* OgreDebugDrawer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = OgreDebugDrawer.hpp; sourceTree = "<group>"; };
 		04E0DBA724285F0100310B48 /* OgreMotionState.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OgreMotionState.cpp; sourceTree = "<group>"; };
 		04E0DBA824285F0100310B48 /* OgreMotionState.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = OgreMotionState.hpp; sourceTree = "<group>"; };
+		04E0DBAA2428765700310B48 /* BulletConverter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BulletConverter.hpp; sourceTree = "<group>"; };
+		04E0DBAB2428765700310B48 /* BulletConverter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BulletConverter.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3503,13 +3488,12 @@
 				04D93D05242349A700CCBE3E /* CollisionShape2TriangleMesh.h */,
 				04D93D06242349A700CCBE3E /* CollisionShape2TriangleMesh.cpp */,
 				04D93D0824234A2200CCBE3E /* ShapeData.h */,
-				04E0DB812424657E00310B48 /* jetShape.hpp */,
-				04E0DB802424657E00310B48 /* jetShape.cpp */,
-				04E0DB8F2425F35B00310B48 /* jetShape */,
 				04E0DBA4242828D400310B48 /* OgreDebugDrawer.hpp */,
 				04E0DBA3242828D400310B48 /* OgreDebugDrawer.cpp */,
 				04E0DBA824285F0100310B48 /* OgreMotionState.hpp */,
 				04E0DBA724285F0100310B48 /* OgreMotionState.cpp */,
+				04E0DBAA2428765700310B48 /* BulletConverter.hpp */,
+				04E0DBAB2428765700310B48 /* BulletConverter.cpp */,
 			);
 			path = Sisy;
 			sourceTree = "<group>";
@@ -6147,23 +6131,6 @@
 			name = BasicDemo;
 			sourceTree = "<group>";
 		};
-		04E0DB8F2425F35B00310B48 /* jetShape */ = {
-			isa = PBXGroup;
-			children = (
-				04E0DB842424663800310B48 /* jetBoxShape.hpp */,
-				04E0DB832424663800310B48 /* jetBoxShape.cpp */,
-				04E0DB8D2425F34F00310B48 /* jetSphereShape.hpp */,
-				04E0DB8C2425F34F00310B48 /* jetSphereShape.cpp */,
-				04E0DB912426090300310B48 /* jetCapsuleShape.hpp */,
-				04E0DB902426090300310B48 /* jetCapsuleShape.cpp */,
-				04E0DB94242610A100310B48 /* jetConeShape.hpp */,
-				04E0DB93242610A100310B48 /* jetConeShape.cpp */,
-				04E0DB97242634C000310B48 /* jetCylinderShape.hpp */,
-				04E0DB96242634C000310B48 /* jetCylinderShape.cpp */,
-			);
-			name = jetShape;
-			sourceTree = "<group>";
-		};
 		04E0DB992426D33B00310B48 /* RollingFrictionDemo */ = {
 			isa = PBXGroup;
 			children = (
@@ -7256,19 +7223,14 @@
 				04D93CEE24233F6100CCBE3E /* MessageQueueSystem.cpp in Sources */,
 				04D93CD824233E3000CCBE3E /* GraphicsSystem.cpp in Sources */,
 				04D93CD724233E3000CCBE3E /* BaseSystem.cpp in Sources */,
-				04E0DB8E2425F34F00310B48 /* jetSphereShape.cpp in Sources */,
-				04E0DB98242634C000310B48 /* jetCylinderShape.cpp in Sources */,
 				04D93CD524233E3000CCBE3E /* TutorialGameState.cpp in Sources */,
 				04E0DB9F2426D38200310B48 /* RollingFrictionDemoGraphicsSystem.cpp in Sources */,
 				04D93CD924233E3000CCBE3E /* CameraController.cpp in Sources */,
-				04E0DB922426090300310B48 /* jetCapsuleShape.cpp in Sources */,
+				04E0DBAC2428765700310B48 /* BulletConverter.cpp in Sources */,
 				04D93D07242349A700CCBE3E /* CollisionShape2TriangleMesh.cpp in Sources */,
-				04E0DB852424663800310B48 /* jetBoxShape.cpp in Sources */,
 				04D93CD424233E3000CCBE3E /* SdlInputHandler.cpp in Sources */,
-				04E0DB95242610A100310B48 /* jetConeShape.cpp in Sources */,
 				04E0DB9C2426D36D00310B48 /* RollingFrictionDemoState.cpp in Sources */,
 				04D93CD624233E3000CCBE3E /* LogicSystem.cpp in Sources */,
-				04E0DB822424657E00310B48 /* jetShape.cpp in Sources */,
 				04D93CF824233FFA00CCBE3E /* OSXUtils.mm in Sources */,
 				04E0DBA5242828D400310B48 /* OgreDebugDrawer.cpp in Sources */,
 				04E0DB7B242393CA00310B48 /* MainLoopSingleThreaded.cpp in Sources */,

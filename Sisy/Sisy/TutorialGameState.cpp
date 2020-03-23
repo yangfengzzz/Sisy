@@ -348,18 +348,17 @@ void TutorialGameState::removePickingConstraint()
     }
 }
 //---------------------------------------------------------------------------------
-TutorialGameState::RigidActor
+std::pair<Ogre::SceneNode*, btRigidBody*>
 TutorialGameState::createRigidBody(float mass, const btTransform& startTransform,
-                                   btCollisionShape* shape,
-                                   Ogre::String name){
+                                   btCollisionShape* shape){
     Ogre::SceneManager *sceneManager = mGraphicsSystem->getSceneManager();
-    Ogre::Item* m_item = sceneManager->createItem(name,
-                                                  Ogre::ResourceGroupManager::
-                                                  AUTODETECT_RESOURCE_GROUP_NAME,
-                                                  Ogre::SCENE_DYNAMIC );
+//    Ogre::Item* m_item = sceneManager->createItem(name,
+//                                                  Ogre::ResourceGroupManager::
+//                                                  AUTODETECT_RESOURCE_GROUP_NAME,
+//                                                  Ogre::SCENE_DYNAMIC );
     Ogre::SceneNode* m_node = sceneManager->getRootSceneNode( Ogre::SCENE_DYNAMIC )->
     createChildSceneNode( Ogre::SCENE_DYNAMIC );
-    m_node->attachObject( m_item );
+//    m_node->attachObject( m_item );
     
     btAssert((!shape || shape->getShapeType() != INVALID_SHAPE_PROXYTYPE));
     
@@ -395,12 +394,7 @@ TutorialGameState::createRigidBody(float mass, const btTransform& startTransform
     m_node->setPosition(pos.x(), pos.y(), pos.z());
     m_node->setOrientation(orn.w(), orn.x(), orn.y(), orn.z());
     
-    RigidActor actor;
-    actor.item = m_item;
-    actor.node = m_node;
-    actor.body = m_body;
-    
-    return actor;
+    return std::make_pair(m_node, m_body);
 }
 //---------------------------------------------------------------------------------
 }

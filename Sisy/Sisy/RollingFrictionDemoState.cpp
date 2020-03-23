@@ -11,21 +11,19 @@
 #include "CameraController.h"
 #include "OgreSceneManager.h"
 #include "OgreCamera.h"
+#include "OgreHlmsUnlitDatablock.h"
 #include "OgreHlmsPbsDatablock.h"
 #include "OgreHlmsSamplerblock.h"
 #include "OgreMath.h"
 #include "OgreRoot.h"
 #include "OgreHlmsManager.h"
 #include "OgreHlmsPbs.h"
+#include "OgreHlmsUnlit.h"
 #include "OgreItem.h"
 #include "OgreTextureGpuManager.h"
 #include "OgreTextAreaOverlayElement.h"
 
-#include "jetBoxShape.hpp"
-#include "jetSphereShape.hpp"
-#include "jetCapsuleShape.hpp"
-#include "jetConeShape.hpp"
-#include "jetCylinderShape.hpp"
+#include "BulletConverter.hpp"
 
 ///create 125 (5x5x5) dynamic object
 #define ARRAY_SIZE_Y 5
@@ -47,8 +45,7 @@ TutorialGameState( helpDescription )
 {
 }
 //-----------------------------------------------------------------------------------
-void MyGameState::createScene01(void)
-{
+void MyGameState::createPhysicalWorld(){
     ///collision configuration contains default setup for memory, collision setup
     m_collisionConfiguration = new btDefaultCollisionConfiguration();
     //m_collisionConfiguration->setConvexConvexMultipointIterations();
@@ -68,94 +65,59 @@ void MyGameState::createScene01(void)
     
     {
         ///create a few basic rigid bodies
-        JetBoxShape* groundShape = new JetBoxShape(btVector3(btScalar(10.), btScalar(5.), btScalar(25.)));
-        groundShape->createRenderMesh("ground1");
+        btCollisionShape* groundShape = new btBoxShape(btVector3(btScalar(10.), btScalar(5.), btScalar(25.)));
         
-        m_collisionShapes.push_back(groundShape->getShape());
+        m_collisionShapes.push_back(groundShape);
         
         btTransform groundTransform;
         groundTransform.setIdentity();
         groundTransform.setOrigin(btVector3(0, 0, -28));
         groundTransform.setRotation(btQuaternion(btVector3(0, 1, 0), SIMD_PI * 0.03));
-        
+        //We can also use DemoApplication::localCreateRigidBody, but for clarity it is provided here:
         btScalar mass(0.);
-        RigidActor plane = createRigidBody(mass, groundTransform,
-                                           groundShape->getShape(),
-                                           "ground1");
-        plane.item->setDatablock( "Marble" );
-        plane.body->setFriction(.5);
-        
-        //Change the addressing mode of the roughness map to wrap via code.
-        //Detail maps default to wrap, but the rest to clamp.
-        assert( dynamic_cast<Ogre::HlmsPbsDatablock*>( plane.item->getSubItem(0)->getDatablock() ) );
-        Ogre::HlmsPbsDatablock *datablock
-        = static_cast<Ogre::HlmsPbsDatablock*>(
-                                               plane.item->getSubItem(0)->getDatablock() );
-        //Make a hard copy of the sampler block
-        Ogre::HlmsSamplerblock samplerblock( *datablock->getSamplerblock( Ogre::PBSM_ROUGHNESS ) );
-        samplerblock.mU = Ogre::TAM_WRAP;
-        samplerblock.mV = Ogre::TAM_WRAP;
-        samplerblock.mW = Ogre::TAM_WRAP;
-        //Set the new samplerblock. The Hlms system will
-        //automatically create the API block if necessary
-        datablock->setSamplerblock( Ogre::PBSM_ROUGHNESS, samplerblock );
+        std::pair<Ogre::SceneNode*, btRigidBody*> plane =
+        createRigidBody(mass, groundTransform,
+                        groundShape);
+        bulletBody.push_back(plane.first);
+        plane.second->setFriction(.5);
     }
     
     {
         ///create a few basic rigid bodies
-        JetBoxShape* groundShape = new JetBoxShape(btVector3(btScalar(100.), btScalar(100.), btScalar(50.)));
-        groundShape->createRenderMesh("ground2");
+        btCollisionShape* groundShape = new btBoxShape(btVector3(btScalar(100.), btScalar(100.), btScalar(50.)));
         
-        m_collisionShapes.push_back(groundShape->getShape());
+        m_collisionShapes.push_back(groundShape);
         
         btTransform groundTransform;
         groundTransform.setIdentity();
         groundTransform.setOrigin(btVector3(0, 0, -54));
         //We can also use DemoApplication::localCreateRigidBody, but for clarity it is provided here:
         btScalar mass(0.);
-        
-        RigidActor plane = createRigidBody(mass, groundTransform,
-                                           groundShape->getShape(),
-                                           "ground2");
-        plane.item->setDatablock( "Marble" );
-        plane.body->setFriction(.1);
-        
-        //Change the addressing mode of the roughness map to wrap via code.
-        //Detail maps default to wrap, but the rest to clamp.
-        assert( dynamic_cast<Ogre::HlmsPbsDatablock*>( plane.item->getSubItem(0)->getDatablock() ) );
-        Ogre::HlmsPbsDatablock *datablock
-        = static_cast<Ogre::HlmsPbsDatablock*>(
-                                               plane.item->getSubItem(0)->getDatablock() );
-        //Make a hard copy of the sampler block
-        Ogre::HlmsSamplerblock samplerblock( *datablock->getSamplerblock( Ogre::PBSM_ROUGHNESS ) );
-        samplerblock.mU = Ogre::TAM_WRAP;
-        samplerblock.mV = Ogre::TAM_WRAP;
-        samplerblock.mW = Ogre::TAM_WRAP;
-        //Set the new samplerblock. The Hlms system will
-        //automatically create the API block if necessary
-        datablock->setSamplerblock( Ogre::PBSM_ROUGHNESS, samplerblock );
+        std::pair<Ogre::SceneNode*, btRigidBody*> plane =
+        createRigidBody(mass, groundTransform,
+                        groundShape);
+        bulletBody.push_back(plane.first);
+        plane.second->setFriction(.1);
     }
     
     {
         //create a few dynamic rigidbodies
         // Re-using the same collision is better for memory usage and performance
 #define NUM_SHAPES 10
-        JetShape* colShapes[NUM_SHAPES] = {
-            new JetSphereShape(btScalar(0.5)),
-            new JetCapsuleShape(0.25, 0.5),
-            new JetCapsuleShapeX(0.25, 0.5),
-            new JetCapsuleShapeZ(0.25, 0.5),
-            new JetConeShape(0.25, 0.5),
-            new JetConeShapeX(0.25, 0.5),
-            new JetConeShapeZ(0.25, 0.5),
-            new JetCylinderShape(btVector3(0.25, 0.5, 0.25)),
-            new JetCylinderShapeX(btVector3(0.5, 0.25, 0.25)),
-            new JetCylinderShapeZ(btVector3(0.25, 0.25, 0.5)),
+        btCollisionShape* colShapes[NUM_SHAPES] = {
+            new btSphereShape(btScalar(0.5)),
+            new btCapsuleShape(0.25, 0.5),
+            new btCapsuleShapeX(0.25, 0.5),
+            new btCapsuleShapeZ(0.25, 0.5),
+            new btConeShape(0.25, 0.5),
+            new btConeShapeX(0.25, 0.5),
+            new btConeShapeZ(0.25, 0.5),
+            new btCylinderShape(btVector3(0.25, 0.5, 0.25)),
+            new btCylinderShapeX(btVector3(0.5, 0.25, 0.25)),
+            new btCylinderShapeZ(btVector3(0.25, 0.25, 0.5)),
         };
-        for (int i = 0; i < NUM_SHAPES; i++){
-            colShapes[i]->createRenderMesh("dynamics_"+std::to_string(i));
-            m_collisionShapes.push_back(colShapes[i]->getShape());
-        }
+        for (int i = 0; i < NUM_SHAPES; i++)
+            m_collisionShapes.push_back(colShapes[i]);
         
         /// Create Dynamic Objects
         btTransform startTransform;
@@ -170,10 +132,7 @@ void MyGameState::createScene01(void)
         float start_z = START_POS_Z - ARRAY_SIZE_Z / 2;
         
         {
-            Ogre::HlmsManager *hlmsManager = mGraphicsSystem->getRoot()->getHlmsManager();
-            assert( dynamic_cast<Ogre::HlmsPbs*>( hlmsManager->getHlms( Ogre::HLMS_PBS ) ) );
-            Ogre::HlmsPbs *hlmsPbs = static_cast<Ogre::HlmsPbs*>( hlmsManager->getHlms(Ogre::HLMS_PBS) );
-            size_t idx = 0;
+            int shapeIndex = 0;
             for (int k = 0; k < ARRAY_SIZE_Y; k++)
             {
                 for (int i = 0; i < ARRAY_SIZE_X; i++)
@@ -185,39 +144,126 @@ void MyGameState::createScene01(void)
                                                                      btScalar(2.0 * j + start_z),
                                                                      btScalar(20 + 2.0 * k + start_y)));
                         
-                        JetShape* colShape = colShapes[idx % NUM_SHAPES];
+                        btCollisionShape* colShape = colShapes[shapeIndex % NUM_SHAPES];
                         
-                        bulletBody[idx] = createRigidBody(mass, startTransform,
-                                                          colShape->getShape(),
-                                                          "dynamics_"+std::to_string(idx % NUM_SHAPES));
-                        
-                        bulletBody[idx].body->setFriction(1.f);
-                        bulletBody[idx].body->setRollingFriction(.1);
-                        bulletBody[idx].body->setSpinningFriction(0.1);
-                        bulletBody[idx].body
-                        ->setAnisotropicFriction(colShape->getShape()->getAnisotropicRollingFrictionDirection(),
-                                                 btCollisionObject::CF_ANISOTROPIC_ROLLING_FRICTION);
-                        
-                        bulletBody[idx].item->setVisibilityFlags( 0x000000001 );
-                        
-                        bulletBody[idx].node->setPosition( 0.2 * i,
-                                                          2 + .2 * k,
-                                                          0.2 * j);
+                        std::pair<Ogre::SceneNode*, btRigidBody*> plane =
+                        createRigidBody(mass, startTransform,
+                                        colShape);
+                        bulletBody.push_back(plane.first);
+                        plane.second->setFriction(1.f);
+                        plane.second->setRollingFriction(.1);
+                        plane.second->setSpinningFriction(0.1);
+                        plane.second->setAnisotropicFriction(colShape->getAnisotropicRollingFrictionDirection(),
+                                                             btCollisionObject::CF_ANISOTROPIC_ROLLING_FRICTION);
+                        shapeIndex++;
+                    }
+                }
+            }
+        }
+    }
+}
+
+void MyGameState::createScene01(void)
+{
+    createPhysicalWorld();
+    
+    Ogre::SceneManager *sceneManager = mGraphicsSystem->getSceneManager();
+    BulletConverter converter(mGraphicsSystem);
+    {
+        ///create a few basic rigid bodies
+        btCollisionShape* groundShape = m_collisionShapes[0];
+        converter.createCollisionShapeGraphicsObject(groundShape, "ground1");
+        
+        Ogre::Item* m_item = sceneManager->createItem("ground1",
+                                                      Ogre::ResourceGroupManager::
+                                                      AUTODETECT_RESOURCE_GROUP_NAME,
+                                                      Ogre::SCENE_DYNAMIC );
+        bulletBody[0]->attachObject(m_item);
+        
+        m_item->setDatablock( "Marble" );
+        //Change the addressing mode of the roughness map to wrap via code.
+        //Detail maps default to wrap, but the rest to clamp.
+        assert( dynamic_cast<Ogre::HlmsPbsDatablock*>( m_item->getSubItem(0)->getDatablock() ) );
+        Ogre::HlmsPbsDatablock *datablock
+        = static_cast<Ogre::HlmsPbsDatablock*>(
+                                               m_item->getSubItem(0)->getDatablock() );
+        //Make a hard copy of the sampler block
+        Ogre::HlmsSamplerblock samplerblock( *datablock->getSamplerblock( Ogre::PBSM_ROUGHNESS ) );
+        samplerblock.mU = Ogre::TAM_WRAP;
+        samplerblock.mV = Ogre::TAM_WRAP;
+        samplerblock.mW = Ogre::TAM_WRAP;
+        //Set the new samplerblock. The Hlms system will
+        //automatically create the API block if necessary
+        datablock->setSamplerblock( Ogre::PBSM_ROUGHNESS, samplerblock );
+    }
+    
+    {
+        ///create a few basic rigid bodies
+        btCollisionShape* groundShape = m_collisionShapes[1];
+        converter.createCollisionShapeGraphicsObject(groundShape, "ground2");
+        
+        Ogre::Item* m_item = sceneManager->createItem("ground2",
+                                                      Ogre::ResourceGroupManager::
+                                                      AUTODETECT_RESOURCE_GROUP_NAME,
+                                                      Ogre::SCENE_DYNAMIC );
+        bulletBody[1]->attachObject(m_item);
+        
+        m_item->setDatablock( "Marble" );
+        //Change the addressing mode of the roughness map to wrap via code.
+        //Detail maps default to wrap, but the rest to clamp.
+        assert( dynamic_cast<Ogre::HlmsPbsDatablock*>( m_item->getSubItem(0)->getDatablock() ) );
+        Ogre::HlmsPbsDatablock *datablock
+        = static_cast<Ogre::HlmsPbsDatablock*>(
+                                               m_item->getSubItem(0)->getDatablock() );
+        //Make a hard copy of the sampler block
+        Ogre::HlmsSamplerblock samplerblock( *datablock->getSamplerblock( Ogre::PBSM_ROUGHNESS ) );
+        samplerblock.mU = Ogre::TAM_WRAP;
+        samplerblock.mV = Ogre::TAM_WRAP;
+        samplerblock.mW = Ogre::TAM_WRAP;
+        //Set the new samplerblock. The Hlms system will
+        //automatically create the API block if necessary
+        datablock->setSamplerblock( Ogre::PBSM_ROUGHNESS, samplerblock );
+    }
+    
+    {
+        for (int i = 2; i < NUM_SHAPES+2; i++){
+            converter.createCollisionShapeGraphicsObject(m_collisionShapes[i],
+                                                         "dynamics_"+std::to_string(i));
+        }
+        
+        
+        {
+            Ogre::HlmsManager *hlmsManager = mGraphicsSystem->getRoot()->getHlmsManager();
+            assert( dynamic_cast<Ogre::HlmsPbs*>( hlmsManager->getHlms( Ogre::HLMS_PBS ) ) );
+            Ogre::HlmsPbs *hlmsPbs = static_cast<Ogre::HlmsPbs*>( hlmsManager->getHlms(Ogre::HLMS_PBS) );
+            size_t idx = 0;
+            for (int k = 0; k < ARRAY_SIZE_Y; k++)
+            {
+                for (int i = 0; i < ARRAY_SIZE_X; i++)
+                {
+                    for (int j = 0; j < ARRAY_SIZE_Z; j++)
+                    {
+                        Ogre::Item* m_item = sceneManager->createItem("dynamics_"+std::to_string(idx % NUM_SHAPES+2),
+                                                                      Ogre::ResourceGroupManager::
+                                                                      AUTODETECT_RESOURCE_GROUP_NAME,
+                                                                      Ogre::SCENE_DYNAMIC );
+                        bulletBody[idx+2]->attachObject(m_item);
+                        m_item->setVisibilityFlags( 0x000000001 );
                         
                         Ogre::String datablockName = "Test" + Ogre::StringConverter::toString( idx);
-                        Ogre::HlmsPbsDatablock *datablock = static_cast<Ogre::HlmsPbsDatablock*>(
-                                                                                                 hlmsPbs->createDatablock( datablockName,
-                                                                                                                          datablockName,
-                                                                                                                          Ogre::HlmsMacroblock(),
-                                                                                                                          Ogre::HlmsBlendblock(),
-                                                                                                                          Ogre::HlmsParamVec() ) );
+                        Ogre::HlmsPbsDatablock *datablock
+                        = static_cast<Ogre::HlmsPbsDatablock*>(
+                                                               hlmsPbs->createDatablock(datablockName,
+                                                                                        datablockName,
+                                                                                        Ogre::HlmsMacroblock(),
+                                                                                        Ogre::HlmsBlendblock(),
+                                                                                        Ogre::HlmsParamVec() ) );
                         
                         datablock->setDiffuse( Ogre::Vector3( 0.0f, 1.0f, 0.0f ) );
-                        
                         datablock->setRoughness(0.02f);
                         datablock->setFresnel( Ogre::Vector3( 1 ), false );
                         datablock->setTransparency( 0.9 );
-                        bulletBody[idx].item->setDatablock( datablock );
+                        m_item->setDatablock( datablock );
                         idx++;
                     }
                 }
@@ -225,16 +271,28 @@ void MyGameState::createScene01(void)
         }
     }
     
-    Ogre::SceneManager *sceneManager = mGraphicsSystem->getSceneManager();
     Ogre::SceneNode *rootNode = sceneManager->getRootSceneNode();
     
     mDebugNode = sceneManager->getRootSceneNode( Ogre::SCENE_DYNAMIC )->
     createChildSceneNode( Ogre::SCENE_DYNAMIC );
     manual = sceneManager->createManualObject();
-    manual->setVisibilityFlags( 0x000000010 );
+    manual->setVisibilityFlags( 0x000000002 );
     mDebugNode->attachObject( manual );
     
-    debug = new OgreDebugDrawer(manual, "BaseWhite");
+    Ogre::HlmsManager *hlmsManager = mGraphicsSystem->getRoot()->getHlmsManager();
+    assert( dynamic_cast<Ogre::HlmsUnlit*>( hlmsManager->getHlms( Ogre::HLMS_UNLIT ) ) );
+    Ogre::HlmsUnlit *hlmsUnlit = static_cast<Ogre::HlmsUnlit*>( hlmsManager->getHlms(Ogre::HLMS_UNLIT) );
+    Ogre::String datablockName = "debugDatalock";
+    Ogre::HlmsUnlitDatablock *datablock
+    = static_cast<Ogre::HlmsUnlitDatablock*>(
+                                           hlmsUnlit->createDatablock(datablockName,
+                                                                      datablockName,
+                                                                      Ogre::HlmsMacroblock(),
+                                                                      Ogre::HlmsBlendblock(),
+                                                                      Ogre::HlmsParamVec() ) );
+    datablock->setUseColour(true);
+    
+    debug = new OgreDebugDrawer(manual, "debugDatalock");
     m_dynamicsWorld->setDebugDrawer(debug);
     
     Ogre::Light *light = sceneManager->createLight();
@@ -299,7 +357,7 @@ void MyGameState::generateDebugText( float timeSinceLast, Ogre::String &outText 
     outText += "\nPress F2 to show/hide animated objects. ";
     outText += (visibilityMask & 0x000000001) ? "[On]" : "[Off]";
     outText += "\nPress F3 to show/hide Decal's debug visualization. ";
-    outText += (visibilityMask & 0x000000010) ? "[On]" : "[Off]";
+    outText += (visibilityMask & 0x000000002) ? "[On]" : "[Off]";
 }
 
 //-----------------------------------------------------------------------------------
@@ -314,19 +372,19 @@ void MyGameState::keyReleased( const SDL_KeyboardEvent &arg )
     if( arg.keysym.sym == SDLK_F2 )
     {
         Ogre::uint32 visibilityMask = mGraphicsSystem->getSceneManager()->getVisibilityMask();
-        bool showMovingObjects = (visibilityMask & 0x00000001);
+        bool showMovingObjects = (visibilityMask & 0x000000001);
         showMovingObjects = !showMovingObjects;
-        visibilityMask &= ~0x00000001;
+        visibilityMask &= ~0x000000001;
         visibilityMask |= (Ogre::uint32)showMovingObjects;
         mGraphicsSystem->getSceneManager()->setVisibilityMask( visibilityMask );
     }
     else if( arg.keysym.sym == SDLK_F3 )
     {
         Ogre::uint32 visibilityMask = mGraphicsSystem->getSceneManager()->getVisibilityMask();
-        bool showMovingObjects = (visibilityMask & 0x00000010);
+        bool showMovingObjects = (visibilityMask & 0x000000002);
         showMovingObjects = !showMovingObjects;
-        visibilityMask &= ~0x00000010;
-        visibilityMask |= (Ogre::uint32)showMovingObjects;
+        visibilityMask &= ~0x000000002;
+        visibilityMask |= (Ogre::uint32)showMovingObjects << 1;
         mGraphicsSystem->getSceneManager()->setVisibilityMask( visibilityMask );
     }
     else
@@ -336,6 +394,38 @@ void MyGameState::keyReleased( const SDL_KeyboardEvent &arg )
 }
 
 void MyGameState::destroyScene(void){
-    
+    //cleanup in the reverse order of creation/initialization
+
+    //remove the rigidbodies from the dynamics world and delete them
+    int i;
+    for (i = m_dynamicsWorld->getNumCollisionObjects() - 1; i >= 0; i--)
+    {
+        btCollisionObject* obj = m_dynamicsWorld->getCollisionObjectArray()[i];
+        btRigidBody* body = btRigidBody::upcast(obj);
+        if (body && body->getMotionState())
+        {
+            delete body->getMotionState();
+        }
+        m_dynamicsWorld->removeCollisionObject(obj);
+        delete obj;
+    }
+
+    //delete collision shapes
+    for (int j = 0; j < m_collisionShapes.size(); j++)
+    {
+        btCollisionShape* shape = m_collisionShapes[j];
+        delete shape;
+    }
+    m_collisionShapes.clear();
+
+    delete m_dynamicsWorld;
+
+    delete m_solver;
+
+    delete m_broadphase;
+
+    delete m_dispatcher;
+
+    delete m_collisionConfiguration;
 }
 }

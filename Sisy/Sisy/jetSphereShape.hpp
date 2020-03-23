@@ -14,10 +14,7 @@
 namespace jet {
 class JetSphereShape : public JetShape{
 public:
-    JetSphereShape(btScalar radius);
-        
-    virtual Ogre::ManualObject* debugDrawObject(const btVector3& color,
-                                                Ogre::SceneManager* scene) override;
+    JetSphereShape(btCollisionShape* m_shape);
     
 private:
     std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*>
