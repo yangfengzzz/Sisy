@@ -1485,6 +1485,7 @@
 		04E0DBAC2428765700310B48 /* BulletConverter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DBAB2428765700310B48 /* BulletConverter.cpp */; };
 		04E0DBB72429A35400310B48 /* ConstraintPhysicsSetupState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DBB52429A35400310B48 /* ConstraintPhysicsSetupState.cpp */; };
 		04E0DBBA2429A35D00310B48 /* ConstraintPhysicsSetupGraphicsSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DBB82429A35D00310B48 /* ConstraintPhysicsSetupGraphicsSystem.cpp */; };
+		04E0DBDA2429E04100310B48 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04964A67241DC2BA0006C91E /* Metal.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -3391,6 +3392,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04E0DBDA2429E04100310B48 /* Metal.framework in Frameworks */,
 				049649CC241DC0F50006C91E /* libgfx.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -8161,9 +8163,13 @@
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include,
 					/usr/local/include/freetype2,
+					/usr/local/include/SDL2,
 				);
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
-				OTHER_LDFLAGS = "-lfreetype";
+				OTHER_LDFLAGS = (
+					"-lfreetype",
+					"-lSDL2",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -8182,9 +8188,13 @@
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include,
 					/usr/local/include/freetype2,
+					/usr/local/include/SDL2,
 				);
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
-				OTHER_LDFLAGS = "-lfreetype";
+				OTHER_LDFLAGS = (
+					"-lfreetype",
+					"-lSDL2",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
