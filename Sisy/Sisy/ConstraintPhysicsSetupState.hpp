@@ -36,6 +36,8 @@ public:
     
     virtual void keyReleased( const SDL_KeyboardEvent &arg );
     
+    virtual void createGUI(void);
+    
 private:
     void setupEmptyDynamicsWorld();
     

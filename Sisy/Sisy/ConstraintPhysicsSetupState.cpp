@@ -24,6 +24,7 @@
 #include "OgreTextAreaOverlayElement.h"
 
 #include "BulletConverter.hpp"
+#include "imgui.h"
 
 static btScalar val;
 static btScalar targetVel = 0;
@@ -212,7 +213,7 @@ void MyGameState::update( float timeSinceLast )
     
     TutorialGameState::update( timeSinceLast );
 }
-
+//-----------------------------------------------------------------------------------
 void MyGameState::generateDebugText( float timeSinceLast, Ogre::String &outText )
 {
     Ogre::uint32 visibilityMask = mGraphicsSystem->getSceneManager()->getVisibilityMask();
@@ -256,8 +257,20 @@ void MyGameState::keyReleased( const SDL_KeyboardEvent &arg )
         TutorialGameState::keyReleased( arg );
     }
 }
-
+//-----------------------------------------------------------------------------------
 void MyGameState::destroyScene(void){
     ;
 }
+//-----------------------------------------------------------------------------------
+void MyGameState::createGUI(void){
+    ImGui::Begin("Velocity");
+
+    ImGui::SliderFloat("target vel", &targetVel, -4.0f, 4.0f);
+    ImGui::SliderFloat("max impulse", &maxImpulse, 0.0f, 1000.0f);
+    ImGui::SliderFloat("actual vel", &actualHingeVelocity, -4.0f, 4.0f);
+    ImGui::Text("angle = %f", val);
+
+    ImGui::End();
+}
+//-----------------------------------------------------------------------------------
 }

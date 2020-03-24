@@ -18,6 +18,8 @@ public:
     
     virtual void destroyScene(void) {}
     
+    virtual void createGUI(void) {}
+    
     virtual void update( float timeSinceLast ) {}
     virtual void finishFrameParallel(void) {}
     virtual void finishFrame(void) {}

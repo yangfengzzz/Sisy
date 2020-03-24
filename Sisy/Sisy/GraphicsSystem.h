@@ -145,6 +145,23 @@ public:
     
     virtual void stopCompositor(void);
     virtual void restartCompositor(void);
+    
+public:
+    void IMGUI_Init();
+    void IMGUI_Shutdown();
+    
+    void IMGUI_Render();
+    
+    SDL_Window* GUI_window;
+    SDL_Renderer* GUI_renderer;
+    
+    // Our state
+    bool show_demo_window = true;
+    bool show_another_window = false;
+    float clear_color[4] = {0.45f, 0.55f, 0.60f, 1.00f};
+
+    // Main loop
+    bool done = false;
 };
 }
 

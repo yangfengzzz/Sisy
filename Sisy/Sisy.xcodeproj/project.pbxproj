@@ -1469,7 +1469,7 @@
 		04D93CD524233E3000CCBE3E /* TutorialGameState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04D93CC424233E2F00CCBE3E /* TutorialGameState.cpp */; };
 		04D93CD624233E3000CCBE3E /* LogicSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04D93CC824233E2F00CCBE3E /* LogicSystem.cpp */; };
 		04D93CD724233E3000CCBE3E /* BaseSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04D93CCC24233E2F00CCBE3E /* BaseSystem.cpp */; };
-		04D93CD824233E3000CCBE3E /* GraphicsSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04D93CCE24233E2F00CCBE3E /* GraphicsSystem.cpp */; };
+		04D93CD824233E3000CCBE3E /* GraphicsSystem.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D93CCE24233E2F00CCBE3E /* GraphicsSystem.mm */; };
 		04D93CD924233E3000CCBE3E /* CameraController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04D93CD124233E3000CCBE3E /* CameraController.cpp */; };
 		04D93CE024233E4400CCBE3E /* libforce.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 04D9386B2423358800CCBE3E /* libforce.dylib */; };
 		04D93CE124233E4400CCBE3E /* libgfx_component.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 04964889241DBDEC0006C91E /* libgfx_component.dylib */; };
@@ -1486,6 +1486,11 @@
 		04E0DBB72429A35400310B48 /* ConstraintPhysicsSetupState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DBB52429A35400310B48 /* ConstraintPhysicsSetupState.cpp */; };
 		04E0DBBA2429A35D00310B48 /* ConstraintPhysicsSetupGraphicsSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DBB82429A35D00310B48 /* ConstraintPhysicsSetupGraphicsSystem.cpp */; };
 		04E0DBDA2429E04100310B48 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04964A67241DC2BA0006C91E /* Metal.framework */; };
+		04E0DBDF2429E22C00310B48 /* imgui_impl_metal.h in Headers */ = {isa = PBXBuildFile; fileRef = 04E0DBDB2429E22B00310B48 /* imgui_impl_metal.h */; };
+		04E0DBE02429E22C00310B48 /* imgui_impl_metal.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DBDC2429E22B00310B48 /* imgui_impl_metal.mm */; };
+		04E0DBE12429E22C00310B48 /* imgui_impl_sdl.h in Headers */ = {isa = PBXBuildFile; fileRef = 04E0DBDD2429E22B00310B48 /* imgui_impl_sdl.h */; };
+		04E0DBE22429E22C00310B48 /* imgui_impl_sdl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DBDE2429E22B00310B48 /* imgui_impl_sdl.cpp */; };
+		04E0DBE32429E40B00310B48 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04964A67241DC2BA0006C91E /* Metal.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -3323,7 +3328,7 @@
 		04D93CCB24233E2F00CCBE3E /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameState.h; sourceTree = "<group>"; };
 		04D93CCC24233E2F00CCBE3E /* BaseSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseSystem.cpp; sourceTree = "<group>"; };
 		04D93CCD24233E2F00CCBE3E /* GraphicsSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphicsSystem.h; sourceTree = "<group>"; };
-		04D93CCE24233E2F00CCBE3E /* GraphicsSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GraphicsSystem.cpp; sourceTree = "<group>"; };
+		04D93CCE24233E2F00CCBE3E /* GraphicsSystem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GraphicsSystem.mm; sourceTree = "<group>"; };
 		04D93CCF24233E3000CCBE3E /* CameraController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraController.h; sourceTree = "<group>"; };
 		04D93CD024233E3000CCBE3E /* GameEntityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameEntityManager.h; sourceTree = "<group>"; };
 		04D93CD124233E3000CCBE3E /* CameraController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CameraController.cpp; sourceTree = "<group>"; };
@@ -3367,6 +3372,10 @@
 		04E0DBB62429A35400310B48 /* ConstraintPhysicsSetupState.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ConstraintPhysicsSetupState.hpp; sourceTree = "<group>"; };
 		04E0DBB82429A35D00310B48 /* ConstraintPhysicsSetupGraphicsSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ConstraintPhysicsSetupGraphicsSystem.cpp; sourceTree = "<group>"; };
 		04E0DBB92429A35D00310B48 /* ConstraintPhysicsSetupGraphicsSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ConstraintPhysicsSetupGraphicsSystem.hpp; sourceTree = "<group>"; };
+		04E0DBDB2429E22B00310B48 /* imgui_impl_metal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = imgui_impl_metal.h; path = imgui/imgui_impl_metal.h; sourceTree = "<group>"; };
+		04E0DBDC2429E22B00310B48 /* imgui_impl_metal.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = imgui_impl_metal.mm; path = imgui/imgui_impl_metal.mm; sourceTree = "<group>"; };
+		04E0DBDD2429E22B00310B48 /* imgui_impl_sdl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = imgui_impl_sdl.h; path = imgui/imgui_impl_sdl.h; sourceTree = "<group>"; };
+		04E0DBDE2429E22B00310B48 /* imgui_impl_sdl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = imgui_impl_sdl.cpp; path = imgui/imgui_impl_sdl.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3374,6 +3383,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04E0DBE32429E40B00310B48 /* Metal.framework in Frameworks */,
 				04D93CE024233E4400CCBE3E /* libforce.dylib in Frameworks */,
 				04D93CE124233E4400CCBE3E /* libgfx_component.dylib in Frameworks */,
 				04D93CE224233E4400CCBE3E /* libgfx.dylib in Frameworks */,
@@ -3496,7 +3506,7 @@
 				04D93CC724233E2F00CCBE3E /* LogicSystem.h */,
 				04D93CC824233E2F00CCBE3E /* LogicSystem.cpp */,
 				04D93CCD24233E2F00CCBE3E /* GraphicsSystem.h */,
-				04D93CCE24233E2F00CCBE3E /* GraphicsSystem.cpp */,
+				04D93CCE24233E2F00CCBE3E /* GraphicsSystem.mm */,
 				04D93D05242349A700CCBE3E /* CollisionShape2TriangleMesh.h */,
 				04D93D06242349A700CCBE3E /* CollisionShape2TriangleMesh.cpp */,
 				04D93D0824234A2200CCBE3E /* ShapeData.h */,
@@ -4540,6 +4550,10 @@
 		049648CC241DBF4F0006C91E /* IMGUI */ = {
 			isa = PBXGroup;
 			children = (
+				04E0DBDB2429E22B00310B48 /* imgui_impl_metal.h */,
+				04E0DBDC2429E22B00310B48 /* imgui_impl_metal.mm */,
+				04E0DBDE2429E22B00310B48 /* imgui_impl_sdl.cpp */,
+				04E0DBDD2429E22B00310B48 /* imgui_impl_sdl.h */,
 				04964940241DC04D0006C91E /* imconfig.h */,
 				04964941241DC04D0006C91E /* imgui_demo.cpp */,
 				0496493E241DC04D0006C91E /* imgui_draw.cpp */,
@@ -6627,6 +6641,7 @@
 				049648BE241DBE320006C91E /* OgreOverlayElementFactory.h in Headers */,
 				049649AB241DC0690006C91E /* OgreColourInterpolatorAffectorFactory.h in Headers */,
 				049649C1241DC0690006C91E /* OgreColourFaderAffector.h in Headers */,
+				04E0DBDF2429E22C00310B48 /* imgui_impl_metal.h in Headers */,
 				049649BC241DC0690006C91E /* OgreDirectionRandomiserAffectorFactory.h in Headers */,
 				04964927241DBF8C0006C91E /* OgreParallaxCorrectedCubemapAuto.h in Headers */,
 				04964950241DC04E0006C91E /* imgui_internal.h in Headers */,
@@ -6651,6 +6666,7 @@
 				04964953241DC04E0006C91E /* imstb_textedit.h in Headers */,
 				0496499B241DC0690006C91E /* OgreColourFaderAffector2.h in Headers */,
 				04964906241DBF690006C91E /* OgreUnlitProperty.h in Headers */,
+				04E0DBE12429E22C00310B48 /* imgui_impl_sdl.h in Headers */,
 				049649A8241DC0690006C91E /* OgreEllipsoidEmitter.h in Headers */,
 				049649C6241DC0690006C91E /* OgreScaleAffector.h in Headers */,
 				049648BC241DBE320006C91E /* OgreFontManager.h in Headers */,
@@ -7255,7 +7271,7 @@
 				04D93CF524233FF000CCBE3E /* MainEntryPoints.cpp in Sources */,
 				04D93CD324233E3000CCBE3E /* GameEntityManager.cpp in Sources */,
 				04D93CEE24233F6100CCBE3E /* MessageQueueSystem.cpp in Sources */,
-				04D93CD824233E3000CCBE3E /* GraphicsSystem.cpp in Sources */,
+				04D93CD824233E3000CCBE3E /* GraphicsSystem.mm in Sources */,
 				04D93CD724233E3000CCBE3E /* BaseSystem.cpp in Sources */,
 				04D93CD524233E3000CCBE3E /* TutorialGameState.cpp in Sources */,
 				04D93CD924233E3000CCBE3E /* CameraController.cpp in Sources */,
@@ -7581,6 +7597,7 @@
 				0496499E241DC0690006C91E /* OgreColourImageAffector.cpp in Sources */,
 				04964903241DBF690006C91E /* OgreHlmsUnlit.cpp in Sources */,
 				0496494A241DC04E0006C91E /* imgui_draw.cpp in Sources */,
+				04E0DBE02429E22C00310B48 /* imgui_impl_metal.mm in Sources */,
 				049648B1241DBE320006C91E /* OgreOverlayElementCommands.cpp in Sources */,
 				049649C2241DC0690006C91E /* OgreParticleFXPlugin.cpp in Sources */,
 				049648C7241DBE320006C91E /* OgreOverlaySystem.cpp in Sources */,
@@ -7607,6 +7624,7 @@
 				04964915241DBF690006C91E /* OgreIrradianceVolume.cpp in Sources */,
 				049648F7241DBF690006C91E /* OgreHlmsJsonUnlit.cpp in Sources */,
 				049648B8241DBE320006C91E /* OgreOverlayManager.cpp in Sources */,
+				04E0DBE22429E22C00310B48 /* imgui_impl_sdl.cpp in Sources */,
 				049648B6241DBE320006C91E /* OgrePanelOverlayElement.cpp in Sources */,
 				049649B5241DC0690006C91E /* OgreBoxEmitter.cpp in Sources */,
 				049648C5241DBE320006C91E /* OgreOverlay.cpp in Sources */,
