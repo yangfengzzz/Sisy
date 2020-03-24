@@ -41,6 +41,10 @@ public:
     capsuleCreator(btCollisionShape* collisionShape,
                    Ogre::String name);
     
+    std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*>
+    staticPlaneCreator(btCollisionShape* collisionShape,
+                       Ogre::String name);
+    
 public:
     Ogre::IndexBufferPacked*
     createIndexBuffer(const Ogre::uint16* indices, int numIndices);

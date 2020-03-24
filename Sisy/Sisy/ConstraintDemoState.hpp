@@ -37,7 +37,12 @@ public:
     virtual void keyReleased( const SDL_KeyboardEvent &arg );
     
 private:
+    void setupEmptyDynamicsWorld();
+    
     void createPhysicalWorld();
+    
+    float m_Time;
+    class btConeTwistConstraint* m_ctc;
 };
 }
 

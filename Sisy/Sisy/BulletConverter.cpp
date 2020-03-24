@@ -84,6 +84,8 @@ BulletConverter::createCollisionShapeGraphicsObject(btCollisionShape* collisionS
     
     if (collisionShape->getShapeType() == STATIC_PLANE_PROXYTYPE)
     {
+        staticPlaneCreator(collisionShape, name);
+        return mesh;
     }
     
     defaultCreator(collisionShape, name);
@@ -275,6 +277,71 @@ BulletConverter::capsuleCreator(btCollisionShape* collisionShape,
                                           Ogre::Vector3(radius+halfHeight) ), false );
         mesh.first->_setBoundingSphereRadius(sphereSize+halfHeight*2);
     }
+    return mesh;
+}
+std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*>
+BulletConverter::staticPlaneCreator(btCollisionShape* collisionShape,
+                                    Ogre::String name){
+    btAlignedObjectArray<Ogre::uint16> indices;
+    btAlignedObjectArray<float> gfxVertices;
+    
+    std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*> mesh;
+    if (collisionShape->getShapeType() == STATIC_PLANE_PROXYTYPE)
+    {
+        const btStaticPlaneShape* staticPlaneShape = static_cast<const btStaticPlaneShape*>(collisionShape);
+        btScalar planeConst = staticPlaneShape->getPlaneConstant();
+        const btVector3& planeNormal = staticPlaneShape->getPlaneNormal();
+        btVector3 planeOrigin = planeNormal * planeConst;
+        btVector3 vec0, vec1;
+        btPlaneSpace1(planeNormal, vec0, vec1);
+
+        btScalar vecLen = 128;
+        btVector3 verts[4];
+
+        verts[0] = planeOrigin + vec0 * vecLen + vec1 * vecLen;
+        verts[1] = planeOrigin - vec0 * vecLen + vec1 * vecLen;
+        verts[2] = planeOrigin - vec0 * vecLen - vec1 * vecLen;
+        verts[3] = planeOrigin + vec0 * vecLen - vec1 * vecLen;
+
+        Ogre::uint16 startIndex = 0;
+        indices.push_back(startIndex + 0);
+        indices.push_back(startIndex + 1);
+        indices.push_back(startIndex + 2);
+        indices.push_back(startIndex + 0);
+        indices.push_back(startIndex + 2);
+        indices.push_back(startIndex + 3);
+        btTransform parentTransform;
+        parentTransform.setIdentity();
+        btVector3 triNormal = parentTransform.getBasis() * planeNormal;
+
+        gfxVertices.resize(4*6);
+
+        for (int i = 0; i < 4; i++)
+        {
+            btVector3 vtxPos;
+            btVector3 pos = parentTransform * verts[i];
+
+            gfxVertices[i*6] = pos[0];
+            gfxVertices[i*6+1] = pos[1];
+            gfxVertices[i*6+2] = pos[2];
+            gfxVertices[i*6+3] = triNormal[0];
+            gfxVertices[i*6+4] = triNormal[1];
+            gfxVertices[i*6+5] = triNormal[2];
+        }
+
+        mesh = createDynamicMesh(&gfxVertices[0], 4,
+                                 &indices[0], indices.size(),
+                                 name);
+        
+        mesh.first->_setBounds(Ogre::Aabb(Ogre::Vector3(planeOrigin
+                                                        - vec0.absolute()*vecLen
+                                                        - vec1.absolute()*vecLen),
+                                          Ogre::Vector3(planeOrigin
+                                                        + vec0.absolute()*vecLen
+                                                        + vec1.absolute()*vecLen) ), false );
+        mesh.first->_setBoundingSphereRadius(vecLen*2*std::sqrt(2.0));
+    }
+    
     return mesh;
 }
 //--------------------------------------------------------------------------------
