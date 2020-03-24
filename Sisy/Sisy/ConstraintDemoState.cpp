@@ -155,9 +155,12 @@ void MyGameState::createPhysicalWorld(){
     {
         trans.setIdentity();
         trans.setOrigin(btVector3(1, 30, -5));
-        createRigidBody(mass, trans, shape);
-        trans.setOrigin(btVector3(0, 0, -5));
+        std::pair<Ogre::SceneNode*, btRigidBody*> body =
+        createRigidBody(mass, trans,
+                        shape);
+        bulletBody.push_back(body.first);
         
+        trans.setOrigin(btVector3(0, 0, -5));
         std::pair<Ogre::SceneNode*, btRigidBody*> body0 =
         createRigidBody(mass, trans,
                         shape);
@@ -659,9 +662,9 @@ void MyGameState::createScene01(void)
         Ogre::HlmsManager *hlmsManager = mGraphicsSystem->getRoot()->getHlmsManager();
         assert( dynamic_cast<Ogre::HlmsPbs*>( hlmsManager->getHlms( Ogre::HLMS_PBS ) ) );
         Ogre::HlmsPbs *hlmsPbs = static_cast<Ogre::HlmsPbs*>( hlmsManager->getHlms(Ogre::HLMS_PBS) );
-        for (int idx = 1; idx < 22; idx++) {
+        for (int idx = 1; idx < 23; idx++) {            
             Ogre::Item* m_item;
-            if (idx == 7) {
+            if (idx == 8) {
                 m_item = sceneManager->createItem("door",
                                                   Ogre::ResourceGroupManager::
                                                   AUTODETECT_RESOURCE_GROUP_NAME,
@@ -705,6 +708,7 @@ void MyGameState::createScene01(void)
     Ogre::HlmsUnlit *hlmsUnlit = static_cast<Ogre::HlmsUnlit*>( hlmsManager->getHlms(Ogre::HLMS_UNLIT) );
     
     debug = new OgreDebugDrawer(manual, hlmsUnlit);
+    debug->setDebugMode(OgreDebugDrawer::DBG_DrawWireframe + OgreDebugDrawer::DBG_DrawConstraintLimits);
     m_dynamicsWorld->setDebugDrawer(debug);
     
     Ogre::Light *light = sceneManager->createLight();
