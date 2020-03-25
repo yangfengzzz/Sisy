@@ -12,6 +12,8 @@
 #include "OgreString.h"
 #include "btVector3.h"
 #include "btCollisionShape.h"
+#include "btAlignedObjectArray.h"
+#include "InstanceGraphicsShape.h"
 
 namespace jet {
 class GraphicsSystem;
@@ -53,13 +55,21 @@ public:
     staticPlaneCreator(btCollisionShape* collisionShape,
                        Ogre::String name);
     
-public:
+    std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*>
+    softBodyCreator(btCollisionShape* collisionShape,
+                    Ogre::String name);
+    
+private:
     Ogre::IndexBufferPacked*
     createIndexBuffer(const Ogre::uint16* indices, int numIndices);
     
     std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*>
     createDynamicMesh(const float* vertices, int numvertices,
                       const Ogre::uint16* indices, int numIndices, Ogre::String name);
+    
+    void computeSoftBodyVertices(btCollisionShape* collisionShape,
+                                 btAlignedObjectArray<GLInstanceVertex>& gfxVertices,
+                                 btAlignedObjectArray<Ogre::uint16>& indices);
     
 private:
     GraphicsSystem* m_glApp;

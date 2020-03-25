@@ -15,12 +15,11 @@
 #include "OgreItem.h"
 #include "GraphicsSystem.h"
 
-#include "InstanceGraphicsShape.h"
-#include "btAlignedObjectArray.h"
 #include "ShapeData.h"
 #include "CollisionShape2TriangleMesh.h"
 #include "btBulletDynamicsCommon.h"
 #include "btHeightfieldTerrainShape.h"
+#include "btSoftBody.h"
 
 namespace jet {
 BulletConverter::BulletConverter(GraphicsSystem *graphicsSystem ){
@@ -44,6 +43,8 @@ BulletConverter::createCollisionShapeGraphicsObject(btCollisionShape* collisionS
     
     if (collisionShape->getShapeType() == SOFTBODY_SHAPE_PROXYTYPE)
     {
+        softBodyCreator(collisionShape, name);
+        return mesh;
     }
     
     if (collisionShape->getShapeType() == MULTI_SPHERE_SHAPE_PROXYTYPE)
@@ -449,6 +450,7 @@ BulletConverter::capsuleCreator(btCollisionShape* collisionShape,
     }
     return mesh;
 }
+//--------------------------------------------------------------------------------
 std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*>
 BulletConverter::staticPlaneCreator(btCollisionShape* collisionShape,
                                     Ogre::String name){
@@ -513,6 +515,71 @@ BulletConverter::staticPlaneCreator(btCollisionShape* collisionShape,
     }
     
     return mesh;
+}
+//--------------------------------------------------------------------------------
+std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*>
+BulletConverter::softBodyCreator(btCollisionShape* collisionShape,
+                                 Ogre::String name){
+    btAlignedObjectArray<Ogre::uint16> indices;
+    btAlignedObjectArray<GLInstanceVertex> gfxVertices;
+    std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*> mesh;
+    computeSoftBodyVertices(collisionShape, gfxVertices, indices);
+    
+    if (gfxVertices.size() && indices.size())
+    {
+        btAlignedObjectArray<float> vertexPositions;
+        vertexPositions.resize(gfxVertices.size()*6);
+        for (int i = 0; i < gfxVertices.size(); i++)
+        {
+            vertexPositions[i * 6 + 0] = gfxVertices[i].xyzw[0];
+            vertexPositions[i * 6 + 1] = gfxVertices[i].xyzw[1];
+            vertexPositions[i * 6 + 2] = gfxVertices[i].xyzw[2];
+            vertexPositions[i * 6 + 3] = gfxVertices[i].normal[0];
+            vertexPositions[i * 6 + 4] = gfxVertices[i].normal[1];
+            vertexPositions[i * 6 + 5] = gfxVertices[i].normal[2];
+        }
+        
+        mesh = createDynamicMesh(&vertexPositions[0], gfxVertices.size(),
+                                 &indices[0], indices.size(),
+                                 name);
+        
+        btTransform t = btTransform::getIdentity();
+        btVector3 aabbMin;
+        btVector3 aabbMax;
+        collisionShape->getAabb(t, aabbMin, aabbMax);
+        mesh.first->_setBounds(Ogre::Aabb(Ogre::Vector3(aabbMin.x(), aabbMin.y(), aabbMin.z()),
+                                          Ogre::Vector3(aabbMax.x(), aabbMax.y(), aabbMax.z()) ), false );
+        mesh.first->_setBoundingSphereRadius((aabbMax-aabbMin).length());
+    }
+    
+    return mesh;
+}
+void BulletConverter::computeSoftBodyVertices(btCollisionShape* collisionShape,
+                                              btAlignedObjectArray<GLInstanceVertex>& gfxVertices,
+                                              btAlignedObjectArray<Ogre::uint16>& indices){
+    btSoftBody* psb = (btSoftBody*)collisionShape->getUserPointer();
+    gfxVertices.resize(psb->m_faces.size() * 3);
+
+    for (int i = 0; i < psb->m_faces.size(); i++)  // Foreach face
+    {
+        for (int k = 0; k < 3; k++)  // Foreach vertex on a face
+        {
+            int currentIndex = i * 3 + k;
+            for (int j = 0; j < 3; j++)
+            {
+                gfxVertices[currentIndex].xyzw[j] = psb->m_faces[i].m_n[k]->m_x[j];
+            }
+            for (int j = 0; j < 3; j++)
+            {
+                gfxVertices[currentIndex].normal[j] = psb->m_faces[i].m_n[k]->m_n[j];
+            }
+            for (int j = 0; j < 2; j++)
+            {
+                gfxVertices[currentIndex].uv[j] = 0.5;  //we don't have UV info...
+            }
+            indices.push_back(currentIndex);
+        }
+    }
 }
 //--------------------------------------------------------------------------------
 Ogre::IndexBufferPacked*
