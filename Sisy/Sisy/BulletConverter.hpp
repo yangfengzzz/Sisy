@@ -34,6 +34,10 @@ public:
                Ogre::String name);
     
     std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*>
+    TerrianCreator(btCollisionShape* collisionShape,
+                   Ogre::String name);
+    
+    std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*>
     sphereCreator(btCollisionShape* collisionShape,
                   Ogre::String name);
     

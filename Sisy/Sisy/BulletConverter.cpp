@@ -20,6 +20,7 @@
 #include "ShapeData.h"
 #include "CollisionShape2TriangleMesh.h"
 #include "btBulletDynamicsCommon.h"
+#include "btHeightfieldTerrainShape.h"
 
 namespace jet {
 BulletConverter::BulletConverter(GraphicsSystem *graphicsSystem ){
@@ -37,6 +38,8 @@ BulletConverter::createCollisionShapeGraphicsObject(btCollisionShape* collisionS
     
     if (collisionShape->getShapeType() == TERRAIN_SHAPE_PROXYTYPE)
     {
+        TerrianCreator(collisionShape, name);
+        return mesh;
     }
     
     if (collisionShape->getShapeType() == SOFTBODY_SHAPE_PROXYTYPE)
@@ -181,6 +184,103 @@ BulletConverter::boxCreator(btCollisionShape* collisionShape,
     return mesh;
 }
 //--------------------------------------------------------------------------------
+class MyTriangleCollector2 : public btTriangleCallback
+{
+public:
+    btAlignedObjectArray<GLInstanceVertex>* m_pVerticesOut;
+    btAlignedObjectArray<Ogre::uint16>* m_pIndicesOut;
+    btVector3 m_aabbMin, m_aabbMax;
+    btScalar m_textureScaling;
+    
+    MyTriangleCollector2(const btVector3& aabbMin, const btVector3& aabbMax)
+    :m_aabbMin(aabbMin), m_aabbMax(aabbMax), m_textureScaling(1)
+    {
+        m_pVerticesOut = 0;
+        m_pIndicesOut = 0;
+    }
+    
+    virtual void processTriangle(btVector3* tris, int partId, int triangleIndex)
+    {
+        for (int k = 0; k < 3; k++)
+        {
+            GLInstanceVertex v;
+            v.xyzw[3] = 0;
+            
+            btVector3 normal = (tris[0] - tris[1]).cross(tris[0] - tris[2]);
+            normal.safeNormalize();
+            for (int l = 0; l < 3; l++)
+            {
+                v.xyzw[l] = tris[k][l];
+                v.normal[l] = normal[l];
+            }
+            
+            v.uv[0] = (1.-((v.xyzw[0] - m_aabbMin[0]) / (m_aabbMax[0] - m_aabbMin[0])))*m_textureScaling;
+            v.uv[1] = (1.-(v.xyzw[1] - m_aabbMin[1]) / (m_aabbMax[1] - m_aabbMin[1]))*m_textureScaling;
+            
+            m_pIndicesOut->push_back((Ogre::uint16)m_pVerticesOut->size());
+            m_pVerticesOut->push_back(v);
+        }
+    }
+};
+std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*>
+BulletConverter::TerrianCreator(btCollisionShape* collisionShape,
+                                Ogre::String name){
+    btAlignedObjectArray<GLInstanceVertex> gfxVertices;
+    btAlignedObjectArray<Ogre::uint16> indices;
+    std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*> mesh;
+    
+    if (collisionShape->getShapeType() == TERRAIN_SHAPE_PROXYTYPE)
+    {
+        const btHeightfieldTerrainShape* heightField = static_cast<const btHeightfieldTerrainShape*>(collisionShape);
+        
+        btVector3 aabbMin, aabbMax;
+        btTransform tr;
+        tr.setIdentity();
+        heightField->getAabb(tr, aabbMin, aabbMax);
+        MyTriangleCollector2  col(aabbMin, aabbMax);
+        if (heightField->getUserValue3())
+        {
+            col.m_textureScaling = heightField->getUserValue3();
+        }
+        col.m_pVerticesOut = &gfxVertices;
+        col.m_pIndicesOut = &indices;
+        for (int k = 0; k < 3; k++)
+        {
+            aabbMin[k] = -BT_LARGE_FLOAT;
+            aabbMax[k] = BT_LARGE_FLOAT;
+        }
+        heightField->processAllTriangles(&col, aabbMin, aabbMax);
+        
+        if (gfxVertices.size() && indices.size())
+        {
+            btAlignedObjectArray<float> vertexPositions;
+            vertexPositions.resize(gfxVertices.size()*6);
+            for (int i = 0; i < gfxVertices.size(); i++)
+            {
+                vertexPositions[i * 6 + 0] = gfxVertices[i].xyzw[0];
+                vertexPositions[i * 6 + 1] = gfxVertices[i].xyzw[1];
+                vertexPositions[i * 6 + 2] = gfxVertices[i].xyzw[2];
+                vertexPositions[i * 6 + 3] = gfxVertices[i].normal[0];
+                vertexPositions[i * 6 + 4] = gfxVertices[i].normal[1];
+                vertexPositions[i * 6 + 5] = gfxVertices[i].normal[2];
+            }
+            
+            mesh = createDynamicMesh(&vertexPositions[0], gfxVertices.size(),
+                                     &indices[0], indices.size(),
+                                     name);
+            
+            btTransform t = btTransform::getIdentity();
+            btVector3 aabbMin;
+            btVector3 aabbMax;
+            collisionShape->getAabb(t, aabbMin, aabbMax);
+            mesh.first->_setBounds(Ogre::Aabb(Ogre::Vector3(aabbMin.x(), aabbMin.y(), aabbMin.z()),
+                                              Ogre::Vector3(aabbMax.x(), aabbMax.y(), aabbMax.z()) ), false );
+            mesh.first->_setBoundingSphereRadius((aabbMax-aabbMin).length());
+        }
+    }
+    return mesh;
+}
+//--------------------------------------------------------------------------------
 std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*>
 BulletConverter::sphereCreator(btCollisionShape* collisionShape,
                                Ogre::String name){
@@ -294,15 +394,15 @@ BulletConverter::staticPlaneCreator(btCollisionShape* collisionShape,
         btVector3 planeOrigin = planeNormal * planeConst;
         btVector3 vec0, vec1;
         btPlaneSpace1(planeNormal, vec0, vec1);
-
+        
         btScalar vecLen = 128;
         btVector3 verts[4];
-
+        
         verts[0] = planeOrigin + vec0 * vecLen + vec1 * vecLen;
         verts[1] = planeOrigin - vec0 * vecLen + vec1 * vecLen;
         verts[2] = planeOrigin - vec0 * vecLen - vec1 * vecLen;
         verts[3] = planeOrigin + vec0 * vecLen - vec1 * vecLen;
-
+        
         Ogre::uint16 startIndex = 0;
         indices.push_back(startIndex + 0);
         indices.push_back(startIndex + 1);
@@ -313,14 +413,14 @@ BulletConverter::staticPlaneCreator(btCollisionShape* collisionShape,
         btTransform parentTransform;
         parentTransform.setIdentity();
         btVector3 triNormal = parentTransform.getBasis() * planeNormal;
-
+        
         gfxVertices.resize(4*6);
-
+        
         for (int i = 0; i < 4; i++)
         {
             btVector3 vtxPos;
             btVector3 pos = parentTransform * verts[i];
-
+            
             gfxVertices[i*6] = pos[0];
             gfxVertices[i*6+1] = pos[1];
             gfxVertices[i*6+2] = pos[2];
@@ -328,7 +428,7 @@ BulletConverter::staticPlaneCreator(btCollisionShape* collisionShape,
             gfxVertices[i*6+4] = triNormal[1];
             gfxVertices[i*6+5] = triNormal[2];
         }
-
+        
         mesh = createDynamicMesh(&gfxVertices[0], 4,
                                  &indices[0], indices.size(),
                                  name);
