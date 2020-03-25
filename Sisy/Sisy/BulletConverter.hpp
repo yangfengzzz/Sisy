@@ -42,6 +42,10 @@ public:
                   Ogre::String name);
     
     std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*>
+    multi_sphereCreator(btCollisionShape* collisionShape,
+                        Ogre::String name);
+    
+    std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*>
     capsuleCreator(btCollisionShape* collisionShape,
                    Ogre::String name);
     

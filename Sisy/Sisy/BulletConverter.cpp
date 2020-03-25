@@ -48,6 +48,8 @@ BulletConverter::createCollisionShapeGraphicsObject(btCollisionShape* collisionS
     
     if (collisionShape->getShapeType() == MULTI_SPHERE_SHAPE_PROXYTYPE)
     {
+        multi_sphereCreator(collisionShape, name);
+        return mesh;
     }
     
     if (collisionShape->getShapeType() == SPHERE_SHAPE_PROXYTYPE)
@@ -75,6 +77,8 @@ BulletConverter::createCollisionShapeGraphicsObject(btCollisionShape* collisionS
             
             if (compound->getChildShape(0)->getShapeType() == MULTI_SPHERE_SHAPE_PROXYTYPE)
             {
+                multi_sphereCreator(collisionShape, name);
+                return mesh;
             }
         }
     }
@@ -324,6 +328,72 @@ BulletConverter::sphereCreator(btCollisionShape* collisionShape,
         mesh.first->_setBoundingSphereRadius(sphereSize);
     }
     
+    return mesh;
+}
+//--------------------------------------------------------------------------------
+std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*>
+BulletConverter::multi_sphereCreator(btCollisionShape* collisionShape,
+                                     Ogre::String name){
+    btAlignedObjectArray<Ogre::uint16> indices;
+    std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*> mesh;
+    
+    int strideInBytes = 9 * sizeof(float);
+    if (collisionShape->getShapeType() == MULTI_SPHERE_SHAPE_PROXYTYPE)
+    {
+        btMultiSphereShape* ms = (btMultiSphereShape*)collisionShape;
+        if (ms->getSphereCount() == 2)
+        {
+            btAlignedObjectArray<float> transformedVertices;
+            int numVertices = sizeof(textured_detailed_sphere_vertices) / strideInBytes;
+            transformedVertices.resize(numVertices * 9);
+            btVector3 sphere0Pos = ms->getSpherePosition(0);
+            btVector3 sphere1Pos = ms->getSpherePosition(1);
+            btVector3 fromTo = sphere1Pos - sphere0Pos;
+            //cache miss
+            for (int i = 0; i < numVertices; i++)
+            {
+                btVector3 vert;
+                vert.setValue(textured_detailed_sphere_vertices[i * 9 + 0],
+                              textured_detailed_sphere_vertices[i * 9 + 1],
+                              textured_detailed_sphere_vertices[i * 9 + 2]);
+                
+                btVector3 trVer(0, 0, 0);
+                
+                if (vert.dot(fromTo) > 0)
+                {
+                    btScalar radiusScale = 2. * ms->getSphereRadius(1);
+                    trVer = radiusScale * vert;
+                    trVer += sphere1Pos;
+                }
+                else
+                {
+                    btScalar radiusScale = 2. * ms->getSphereRadius(0);
+                    trVer = radiusScale * vert;
+                    trVer += sphere0Pos;
+                }
+                
+                transformedVertices[i * 6 + 0] = trVer[0];
+                transformedVertices[i * 6 + 1] = trVer[1];
+                transformedVertices[i * 6 + 2] = trVer[2];
+                transformedVertices[i * 6 + 3] = textured_detailed_sphere_vertices[i * 9 + 4];
+                transformedVertices[i * 6 + 4] = textured_detailed_sphere_vertices[i * 9 + 5];
+                transformedVertices[i * 6 + 5] = textured_detailed_sphere_vertices[i * 9 + 6];
+            }
+            
+            int numIndices = sizeof(textured_detailed_sphere_indices) / sizeof(Ogre::uint16);
+            mesh = createDynamicMesh(&transformedVertices[0], numVertices,
+                                     textured_detailed_sphere_indices, numIndices,
+                                     name);
+            
+            btTransform t = btTransform::getIdentity();
+            btVector3 aabbMin;
+            btVector3 aabbMax;
+            collisionShape->getAabb(t, aabbMin, aabbMax);
+            mesh.first->_setBounds(Ogre::Aabb(Ogre::Vector3(aabbMin.x(), aabbMin.y(), aabbMin.z()),
+                                              Ogre::Vector3(aabbMax.x(), aabbMax.y(), aabbMax.z()) ), false );
+            mesh.first->_setBoundingSphereRadius((aabbMax-aabbMin).length());
+        }
+    }
     return mesh;
 }
 //--------------------------------------------------------------------------------
