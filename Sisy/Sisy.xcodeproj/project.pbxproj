@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04229874242AE4DE0000C2D8 /* RollingFrictionDemoState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DB9A2426D36D00310B48 /* RollingFrictionDemoState.cpp */; };
+		04229875242AE4DE0000C2D8 /* RollingFrictionDemoGraphicsSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DB9D2426D38200310B48 /* RollingFrictionDemoGraphicsSystem.cpp */; };
 		049644A8241D9F810006C91E /* OgreWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 049642A5241D9F650006C91E /* OgreWindow.h */; };
 		049644A9241D9F810006C91E /* OgrePredefinedControllers.h in Headers */ = {isa = PBXBuildFile; fileRef = 049642A6241D9F650006C91E /* OgrePredefinedControllers.h */; };
 		049644AA241D9F810006C91E /* OgreDynLibManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 049642A7241D9F650006C91E /* OgreDynLibManager.cpp */; };
@@ -1483,8 +1485,6 @@
 		04E0DBA5242828D400310B48 /* OgreDebugDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DBA3242828D400310B48 /* OgreDebugDrawer.cpp */; };
 		04E0DBA924285F0100310B48 /* OgreMotionState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DBA724285F0100310B48 /* OgreMotionState.cpp */; };
 		04E0DBAC2428765700310B48 /* BulletConverter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DBAB2428765700310B48 /* BulletConverter.cpp */; };
-		04E0DBB72429A35400310B48 /* ConstraintPhysicsSetupState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DBB52429A35400310B48 /* ConstraintPhysicsSetupState.cpp */; };
-		04E0DBBA2429A35D00310B48 /* ConstraintPhysicsSetupGraphicsSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DBB82429A35D00310B48 /* ConstraintPhysicsSetupGraphicsSystem.cpp */; };
 		04E0DBDA2429E04100310B48 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04964A67241DC2BA0006C91E /* Metal.framework */; };
 		04E0DBDF2429E22C00310B48 /* imgui_impl_metal.h in Headers */ = {isa = PBXBuildFile; fileRef = 04E0DBDB2429E22B00310B48 /* imgui_impl_metal.h */; };
 		04E0DBE02429E22C00310B48 /* imgui_impl_metal.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04E0DBDC2429E22B00310B48 /* imgui_impl_metal.mm */; };
@@ -7277,12 +7277,12 @@
 				04D93CD924233E3000CCBE3E /* CameraController.cpp in Sources */,
 				04E0DBAC2428765700310B48 /* BulletConverter.cpp in Sources */,
 				04D93D07242349A700CCBE3E /* CollisionShape2TriangleMesh.cpp in Sources */,
-				04E0DBB72429A35400310B48 /* ConstraintPhysicsSetupState.cpp in Sources */,
-				04E0DBBA2429A35D00310B48 /* ConstraintPhysicsSetupGraphicsSystem.cpp in Sources */,
 				04D93CD424233E3000CCBE3E /* SdlInputHandler.cpp in Sources */,
 				04D93CD624233E3000CCBE3E /* LogicSystem.cpp in Sources */,
 				04D93CF824233FFA00CCBE3E /* OSXUtils.mm in Sources */,
 				04E0DBA5242828D400310B48 /* OgreDebugDrawer.cpp in Sources */,
+				04229874242AE4DE0000C2D8 /* RollingFrictionDemoState.cpp in Sources */,
+				04229875242AE4DE0000C2D8 /* RollingFrictionDemoGraphicsSystem.cpp in Sources */,
 				04E0DB7B242393CA00310B48 /* MainLoopSingleThreaded.cpp in Sources */,
 				04E0DBA924285F0100310B48 /* OgreMotionState.cpp in Sources */,
 				04D93CF424233FF000CCBE3E /* StaticPluginLoader.cpp in Sources */,

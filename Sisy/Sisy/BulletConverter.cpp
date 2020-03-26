@@ -404,7 +404,7 @@ BulletConverter::capsuleCreator(btCollisionShape* collisionShape,
     btAlignedObjectArray<Ogre::uint16> indices;
     std::pair<Ogre::MeshPtr, Ogre::VertexBufferPacked*> mesh;
     
-    int strideInBytes = 6 * sizeof(float);
+    int strideInBytes = 9 * sizeof(float);
     if (collisionShape->getShapeType() == CAPSULE_SHAPE_PROXYTYPE)
     {
         btCapsuleShape* sphereShape = (btCapsuleShape*)collisionShape;  //Y up
